@@ -1,0 +1,22 @@
+{
+  "name": "oxid-professional-services/usercentrics",
+  "description": "Module to manage the cookie consent",
+  "type": "oxideshop-module",
+  "minimum-stability": "stable",
+  "extra": {
+    "oxideshop": {
+      "target-directory": "oxps/usercentrics"
+    }
+  },
+  "require": {
+
+  },
+  "version": "1.0.1",
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "OxidProfessionalServices\\Usercentrics\\": ""
+    }
+  }
+}
