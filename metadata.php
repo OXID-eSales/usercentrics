@@ -1,7 +1,7 @@
 <?php
 
 use OxidEsales\Eshop\Core\ViewHelper\JavaScriptRenderer;
-use OxidProfessionalServices\Usercentrics\Core\UsercentricsScriptRenderer;
+use OxidProfessionalServices\Usercentrics\Core\ScriptRenderer;
 
 $sMetadataVersion = '2.1';
 $aModule = [
@@ -34,7 +34,7 @@ $aModule = [
     'controllers' => [],
 
     'extend' => [
-        JavaScriptRenderer::class => UsercentricsScriptRenderer::class
+        JavaScriptRenderer::class => ScriptRenderer::class
     ]
 
 ];

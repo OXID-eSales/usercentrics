@@ -7,10 +7,10 @@ use Exception;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 
-class UsercentricsScript implements ScriptRepository
+class Repository implements RepositoryInterface
 {
     /**
-     * @var ConfigurationAccess
+     * @var ConfigurationAccessInterface
      */
     private $configService;
 
@@ -19,7 +19,7 @@ class UsercentricsScript implements ScriptRepository
      */
     private $scriptsByPath;
 
-    public function __construct(ConfigurationAccess $configService)
+    public function __construct(ConfigurationAccessInterface $configService)
     {
         $this->configService = $configService;
         $this->scriptsByPath = $this->getScriptsByPath();

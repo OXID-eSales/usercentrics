@@ -2,12 +2,11 @@
 
 namespace OxidProfessionalServices\Usercentrics\Core;
 
-use OxidProfessionalServices\Usercentrics\Service\ScriptRenderer;
-use OxidProfessionalServices\Usercentrics\Service\UsercentricsRenderer;
+use OxidProfessionalServices\Usercentrics\Service\RendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
+class ScriptRenderer extends UsercentricsScriptRenderer_parent
 {
     /**
      * @return \Psr\Container\ContainerInterface
@@ -23,10 +22,10 @@ class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
      * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
      * @throws ContainerExceptionInterface Error while retrieving the entry.
      */
-    protected function getRendererService(): ScriptRenderer
+    protected function getRendererService(): RendererInterface
     {
         $container = $this->getContainer();
-        $renderer = $container->get('OxidProfessionalServices\Usercentrics\Service\ScriptRenderer');
+        $renderer = $container->get('OxidProfessionalServices\Usercentrics\Service\RendererInterface');
         assert($renderer instanceof ScriptRenderer);
         return $renderer;
     }

@@ -3,7 +3,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
-interface ScriptRenderer
+interface RendererInterface
 {
     /**
      * Form output for includes.

@@ -5,18 +5,18 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 
 use Exception;
 
-class UsercentricsRenderer implements ScriptRenderer
+class Renderer implements RendererInterface
 {
     /**
-     * @var ScriptRepository
+     * @var RepositoryInterface
      */
     private $repository;
 
     /**
-     * UsercentricsRenderer constructor.
-     * @param ScriptRepository $repository
+     * Renderer constructor.
+     * @param RepositoryInterface $repository
      */
-    public function __construct(ScriptRepository $repository)
+    public function __construct(RepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

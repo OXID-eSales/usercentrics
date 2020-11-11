@@ -2,17 +2,17 @@ services:
   _defaults:
     public: false
     autowire: true
-  OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess:
-    class: OxidProfessionalServices\Usercentrics\Service\UsercentricsConfigurationAccess
+  OxidProfessionalServices\Usercentrics\Service\ConfigurationAccessInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess
     arguments:
       - !php/const INSTALLATION_ROOT_PATH
-      - '@OxidProfessionalServices\Usercentrics\Service\FileFormat'
+      - '@OxidProfessionalServices\Usercentrics\Service\FileFormatInterface'
       - var/configuration/usercentrics.yaml
 
-  OxidProfessionalServices\Usercentrics\Service\ScriptRepository:
-    class: OxidProfessionalServices\Usercentrics\Service\UsercentricsScript
-  OxidProfessionalServices\Usercentrics\Service\ScriptRenderer:
-    class: OxidProfessionalServices\Usercentrics\Service\UsercentricsRenderer
+  OxidProfessionalServices\Usercentrics\Service\RepositoryInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Repository
+  OxidProfessionalServices\Usercentrics\Service\RendererInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
-  OxidProfessionalServices\Usercentrics\Service\FileFormat:
+  OxidProfessionalServices\Usercentrics\Service\FileFormatInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Yaml

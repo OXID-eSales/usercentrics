@@ -4,7 +4,7 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Service;
 
 use org\bovigo\vfs\vfsStream;
 use OxidEsales\TestingLibrary\UnitTestCase;
-use OxidProfessionalServices\Usercentrics\Service\UsercentricsConfigurationAccess;
+use OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
@@ -27,7 +27,7 @@ class ConfigTest extends UnitTestCase
 
 
         $targetConfigFilePath = $fileSystem->url() . "/ConfigPutTest.yaml";
-        $sut = new UsercentricsConfigurationAccess($targetConfigFilePath, new Yaml());
+        $sut = new ConfigurationAccess($targetConfigFilePath, new Yaml());
         $scripts = [new Script("test.js", "TestServiceId")];
         $services = [new Service("name", "TestServiceId")];
         $configuration = new Configuration($scripts, $services);
@@ -38,7 +38,7 @@ class ConfigTest extends UnitTestCase
 
     public function testConfigGet(): void
     {
-        $sut = new UsercentricsConfigurationAccess(__DIR__ . "/ConfigTestData/ConfigReadTest.yaml", new Yaml());
+        $sut = new ConfigurationAccess(__DIR__ . "/ConfigTestData/ConfigReadTest.yaml", new Yaml());
         $configuration = $sut->getConfiguration();
         $this->assertEquals("TestService1Id", $configuration->getServices()[0]->getId());
         $this->assertEquals("name1", $configuration->getServices()[0]->getName());
