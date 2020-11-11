@@ -12,3 +12,23 @@ $ composer config repositories.oxid-professional-services/usercentrics path ./so
 $ composer require oxid-professional-services/usercentrics:*
 $ vendor/bin/oe-console oe:module:install source/modules/oxps/usercentrics/
 ```
+
+### Running tests
+
+To run the tests, configure the module in test_config.yaml like:
+
+```
+...
+partial_module_paths: oxps/usercentrics
+...
+run_tests_for_shop: false
+run_tests_for_modules: true
+...
+```
+
+Now it should be possible to run the tests:
+
+```
+$ vendor/bin/runtests
+$ vendor/bin/runtests-codeception
+```
