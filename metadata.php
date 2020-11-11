@@ -1,6 +1,7 @@
 <?php
 
 use OxidEsales\Eshop\Core\ViewHelper\JavaScriptRenderer;
+use OxidProfessionalServices\Usercentrics\Controller;
 use OxidProfessionalServices\Usercentrics\Core\UsercentricsScriptRenderer;
 
 $sMetadataVersion = '2.1';
@@ -17,7 +18,12 @@ $aModule = [
     'author' => 'OXID Professional Services',
     'events' => [],
 
-    'templates' => [],
+    'templates' => [
+        // Admin Templates
+        'oxps_cookieconsent_services.tpl'   => 'oxps/usercentrics/views/admin/tpl/oxps_cookieconsent_services.tpl',
+        'oxps_cookieconsent_scripts.tpl'   => 'oxps/usercentrics/views/admin/tpl/oxps_cookieconsent_scripts.tpl',
+    ],
+
     'blocks' => [
             [ 'template' => 'layout/base.tpl', 'block' => 'base_js',     'file' => '/views/blocks/base_js.tpl' ],
     ],
@@ -31,7 +37,11 @@ $aModule = [
         ],
     ],
 
-    'controllers' => [],
+    'controllers' => [
+        // Admin Controllers
+        'oxps_cookieconsent_services'   => Controller\Admin\Services::class,
+        'oxps_cookieconsent_scripts'   => Controller\Admin\Scripts::class,
+    ],
 
     'extend' => [
         JavaScriptRenderer::class => UsercentricsScriptRenderer::class
