@@ -26,6 +26,15 @@ run_tests_for_modules: true
 ...
 ```
 
+Adjust the `Tests/Codeception/acceptance.suite.yml` with correct selenium server host:
+
+```
+- WebDriver:
+    ...
+    host: 'localhost'
+    ...
+```
+
 Now it should be possible to run the tests:
 
 ```
