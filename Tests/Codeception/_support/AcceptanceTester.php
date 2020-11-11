@@ -2,6 +2,8 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception;
 
+use OxidEsales\Codeception\Admin\AdminLoginPage;
+
 /**
  * Inherited Methods
  *
@@ -25,4 +27,15 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * Define custom actions here
      */
+    /**
+     * @return \OxidEsales\Codeception\Admin\AdminPanel
+     */
+    public function openAdminLoginPage()
+    {
+        $I = $this;
+        $adminPanel = new AdminLoginPage($I);
+        $I->amOnPage($adminPanel->URL);
+
+        return $adminPanel;
+    }
 }
