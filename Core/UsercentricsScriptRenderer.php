@@ -4,6 +4,8 @@ namespace OxidProfessionalServices\Usercentrics\Core;
 
 use OxidProfessionalServices\Usercentrics\Service\ScriptRenderer;
 use OxidProfessionalServices\Usercentrics\Service\UsercentricsRenderer;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
 {
@@ -17,17 +19,16 @@ class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
     }
 
     /**
-     * @return ScriptRenderer|null
+     * @return ScriptRenderer
+     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+     * @throws ContainerExceptionInterface Error while retrieving the entry.
      */
-    protected function getRendererService(): ?ScriptRenderer
+    protected function getRendererService(): ScriptRenderer
     {
         $container = $this->getContainer();
-        if ($container->has('OxidProfessionalServices\Usercentrics\Service\ScriptRenderer')) {
-            $renderer = $container->get('OxidProfessionalServices\Usercentrics\Service\ScriptRenderer');
-            assert($renderer instanceof ScriptRenderer);
-            return $renderer;
-        }
-        return null;
+        $renderer = $container->get('OxidProfessionalServices\Usercentrics\Service\ScriptRenderer');
+        assert($renderer instanceof ScriptRenderer);
+        return $renderer;
     }
 
     /**
@@ -54,10 +55,12 @@ class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
      */
     protected function formFilesOutput($includes, $widget)
     {
-        $service = $this->getRendererService();
-        if (!isset($service)) {
+        try {
+            $service = $this->getRendererService();
+        } catch (\Exception $ex) {
             return parent::formFilesOutput($includes, $widget);
         }
+
         return $service->formFilesOutput($includes, $widget);
     }
 }
