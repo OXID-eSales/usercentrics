@@ -34,26 +34,10 @@ class Configuration
     }
 
     /**
-     * @param Script[] $scripts
-     */
-    public function setScripts(array $scripts): void
-    {
-        $this->scripts = $scripts;
-    }
-
-    /**
      * @return Service[]
      */
     public function getServices(): array
     {
         return $this->services;
-    }
-
-    /**
-     * @param Service[] $services
-     */
-    public function setServices(array $services): void
-    {
-        $this->services = $services;
     }
 }

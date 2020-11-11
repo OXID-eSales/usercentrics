@@ -35,26 +35,10 @@ class Script
     }
 
     /**
-     * @param string $path
-     */
-    public function setPath(string $path): void
-    {
-        $this->path = $path;
-    }
-
-    /**
      * @return string
      */
     public function getServiceId(): string
     {
         return $this->serviceId;
-    }
-
-    /**
-     * @param string $serviceId
-     */
-    public function setServiceId(string $serviceId): void
-    {
-        $this->serviceId = $serviceId;
     }
 }
