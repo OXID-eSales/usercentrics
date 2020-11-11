@@ -7,14 +7,10 @@ modules:
     - Asserts
     - WebDriver:
         url: '%SHOP_URL%'
-        host: 'selenium'
-        browser: chrome
+        browser: firefox
         port: '%SELENIUM_SERVER_PORT%'
         window_size: 1920x1080
         clear_cookies: true
-        capabilities:
-          chromeOptions:
-            w3c: false
     - Db:
         dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%;charset=utf8'
         user: '%DB_USERNAME%'
