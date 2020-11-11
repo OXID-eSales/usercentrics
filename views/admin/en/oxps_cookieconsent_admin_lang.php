@@ -7,7 +7,7 @@ $aLang = array(
     'charset'                                              => 'UTF-8',
 
     // Lang-Strings
-    'oxpscookieconsent'                                    => 'Cookie consent',
+    'oxps_cookieconsent'                                   => 'Cookie consent',
     'oxps_cookieconsent_services'                          => 'Services',
     'oxps_cookieconsent_scripts'                           => 'Scripts',
 

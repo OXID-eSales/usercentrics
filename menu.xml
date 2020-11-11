@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OX>
     <OXMENU id="NAVIGATION_ESHOPADMIN">
-        <MAINMENU id="oxpscookieconsent">
+        <MAINMENU id="oxps_cookieconsent">
             <SUBMENU id="oxps_cookieconsent_services" cl="oxps_cookieconsent_services">
                 <TAB />
             </SUBMENU>
