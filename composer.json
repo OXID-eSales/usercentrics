@@ -9,7 +9,8 @@
     }
   },
   "require": {
-
+    "symfony/yaml" : "> 3",
+    "ext-json": "*"
   },
   "version": "1.0.1",
   "require-dev": {

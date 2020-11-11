@@ -1,0 +1,4 @@
+scripts:
+    - { service: TestServiceId, path: test.js }
+services:
+    - { name: name, id: TestServiceId }

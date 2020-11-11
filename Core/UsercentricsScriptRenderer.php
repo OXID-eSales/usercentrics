@@ -2,8 +2,34 @@
 
 namespace OxidProfessionalServices\Usercentrics\Core;
 
+use OxidProfessionalServices\Usercentrics\Service\ScriptRenderer;
+use OxidProfessionalServices\Usercentrics\Service\UsercentricsRenderer;
+
 class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
 {
+    /**
+     * @return \Psr\Container\ContainerInterface
+     */
+    protected function getContainer()
+    {
+        return \OxidEsales\EshopCommunity\Internal\Container\ContainerFactory::getInstance()
+            ->getContainer();
+    }
+
+    /**
+     * @return ScriptRenderer|null
+     */
+    protected function getRendererService(): ?ScriptRenderer
+    {
+        $container = $this->getContainer();
+        if ($container->has('OxidProfessionalServices\Usercentrics\Service\ScriptRenderer')) {
+            $renderer = $container->get('OxidProfessionalServices\Usercentrics\Service\ScriptRenderer');
+            assert($renderer instanceof ScriptRenderer);
+            return $renderer;
+        }
+        return null;
+    }
+
     /**
      * Enclose with script tag or add in function for wiget.
      *
@@ -15,54 +41,23 @@ class UsercentricsScriptRenderer extends UsercentricsScriptRenderer_parent
      */
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
-        if ($scriptsOutput) {
-            if ($widget && !$isAjaxRequest) {
-                $scriptsOutput = "window.addEventListener('load', function() { $scriptsOutput }, false )";
-            }
-
-            return "<script type='text/javascript'>$scriptsOutput</script>";
-        }
-        return "";
+        return parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
     }
 
     /**
      * Form output for includes.
      *
-     * @param array<array<string>>  $includes String files to include.
+     * @param array  $includes String files to include.
      * @param string $widget   Widget name.
      *
      * @return string
      */
     protected function formFilesOutput($includes, $widget)
     {
-        if (!count($includes)) {
-            return '';
+        $service = $this->getRendererService();
+        if (!isset($service)) {
+            return parent::formFilesOutput($includes, $widget);
         }
-
-        ksort($includes); // Sort by priority.
-        $usedSources = [];
-        $widgets = [];
-        $widgetTemplate = "WidgetsHandler.registerFile('%s', '%s');";
-        $scriptTemplate = '<script type="text/javascript" src="%s"></script>';
-        foreach ($includes as $priority) {
-            foreach ($priority as $source) {
-                if (!in_array($source, $usedSources)) {
-                    $widgets[] = sprintf(($widget ? $widgetTemplate : $scriptTemplate), $source, $widget);
-                    $usedSources[] = $source;
-                }
-            }
-        }
-        $output = implode(PHP_EOL, $widgets);
-        if ($widget && !empty($output)) {
-            $output = <<<HTML
-<script type='text/javascript'>
-    window.addEventListener('load', function() {
-        $output
-    }, false)
-</script>
-HTML;
-        }
-
-        return $output;
+        return $service->formFilesOutput($includes, $widget);
     }
 }
