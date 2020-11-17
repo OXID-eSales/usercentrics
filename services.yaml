@@ -15,4 +15,4 @@ services:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
   OxidProfessionalServices\Usercentrics\Service\FileFormatInterface:
-    class: OxidProfessionalServices\Usercentrics\Service\Yaml
+    class: OxidProfessionalServices\Usercentrics\Service\YamlFileFormat

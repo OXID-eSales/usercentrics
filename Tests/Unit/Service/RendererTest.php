@@ -6,7 +6,7 @@ use OxidEsales\TestingLibrary\UnitTestCase;
 use OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess;
 use OxidProfessionalServices\Usercentrics\Service\Renderer;
 use OxidProfessionalServices\Usercentrics\Service\Repository;
-use OxidProfessionalServices\Usercentrics\Service\Yaml;
+use OxidProfessionalServices\Usercentrics\Service\YamlFileFormat;
 
 /**
  * Class RendererTest
@@ -21,7 +21,7 @@ class RendererTest extends UnitTestCase
     {
         $config = new ConfigurationAccess(
             __DIR__ . '/ConfigTestData/Service1.yaml',
-            new Yaml()
+            new YamlFileFormat()
         );
         $repository = new Repository($config);
         $sut = new Renderer($repository);
@@ -33,7 +33,7 @@ class RendererTest extends UnitTestCase
     {
         $config = new ConfigurationAccess(
             __DIR__ . '/ConfigTestData/Service1.yaml',
-            new Yaml()
+            new YamlFileFormat()
         );
         $repository = new Repository($config);
         $sut = new Renderer($repository);

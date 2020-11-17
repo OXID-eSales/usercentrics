@@ -5,7 +5,7 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Service;
 use OxidEsales\TestingLibrary\UnitTestCase;
 use OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess;
 use OxidProfessionalServices\Usercentrics\Service\Repository;
-use OxidProfessionalServices\Usercentrics\Service\Yaml;
+use OxidProfessionalServices\Usercentrics\Service\YamlFileFormat;
 
 /**
  * Class RepositoryTest
@@ -20,7 +20,7 @@ class RepositoryTest extends UnitTestCase
     {
         $config = new ConfigurationAccess(
             __DIR__ . '/ConfigTestData/EmptyTest.yaml',
-            new Yaml()
+            new YamlFileFormat()
         );
         $scriptService = new Repository($config);
         $this->assertTrue($scriptService->isScriptWhitelisted("test.js"));
@@ -30,7 +30,7 @@ class RepositoryTest extends UnitTestCase
     {
         $config = new ConfigurationAccess(
             __DIR__ . '/ConfigTestData/Service1.yaml',
-            new Yaml()
+            new YamlFileFormat()
         );
         $scriptService = new Repository($config);
         $this->assertFalse(

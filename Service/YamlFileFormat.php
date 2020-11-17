@@ -7,7 +7,7 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 use Symfony\Component\Yaml\Dumper;
 use Symfony\Component\Yaml\Parser;
 
-class Yaml implements FileFormatInterface
+class YamlFileFormat implements FileFormatInterface
 {
     /**
      * @var Parser
