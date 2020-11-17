@@ -1,7 +1,9 @@
 services:
+
   _defaults:
     public: false
     autowire: true
+
   OxidProfessionalServices\Usercentrics\Service\ConfigurationAccessInterface:
     class: OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess
     arguments:
@@ -11,8 +13,10 @@ services:
 
   OxidProfessionalServices\Usercentrics\Service\RepositoryInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Repository
+
   OxidProfessionalServices\Usercentrics\Service\RendererInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
+
   OxidProfessionalServices\Usercentrics\Service\FileFormatInterface:
     class: OxidProfessionalServices\Usercentrics\Service\YamlFileFormat
