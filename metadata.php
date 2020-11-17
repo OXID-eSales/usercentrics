@@ -19,7 +19,8 @@ $aModule = [
 
     'templates' => [],
     'blocks' => [
-            [ 'template' => 'layout/base.tpl', 'block' => 'base_js',     'file' => '/views/blocks/base_js.tpl' ],
+            [ 'template' => 'layout/base.tpl', 'block' => 'base_js',                'file' => '/views/blocks/base_js.tpl' ],
+            [ 'template' => 'layout/base.tpl', 'block' => 'head_meta_description',  'file' => '/views/blocks/head_meta_description.tpl' ],
     ],
 
     'settings' => [
@@ -29,6 +30,12 @@ $aModule = [
             'type'  => 'aarr',
             'value' => [],
         ],
+        [
+            'group' => 'usercentrics_advanced',
+            'name'  => 'smartDataProtectorActive',
+            'type'  => 'bool',
+            'value' => 'true'
+        ]
     ],
 
     'controllers' => [],
