@@ -7,22 +7,22 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 use Exception;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
+use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDaoInterface;
 
-class Repository implements RepositoryInterface
+class ScriptServiceMapper implements ScriptServiceMapperInterface
 {
     /**
-     * @var ConfigurationAccessInterface
+     * @var ConfigurationDaoInterface
      */
-    private $configService;
+    private $configurationDao;
 
     /**
      * @var array<string,?Service>
      */
     private $scriptsByPath;
 
-    public function __construct(ConfigurationAccessInterface $configService)
-    {
-        $this->configService = $configService;
+    public function __construct(ConfigurationDaoInterface $configurationDao) {
+        $this->configurationDao = $configurationDao;
         $this->scriptsByPath = $this->getScriptsByPath();
     }
 
@@ -36,6 +36,9 @@ class Repository implements RepositoryInterface
         return !isset($scriptsByPath[$pathOrUrl]);
     }
 
+    /**
+     * Get linked script Service
+     */
     public function scriptService(string $pathOrUrl): ?Service
     {
         $scriptsByPath = $this->scriptsByPath;
@@ -58,7 +61,7 @@ class Repository implements RepositoryInterface
      */
     protected function getScriptsByPath(): array
     {
-        $config = $this->configService->getConfiguration();
+        $config = $this->configurationDao->getConfiguration();
         $scripts = $config->getScripts();
         $services = $config->getServices();
         /**

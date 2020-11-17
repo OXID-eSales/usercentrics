@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace OxidProfessionalServices\Usercentrics\Service;
+namespace OxidProfessionalServices\Usercentrics\Service\Configuration;
 
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
-use Symfony\Component\Yaml\Dumper;
-use Symfony\Component\Yaml\Parser;
-use Symfony\Component\Yaml\Yaml;
 
 /***
  * Class Configuration
  * @package OxidProfessionalServices\Usercentrics\Core
  */
-class ConfigurationAccess implements ConfigurationAccessInterface
+class ConfigurationDao implements ConfigurationDaoInterface
 {
     /**
      * @var string

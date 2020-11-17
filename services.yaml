@@ -4,19 +4,19 @@ services:
     public: false
     autowire: true
 
-  OxidProfessionalServices\Usercentrics\Service\ConfigurationAccessInterface:
-    class: OxidProfessionalServices\Usercentrics\Service\ConfigurationAccess
+  OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDaoInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
     arguments:
       - !php/const INSTALLATION_ROOT_PATH
-      - '@OxidProfessionalServices\Usercentrics\Service\FileFormatInterface'
+      - '@OxidProfessionalServices\Usercentrics\Service\Configuration\FileFormatInterface'
       - var/configuration/usercentrics.yaml
 
-  OxidProfessionalServices\Usercentrics\Service\RepositoryInterface:
-    class: OxidProfessionalServices\Usercentrics\Service\Repository
+  OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapperInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper
 
   OxidProfessionalServices\Usercentrics\Service\RendererInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
 
-  OxidProfessionalServices\Usercentrics\Service\FileFormatInterface:
-    class: OxidProfessionalServices\Usercentrics\Service\YamlFileFormat
+  OxidProfessionalServices\Usercentrics\Service\Configuration\FileFormatInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Configuration\YamlFileFormat

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OxidProfessionalServices\Usercentrics\Service;
+namespace OxidProfessionalServices\Usercentrics\Service\Configuration;
 
 interface FileFormatInterface
 {

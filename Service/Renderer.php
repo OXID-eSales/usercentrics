@@ -9,20 +9,23 @@ use Exception;
 class Renderer implements RendererInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var ScriptServiceMapperInterface
      */
-    private $repository;
+    private $scriptServiceMapper;
 
     /**
      * Renderer constructor.
-     * @param RepositoryInterface $repository
+     * @param ScriptServiceMapperInterface $scriptServiceMapper
      */
-    public function __construct(RepositoryInterface $repository)
+    public function __construct(ScriptServiceMapperInterface $scriptServiceMapper)
     {
-        $this->repository = $repository;
+        $this->scriptServiceMapper = $scriptServiceMapper;
     }
 
-    public function usercentricsScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
+    /**
+     * @TODO ?
+     */
+    protected function usercentricsScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
     {
         //ask service for service-name of the script
         //create data attribute with the service name
@@ -79,11 +82,11 @@ class Renderer implements RendererInterface
     * @return string
     * see https://usercentrics.com/de/knowledge-hub/usercentrics-skript-direkt-in-deine-website-einbinden/#Data-Attribute_vergeben
     */
-    public function usercentricsScriptIncludeNormal(array $includes)
+    protected function usercentricsScriptIncludeNormal(array $includes)
     {
         $scripts = [];
         foreach ($includes as $source) {
-            $serviceInfo = $this->repository->scriptService($source);
+            $serviceInfo = $this->scriptServiceMapper->scriptService($source);
             $data = "";
             $type = "";
             $src = " src=\"$source\"";
