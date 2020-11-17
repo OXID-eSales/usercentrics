@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use OxidEsales\Eshop\Core\ViewHelper\JavaScriptRenderer;
 use OxidProfessionalServices\Usercentrics\Core\ScriptRenderer;
 

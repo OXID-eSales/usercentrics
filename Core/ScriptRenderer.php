@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace OxidProfessionalServices\Usercentrics\Core;
 
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Service\RendererInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -12,8 +15,7 @@ class ScriptRenderer extends UsercentricsScriptRenderer_parent
 
     protected function getContainer(): ContainerInterface
     {
-        return \OxidEsales\EshopCommunity\Internal\Container\ContainerFactory::getInstance()
-            ->getContainer();
+        return ContainerFactory::getInstance()->getContainer();
     }
 
     /**
