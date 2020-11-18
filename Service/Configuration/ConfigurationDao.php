@@ -122,7 +122,7 @@ class ConfigurationDao implements ConfigurationDaoInterface
      *
      * @param Script[] $scripts
      *
-     * @return array
+     * @return mixed[]
      */
     private function preparePlainScriptsArray(array $scripts): array
     {
@@ -143,7 +143,7 @@ class ConfigurationDao implements ConfigurationDaoInterface
      *
      * @param Service[] $services
      *
-     * @return array
+     * @return mixed[]
      */
     private function preparePlainServicesArray(array $services): array
     {

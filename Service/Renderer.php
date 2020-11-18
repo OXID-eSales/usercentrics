@@ -23,25 +23,6 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @TODO ?
-     */
-    protected function usercentricsScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
-    {
-        //ask service for service-name of the script
-        //create data attribute with the service name
-
-
-        if ($scriptsOutput) {
-            if ($widget && !$isAjaxRequest) {
-                $scriptsOutput = "window.addEventListener('load', function() { $scriptsOutput }, false )";
-            }
-
-            return "<script type='text/plain' data-service=''>$scriptsOutput</script>";
-        }
-        return "";
-    }
-
-    /**
      * @param mixed[] $includes //[ 10 => ["test.js","test2.js"] ]
      * @param string $widget widget name or if no widget selected then an empty string
      * @return string
@@ -99,5 +80,24 @@ class Renderer implements RendererInterface
         }
 
         return implode(PHP_EOL, $scripts);
+    }
+
+    /**
+     * @TODO ?
+     */
+    protected function usercentricsScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
+    {
+        //ask service for service-name of the script
+        //create data attribute with the service name
+
+
+        if ($scriptsOutput) {
+            if ($widget && !$isAjaxRequest) {
+                $scriptsOutput = "window.addEventListener('load', function() { $scriptsOutput }, false )";
+            }
+
+            return "<script type='text/plain' data-service=''>$scriptsOutput</script>";
+        }
+        return "";
     }
 }
