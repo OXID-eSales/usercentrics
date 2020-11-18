@@ -47,6 +47,8 @@ class ScriptRenderer extends UsercentricsScriptRenderer_parent
      * @param string $widget   Widget name.
      *
      * @return string
+     *
+     * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected function formFilesOutput($includes, $widget)
     {
