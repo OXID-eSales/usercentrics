@@ -14,36 +14,20 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
  */
 class ConfigurationDao implements ConfigurationDaoInterface
 {
-    /**
-     * @var string
-     */
-    private $path;
+    /** @var StorageInterface */
+    private $storage;
 
-    /**
-     * @var FileFormatInterface
-     */
-    private $formater;
-
-    public function __construct(string $basePath, FileFormatInterface $format, string $file = "")
+    public function __construct(StorageInterface $storage)
     {
-        $this->path = $basePath;
-        if ($file) {
-            $this->path .= "/$file";
-        }
-        $this->formater = $format;
+        $this->storage = $storage;
     }
 
     /**
-     * @psalm-suppress MixedAssignment
-     * @psalm-suppress MixedArrayAssignment
      * @return Configuration
      */
     public function getConfiguration(): Configuration
     {
-        $plainConfig = [];
-        if (file_exists($this->path)) {
-            $plainConfig = $this->formater->parse($this->path);
-        }
+        $plainConfig = $this->storage->getData();
 
         $plainScripts = isset($plainConfig['scripts']) ? $plainConfig['scripts'] : [];
         if (! is_array($plainScripts)) {
@@ -94,6 +78,7 @@ class ConfigurationDao implements ConfigurationDaoInterface
             'scripts' => $plainScripts,
             'services' => $plainServices
         ];
-        $this->formater->dump($plainConfig, $this->path);
+
+        $this->storage->putData($plainConfig);
     }
 }

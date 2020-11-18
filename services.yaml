@@ -7,9 +7,14 @@ services:
   OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDaoInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
     arguments:
-      - !php/const INSTALLATION_ROOT_PATH
-      - '@OxidProfessionalServices\Usercentrics\Service\Configuration\FileFormatInterface'
-      - var/configuration/usercentrics.yaml
+      $storage: '@OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface'
+
+  OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage
+    public: true
+    arguments:
+      $directory: !php/const INSTALLATION_ROOT_PATH
+      $fileName: usercentrics.yaml
 
   OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapperInterface:
     class: OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper
@@ -17,6 +22,3 @@ services:
   OxidProfessionalServices\Usercentrics\Service\RendererInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
-
-  OxidProfessionalServices\Usercentrics\Service\Configuration\FileFormatInterface:
-    class: OxidProfessionalServices\Usercentrics\Service\Configuration\YamlFileFormat

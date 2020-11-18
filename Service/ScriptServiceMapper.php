@@ -21,7 +21,8 @@ class ScriptServiceMapper implements ScriptServiceMapperInterface
      */
     private $scriptsByPath;
 
-    public function __construct(ConfigurationDaoInterface $configurationDao) {
+    public function __construct(ConfigurationDaoInterface $configurationDao)
+    {
         $this->configurationDao = $configurationDao;
         $this->scriptsByPath = $this->getScriptsByPath();
     }
