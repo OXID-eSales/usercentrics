@@ -35,6 +35,21 @@ class YamlStorageTest extends StorageUnitTestCase
         $this->assertEquals(["test" => "value"], $sut->getData());
     }
 
+    public function testGetNotExistingFileDataGivesEmptyArray(): void
+    {
+        $path = $this->getVirtualStructurePath([]);
+        $file = 'ConfigReadTest.yaml';
+
+        $sut = new YamlStorage(
+            $path,
+            'ConfigReadTest.yaml'
+        );
+
+        $this->assertFileNotExists($path . DIRECTORY_SEPARATOR . $file);
+
+        $this->assertEquals([], $sut->getData());
+    }
+
     public function testPutData(): void
     {
         $path = $this->getVirtualStructurePath([

@@ -32,9 +32,11 @@ class YamlStorage implements StorageInterface
 
     public function getData(): array
     {
-        $result = $this->parser->parseFile($this->getConfigurationFilePath());
+        if (file_exists($this->getConfigurationFilePath())) {
+            $result = $this->parser->parseFile($this->getConfigurationFilePath());
+        }
 
-        if (!is_array($result)) {
+        if (!isset($result) || !is_array($result)) {
             $result = [];
         }
 
