@@ -1,7 +1,9 @@
 <?php
 
+use OxidEsales\Eshop\Core\ViewConfig;
 use OxidEsales\Eshop\Core\ViewHelper\JavaScriptRenderer;
 use OxidProfessionalServices\Usercentrics\Core\UsercentricsScriptRenderer;
+use OxidProfessionalServices\Usercentrics\Core\ViewConfig as UsercentricsViewConfig;
 
 $sMetadataVersion = '2.1';
 $aModule = [
@@ -19,22 +21,32 @@ $aModule = [
 
     'templates' => [],
     'blocks' => [
-            [ 'template' => 'layout/base.tpl', 'block' => 'base_js',     'file' => '/views/blocks/base_js.tpl' ],
+            [
+                'template' => 'layout/base.tpl',
+                'block' => 'base_js',
+                'file' => '/views/blocks/base_js.tpl'
+            ],
+            [
+                'template' => 'layout/base.tpl',
+                'block' => 'head_meta_description',
+                'file' => 'views/blocks/head_meta_description.tpl'
+            ],
     ],
 
     'settings' => [
         [
-            'group' => 'usercentrics_base',
-            'name'  => 'js_service_map',
-            'type'  => 'aarr',
-            'value' => [],
-        ],
+            'group' => 'usercentrics_advanced',
+            'name'  => 'smartDataProtectorActive',
+            'type'  => 'bool',
+            'value' => true
+        ]
     ],
 
     'controllers' => [],
 
     'extend' => [
-        JavaScriptRenderer::class => UsercentricsScriptRenderer::class
+        JavaScriptRenderer::class => UsercentricsScriptRenderer::class,
+        ViewConfig::class => UsercentricsViewConfig::class
     ]
 
 ];
