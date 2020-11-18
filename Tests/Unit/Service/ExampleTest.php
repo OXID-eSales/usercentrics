@@ -13,5 +13,6 @@ class ExampleTest extends TestCase
     {
         $config = Registry::get(Config::class);
         $this->assertInstanceOf(Config::class, $config);
+        $this->assertTrue(false);
     }
 }
