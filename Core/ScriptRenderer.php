@@ -10,7 +10,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
-class ScriptRenderer extends UsercentricsScriptRenderer_parent
+class ScriptRenderer extends ScriptRenderer_parent
 {
 
     protected function getContainer(): ContainerInterface
