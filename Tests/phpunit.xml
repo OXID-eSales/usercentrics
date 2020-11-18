@@ -5,20 +5,23 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
-         printerClass="\OxidEsales\TestingLibrary\Printer"
          forceCoversAnnotation="false"
          processIsolation="false"
          stopOnError="false"
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
+         beStrictAboutTestsThatDoNotTestAnything="false"
          verbose="false">
+    <testsuites>
+        <testsuite name="UnitTests">
+            <directory>Unit/</directory>
+        </testsuite>
+    </testsuites>
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../Component</directory>
-            <directory suffix=".php">../Controller</directory>
+        <whitelist addUncoveredFilesFromWhitelist="false"
+                   processUncoveredFilesFromWhitelist="false">
             <directory suffix=".php">../Core</directory>
-            <directory suffix=".php">../Model</directory>
         </whitelist>
     </filter>
 </phpunit>
