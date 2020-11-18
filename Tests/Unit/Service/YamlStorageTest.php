@@ -3,16 +3,15 @@
 namespace OxidProfessionalServices\Usercentrics\Tests\Service;
 
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
-use OxidEsales\TestingLibrary\UnitTestCase;
-use org\bovigo\vfs\vfsStream;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
+use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
 
 /**
  * YamlStorageTest Yaml
  * @package OxidProfessionalServices\Usercentrics\Tests\Service
  */
-class YamlStorageTest extends UnitTestCase
+class YamlStorageTest extends StorageUnitTestCase
 {
     public function testIntegration(): void
     {
@@ -24,14 +23,12 @@ class YamlStorageTest extends UnitTestCase
 
     public function testGetData(): void
     {
-        $baseDir = vfsStream::setup('root', 444);
-        $structure = [
+        $path = $this->getVirtualStructurePath([
             'ConfigReadTest.yaml' => 'test: value'
-        ];
-        vfsStream::create($structure, $baseDir);
+        ]);
 
         $sut = new YamlStorage(
-            vfsStream::url('root'),
+            $path,
             'ConfigReadTest.yaml'
         );
 
@@ -40,14 +37,12 @@ class YamlStorageTest extends UnitTestCase
 
     public function testPutData(): void
     {
-        $baseDir = vfsStream::setup('root', 444);
-        $structure = [
+        $path = $this->getVirtualStructurePath([
             'ConfigReadTest.yaml' => 'test: wrongValue'
-        ];
-        vfsStream::create($structure, $baseDir);
+        ]);
 
         $sut = new YamlStorage(
-            vfsStream::url('root'),
+            $path,
             'ConfigReadTest.yaml'
         );
 
