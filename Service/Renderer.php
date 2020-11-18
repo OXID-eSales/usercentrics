@@ -42,10 +42,10 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @param string[] $includes //[ 10 => ["test.js","test2.js"] ]
+     * @param mixed[] $includes //[ 10 => ["test.js","test2.js"] ]
      * @param string $widget widget name or if no widget selected then an empty string
      * @return string
-     * see https://usercentrics.com/de/knowledge-hub/usercentrics-skript-direkt-in-deine-website-einbinden/#Data-Attribute_vergeben
+     * see https://usercentrics.com/knowledge-hub/direct-integration-usercentrics-script-website/#Assign_data_attributes
      * psalm-suppress
      */
     public function formFilesOutput(array $includes, string $widget): string
@@ -78,9 +78,9 @@ class Renderer implements RendererInterface
     }
 
     /**
-    * @param array<string> $includes //[ "test.js","test2.js"]
+    * @param string[] $includes //[ "test.js","test2.js"]
     * @return string
-    * see https://usercentrics.com/de/knowledge-hub/usercentrics-skript-direkt-in-deine-website-einbinden/#Data-Attribute_vergeben
+    * see https://usercentrics.com/knowledge-hub/direct-integration-usercentrics-script-website/#Assign_data_attributes
     */
     protected function usercentricsScriptIncludeNormal(array $includes)
     {

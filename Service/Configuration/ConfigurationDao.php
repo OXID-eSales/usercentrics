@@ -75,6 +75,7 @@ class ConfigurationDao implements ConfigurationDaoInterface
      */
     private function getConfigTypeFromPlainData(string $typeOfList, array $plainConfig): array
     {
+        /** @var mixed $typeConfig */
         $typeConfig = $plainConfig[$typeOfList] ?? [];
 
         if (!is_array($typeConfig)) {
@@ -89,9 +90,10 @@ class ConfigurationDao implements ConfigurationDaoInterface
      */
     private function scriptFromArray(array $data): Script
     {
-        $path = $data['path'] ?? "";
-        $service = $data['service'] ?? "";
-        return new Script((string)$path, (string)$service);
+        $path = (string)($data['path'] ?? '');
+        $service = (string)($data['service'] ?? '');
+
+        return new Script($path, $service);
     }
 
     /**
@@ -99,9 +101,10 @@ class ConfigurationDao implements ConfigurationDaoInterface
      */
     private function serviceFromArray(array $data): Service
     {
-        $serviceName = $data['name'] ?? "";
-        $serviceId = $data['id'] ?? "";
-        return new Service((string)$serviceName, (string)$serviceId);
+        $serviceName = (string)($data['name'] ?? '');
+        $serviceId = (string)($data['id'] ?? '');
+
+        return new Service($serviceName, $serviceId);
     }
 
     public function putConfiguration(Configuration $configuration): void

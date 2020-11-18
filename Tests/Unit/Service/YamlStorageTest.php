@@ -16,6 +16,7 @@ class YamlStorageTest extends StorageUnitTestCase
     public function testIntegration(): void
     {
         $container = ContainerFactory::getInstance()->getContainer();
+        /** @var StorageInterface $storage */
         $storage = $container->get(StorageInterface::class);
 
         $this->assertInstanceOf(YamlStorage::class, $storage);
