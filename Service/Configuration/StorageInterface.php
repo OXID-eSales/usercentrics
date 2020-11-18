@@ -6,6 +6,13 @@ namespace OxidProfessionalServices\Usercentrics\Service\Configuration;
 
 interface StorageInterface
 {
+    /**
+     * @return mixed[]
+     */
     public function getData(): array;
-    public function putData($data): void;
+
+    /**
+     * @param mixed[] $data
+     */
+    public function putData(array $data): void;
 }

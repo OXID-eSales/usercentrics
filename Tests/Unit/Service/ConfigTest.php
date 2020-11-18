@@ -15,9 +15,6 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
  */
 class ConfigTest extends StorageUnitTestCase
 {
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     public function testConfigPut(): void
     {
         $directory = $this->getVirtualStructurePath();

@@ -9,7 +9,7 @@ interface RendererInterface
     /**
      * Form output for includes.
      *
-     * @param array  $includes String files to include.
+     * @param string[]  $includes String files to include.
      * @param string $widget   Widget name.
      *
      * @return string

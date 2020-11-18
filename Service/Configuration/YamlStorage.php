@@ -41,17 +41,15 @@ class YamlStorage implements StorageInterface
         return $result;
     }
 
-    public function putData($data): void
+    public function putData(array $data): void
     {
         $yamlData = $this->dumper->dump($data, 2);
 
         file_put_contents($this->getConfigurationFilePath(), $yamlData);
     }
 
-    private function getConfigurationFilePath()
+    private function getConfigurationFilePath(): string
     {
-        $configurationDirectory = $this->directory;
-
-        return $configurationDirectory . DIRECTORY_SEPARATOR . $this->fileName;
+        return $this->directory . DIRECTORY_SEPARATOR . $this->fileName;
     }
 }

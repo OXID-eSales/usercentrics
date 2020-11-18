@@ -18,10 +18,6 @@ class ScriptRenderer extends UsercentricsScriptRenderer_parent
         return ContainerFactory::getInstance()->getContainer();
     }
 
-    /**
-     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
-     * @throws ContainerExceptionInterface Error while retrieving the entry.
-     */
     protected function getRendererService(): RendererInterface
     {
         $container = $this->getContainer();
@@ -47,7 +43,7 @@ class ScriptRenderer extends UsercentricsScriptRenderer_parent
     /**
      * Form output for includes.
      *
-     * @param array  $includes String files to include.
+     * @param string[] $includes String files to include.
      * @param string $widget   Widget name.
      *
      * @return string

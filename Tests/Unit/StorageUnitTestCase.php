@@ -12,6 +12,9 @@ use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
  */
 class StorageUnitTestCase extends UnitTestCase
 {
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function getVirtualStructurePath(array $structure = []): string
     {
         $baseDir = vfsStream::setup('root', 444);

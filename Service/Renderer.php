@@ -42,7 +42,7 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @param array $includes //[ 10 => ["test.js","test2.js"] ]
+     * @param string[] $includes //[ 10 => ["test.js","test2.js"] ]
      * @param string $widget widget name or if no widget selected then an empty string
      * @return string
      * see https://usercentrics.com/de/knowledge-hub/usercentrics-skript-direkt-in-deine-website-einbinden/#Data-Attribute_vergeben
