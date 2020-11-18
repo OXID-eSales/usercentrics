@@ -23,64 +23,57 @@ class Renderer implements RendererInterface
     }
 
     /**
-     * @param mixed[] $includes //[ 10 => ["test.js","test2.js"] ]
-     * @param string $widget widget name or if no widget selected then an empty string
-     *
-     * @return string
-     *
-     * see https://usercentrics.com/knowledge-hub/direct-integration-usercentrics-script-website/#Assign_data_attributes
+     * @param array<int,array<string>> $pathGroups // [ 10 => ["test.js","test2.js"] ]
      */
-    public function formFilesOutput(array $includes, string $widget): string
+    public function formFilesOutput(array $pathGroups, string $widget): string
     {
-        if (!count($includes)) {
+        if (!count($pathGroups)) {
             return '';
         }
 
-        /**
-         * @var array<array<string>>
-         */
-        $typedIncludes = $includes;
+        ksort($pathGroups); // Sort by priority.
 
-        ksort($includes); // Sort by priority.
-        /**
-         * @var string[]
-         */
-        $scripts = [];
-        foreach ($typedIncludes as $priority) {
-            foreach ($priority as $source) {
-                if (!in_array($source, $scripts)) {
-                    $scripts[] = (string) $source;
+        /** @var string[] $sources */
+        $sources = [];
+        foreach ($pathGroups as $priorityGroup) {
+            /** @var string $onePath */
+            foreach ($priorityGroup as $onePath) {
+                if (!in_array($onePath, $sources)) {
+                    $sources[] = (string)$onePath;
                 }
             }
         }
-        if (!$widget) {
-            return $this->usercentricsScriptIncludeNormal($scripts);
+
+        if ($widget) {
+            throw new Exception("Widgets are not yet supported");
         }
-        throw new Exception("widgets are not yet supported");
+
+        return $this->prepareScriptUrlsOutput($sources);
     }
 
     /**
-    * @param string[] $includes //[ "test.js","test2.js"]
-    * @return string
-    * see https://usercentrics.com/knowledge-hub/direct-integration-usercentrics-script-website/#Assign_data_attributes
-    */
-    protected function usercentricsScriptIncludeNormal(array $includes)
+     * @param array<string> $sources //[ "test.js","test2.js"]
+     *
+     * see https://usercentrics.com/knowledge-hub/direct-integration-usercentrics-script-website/#Assign_data_attributes
+     */
+    protected function prepareScriptUrlsOutput(array $sources): string
     {
-        $scripts = [];
-        foreach ($includes as $source) {
-            $serviceInfo = $this->scriptServiceMapper->scriptService($source);
-            $data = "";
-            $type = "";
-            $src = " src=\"$source\"";
-            if (isset($serviceInfo)) {
-                $serviceName = $serviceInfo->getName();
+        $outputs = [];
+
+        foreach ($sources as $source) {
+            $data = '';
+            $type = '';
+            $src = ' src="' . $source . '"';
+
+            $service = $this->scriptServiceMapper->getScriptPathService($source);
+            if ($service !== null) {
                 $type = ' type="text/plain"';
-                $data = " data-usercentrics=\"$serviceName\"";
+                $data = ' data-usercentrics="' . $service->getName() . '"';
             }
-            $scripts[] = "<script$type$data$src></script>";
+            $outputs[] = "<script{$type}{$data}{$src}></script>";
         }
 
-        return implode(PHP_EOL, $scripts);
+        return implode(PHP_EOL, $outputs);
     }
 
     /**
@@ -90,7 +83,6 @@ class Renderer implements RendererInterface
     {
         //ask service for service-name of the script
         //create data attribute with the service name
-
 
         if ($scriptsOutput) {
             if ($widget && !$isAjaxRequest) {

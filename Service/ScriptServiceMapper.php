@@ -17,50 +17,44 @@ class ScriptServiceMapper implements ScriptServiceMapperInterface
     private $configurationDao;
 
     /**
+     * This is a map of service path as key with a service id
+     * @example: ['some/path/to/script.js' => 'SomeConfiguredServiceId']
+     *
      * @var array<string,?Service>
      */
-    private $scriptsByPath;
+    private $scriptPathServices;
 
     public function __construct(ConfigurationDaoInterface $configurationDao)
     {
         $this->configurationDao = $configurationDao;
-        $this->scriptsByPath = $this->getScriptsByPath();
+        $this->scriptPathServices = $this->mapScriptPathsToServices();
     }
 
-    /**
-     * @param string $pathOrUrl
-     * @return bool
-     */
-    public function isScriptWhitelisted(string $pathOrUrl): bool
+    public function checkPathShouldBeProcessed(string $pathOrUrl): bool
     {
-        $scriptsByPath = $this->scriptsByPath;
-        return !isset($scriptsByPath[$pathOrUrl]);
+        $scriptsByPath = $this->scriptPathServices;
+        return isset($scriptsByPath[$pathOrUrl]);
     }
 
-    /**
-     * Get linked script Service
-     */
-    public function scriptService(string $pathOrUrl): ?Service
+    public function getScriptPathService(string $pathOrUrl): ?Service
     {
-        $scriptsByPath = $this->scriptsByPath;
+        $scriptsByPath = $this->scriptPathServices;
         return isset($scriptsByPath[$pathOrUrl]) ? $scriptsByPath[$pathOrUrl] : null;
     }
 
     /**
-     * @param string $snippet
-     * @return bool
      * @throws Exception
      */
-    public function isSnippetWhitelisted(string $snippet): bool
+    public function checkSnippetShouldBeProcessed(string $snippet): bool
     {
-        //fixme: do implement this
-        throw new Exception("not yet implemented");
+        //@todo
+        throw new Exception("Widgets are not yet supported");
     }
 
     /**
      * @return array<string,?Service>
      */
-    protected function getScriptsByPath(): array
+    protected function mapScriptPathsToServices(): array
     {
         $config = $this->configurationDao->getConfiguration();
         $scripts = $config->getScripts();

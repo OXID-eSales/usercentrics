@@ -37,13 +37,14 @@ class ScriptRenderer extends UsercentricsScriptRenderer_parent
      */
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
+        // todo
         return parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
     }
 
     /**
      * Form output for includes.
      *
-     * @param string[] $includes String files to include.
+     * @param array<int,array<string>> $includes String files to include.
      * @param string $widget   Widget name.
      *
      * @return string

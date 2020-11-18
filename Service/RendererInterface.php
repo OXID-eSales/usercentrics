@@ -9,10 +9,10 @@ interface RendererInterface
     /**
      * Form output for includes.
      *
-     * @param string[]  $includes String files to include.
+     * @param array<int,array<string>> $pathGroups // [ 10 => ["test.js","test2.js"] ]
      * @param string $widget   Widget name.
      *
      * @return string
      */
-    public function formFilesOutput(array $includes, string $widget): string;
+    public function formFilesOutput(array $pathGroups, string $widget): string;
 }

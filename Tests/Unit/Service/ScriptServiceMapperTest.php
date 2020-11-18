@@ -2,9 +2,9 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Service;
 
+use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
-use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlFileFormat;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
 
 /**
@@ -14,12 +14,15 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
  */
 class ScriptServiceMapperTest extends StorageUnitTestCase
 {
-    public function testScriptIsWhitelistedIfNotConfigured(): void
+    public function testScriptShouldNotBeProcessedIfNotConfigured(): void
     {
         $config = new ConfigurationDao($this->getStorage('EmptyTest.yaml', __DIR__ . '/ConfigTestData'));
-
         $scriptServiceMapper = new ScriptServiceMapper($config);
-        $this->assertTrue($scriptServiceMapper->isScriptWhitelisted("test.js"));
+
+        $this->assertFalse(
+            $scriptServiceMapper->checkPathShouldBeProcessed("test.js"),
+            "test1.js should not be processed as its not configured"
+        );
     }
 
     public function testScriptNameConfigured(): void
@@ -27,13 +30,15 @@ class ScriptServiceMapperTest extends StorageUnitTestCase
         $config = new ConfigurationDao($this->getStorage('Service1.yaml', __DIR__ . '/ConfigTestData'));
 
         $scriptServiceMapper = new ScriptServiceMapper($config);
-        $this->assertFalse(
-            $scriptServiceMapper->isScriptWhitelisted("test1.js"),
-            "test1.js whitelisted but configured"
+        $this->assertTrue(
+            $scriptServiceMapper->checkPathShouldBeProcessed("test1.js"),
+            "test1.js is marked as no processing needed but it should be processed, as its configured"
         );
-        $service = $scriptServiceMapper->scriptService("test1.js");
+
+        /** @var Service $service */
+        $service = $scriptServiceMapper->getScriptPathService("test1.js");
+
         $this->assertNotNull($service);
-        assert($service != null);
         $this->assertEquals("name1", $service->getName());
     }
 }

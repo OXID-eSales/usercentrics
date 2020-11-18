@@ -9,9 +9,18 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 
 interface ScriptServiceMapperInterface
 {
-    public function isScriptWhitelisted(string $pathOrUrl): bool;
+    /**
+     * Check path/url should be processed by the module
+     */
+    public function checkPathShouldBeProcessed(string $pathOrUrl): bool;
 
-    public function scriptService(string $pathOrUrl): ?Service;
+    /**
+     * Get path/url related service
+     */
+    public function getScriptPathService(string $pathOrUrl): ?Service;
 
-    public function isSnippetWhitelisted(string $snippet): bool;
+    /**
+     * Check snipped should be processed by the module
+     */
+    public function checkSnippetShouldBeProcessed(string $snippet): bool;
 }
