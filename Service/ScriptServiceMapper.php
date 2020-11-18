@@ -65,38 +65,12 @@ class ScriptServiceMapper implements ScriptServiceMapperInterface
         $config = $this->configurationDao->getConfiguration();
         $scripts = $config->getScripts();
         $services = $config->getServices();
-        /**
-         * create dictionary for services
-         * @var array<string, Service>
-         */
-        $servicesById = array_reduce(
-            $services,
-            /**
-             * @param array<string,Service> $result
-             * @param Service $item
-             * @return array<string,Service>
-             */
-            function (array &$result, Service $item) {
-                $result[$item->getId()] = $item;
-                return $result;
-            },
-            []
-        );
+        $result = [];
 
+        foreach ($scripts as $oneScript) {
+            $result[$oneScript->getPath()] = $services[$oneScript->getServiceId()] ?? null;
+        }
 
-        return array_reduce(
-            $scripts,
-            /**
-             * @param array<string,?Service> $result
-             * @param Script $item
-             * @return array<string,?Service>
-             */
-            function (array &$result, Script $item) use ($servicesById) {
-                $result[$item->getPath()] = isset($servicesById[$item->getServiceId()]) ?
-                    $servicesById[$item->getServiceId()] : null;
-                return $result;
-            },
-            []
-        );
+        return $result;
     }
 }

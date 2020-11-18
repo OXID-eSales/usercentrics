@@ -25,9 +25,10 @@ class Renderer implements RendererInterface
     /**
      * @param mixed[] $includes //[ 10 => ["test.js","test2.js"] ]
      * @param string $widget widget name or if no widget selected then an empty string
+     *
      * @return string
+     *
      * see https://usercentrics.com/knowledge-hub/direct-integration-usercentrics-script-website/#Assign_data_attributes
-     * psalm-suppress
      */
     public function formFilesOutput(array $includes, string $widget): string
     {

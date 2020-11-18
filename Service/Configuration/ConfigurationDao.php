@@ -61,7 +61,8 @@ class ConfigurationDao implements ConfigurationDaoInterface
         $services = [];
         /** @var string[] $serviceDataArray */
         foreach ($plainServices as $serviceDataArray) {
-            $services[] = $this->serviceFromArray($serviceDataArray);
+            $service = $this->serviceFromArray($serviceDataArray);
+            $services[$service->getId()] = $service;
         }
 
         return $services;

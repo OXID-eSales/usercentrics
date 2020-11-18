@@ -42,7 +42,7 @@ class ConfigTest extends StorageUnitTestCase
 
         $configuration = $sut->getConfiguration();
 
-        $oneService = $configuration->getServices()[0];
+        $oneService = $configuration->getServices()['TestService1Id'];
         $this->assertEquals("TestService1Id", $oneService->getId());
         $this->assertEquals("name1", $oneService->getName());
 
