@@ -50,12 +50,7 @@ class ScriptRenderer extends UsercentricsScriptRenderer_parent
      */
     protected function formFilesOutput($includes, $widget)
     {
-        try {
-            $service = $this->getRendererService();
-        } catch (\Exception $ex) {
-            return parent::formFilesOutput($includes, $widget);
-        }
-
+        $service = $this->getRendererService();
         return $service->formFilesOutput($includes, $widget);
     }
 }
