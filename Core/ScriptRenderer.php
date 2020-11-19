@@ -21,9 +21,8 @@ class ScriptRenderer extends ScriptRenderer_parent
     protected function getRendererService(): RendererInterface
     {
         $container = $this->getContainer();
-        /** @var RendererInterface $renderer */
-        $renderer = $container->get(RendererInterface::class);
-        return $renderer;
+        /** @var RendererInterface */
+        return $container->get(RendererInterface::class);
     }
 
     /**
