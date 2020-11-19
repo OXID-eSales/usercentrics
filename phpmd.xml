@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<ruleset name="Oxid PS Rule set"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
+                     http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="
+                     http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>
+        Oxid PS Ruleset
+    </description>
+    <rule ref="rulesets/codesize.xml" />
+    <rule ref="rulesets/unusedcode.xml"/>
+    <rule ref="rulesets/cleancode.xml">
+        <exclude name="StaticAccess"/>
+    </rule>
+    <rule ref="rulesets/cleancode.xml/StaticAccess">
+    <properties>
+        <property name="exceptions">
+            <value>
+                \OxidEsales\Eshop\Core\Registry,
+            </value>
+        </property>
+    </properties>
+    </rule>
+
+
+    <rule ref="rulesets/naming.xml">
+        <exclude name="ShortVariable" />
+    </rule>
+    <exclude-pattern>*_support/*</exclude-pattern>
+    <exclude-pattern>*params.php</exclude-pattern>
+    <rule ref="rulesets/naming.xml/ShortVariable"
+          since="0.2"
+          message="Avoid variables with short names like {0}. Configured minimum length is {1}."
+          class="PHPMD\Rule\Naming\ShortVariable"
+          externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable">
+        <priority>3</priority>
+        <properties>
+            <property name="minimum" description="Minimum length for a variable, property or parameter name" value="3"/>
+            <!--
+            id = valid name for ids
+            i,j = counter variables, e.g. in loops (btw. e,f to be avoided because it gets too complicated)
+            I => "I" like in "I write codeception tests"
+            -->
+            <property name="exceptions" value="id,i,j,I" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/design.xml" />
+</ruleset>
