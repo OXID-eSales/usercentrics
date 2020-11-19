@@ -41,6 +41,12 @@ $aModule = [
             'name'  => 'smartDataProtectorActive',
             'type'  => 'bool',
             'value' => true
+        ],
+        [
+            'group' => 'usercentrics_advanced',
+            'name'  => 'usercentricsId',
+            'type'  => 'str',
+            'value' => '3j0TmWxNS'
         ]
     ],
 
