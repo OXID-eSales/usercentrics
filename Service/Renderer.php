@@ -6,7 +6,7 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 
 use Exception;
 
-class Renderer implements RendererInterface
+final class Renderer implements RendererInterface
 {
     /**
      * @var ScriptServiceMapperInterface
@@ -65,7 +65,7 @@ class Renderer implements RendererInterface
             $type = '';
             $src = ' src="' . $source . '"';
 
-            $service = $this->scriptServiceMapper->getScriptPathService($source);
+            $service = $this->scriptServiceMapper->getServiceByScriptPath($source);
             if ($service !== null) {
                 $type = ' type="text/plain"';
                 $data = ' data-usercentrics="' . $service->getName() . '"';
@@ -76,20 +76,23 @@ class Renderer implements RendererInterface
         return implode(PHP_EOL, $outputs);
     }
 
-    /**
-     * @TODO ?
-     */
-    protected function usercentricsScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
+    public function encloseScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
     {
-        //ask service for service-name of the script
-        //create data attribute with the service name
-
         if ($scriptsOutput) {
             if ($widget && !$isAjaxRequest) {
-                $scriptsOutput = "window.addEventListener('load', function() { $scriptsOutput }, false )";
+                throw new Exception("Widgets are not yet supported");
             }
+            $id = $this->scriptServiceMapper->getIdForSnippet($scriptsOutput);
+            $service = $this->scriptServiceMapper->getServiceBySnippet($id);
+            $data = '';
+            $type = '';
+            if ($service !== null) {
+                $type = ' type="text/plain"';
+                $data = ' data-usercentrics="' . $service->getName() . '"';
+            }
+            $dataOxid = " data-oxid=\"$id\"";
 
-            return "<script type='text/plain' data-service=''>$scriptsOutput</script>";
+            return "<script{$type}{$data}{$dataOxid}>$scriptsOutput</script>";
         }
         return "";
     }

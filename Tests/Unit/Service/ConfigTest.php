@@ -2,6 +2,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Unit\Service;
 
+use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
@@ -24,7 +25,8 @@ class ConfigTest extends StorageUnitTestCase
 
         $scripts = [new Script('test.js', 'TestServiceId')];
         $services = [new Service('name', 'TestServiceId')];
-        $configuration = new Configuration($scripts, $services);
+        $snippets = [new ScriptSnippet('123', 'TestServiceId')];
+        $configuration = new Configuration($scripts, $services, $snippets);
 
         $sut->putConfiguration($configuration);
 

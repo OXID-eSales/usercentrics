@@ -15,4 +15,13 @@ interface RendererInterface
      * @return string
      */
     public function formFilesOutput(array $pathGroups, string $widget): string;
+
+    /**
+     * encloses script code with a script tag
+     * @param string $scriptsOutput
+     * @param string $widget
+     * @param bool $isAjaxRequest
+     * @return string
+     */
+    public function encloseScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string;
 }

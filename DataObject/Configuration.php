@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\DataObject;
 
-class Configuration
+/** @psalm-immutable */
+final class Configuration
 {
     /**
      * @var Script[]
@@ -17,14 +18,21 @@ class Configuration
     private $services;
 
     /**
+     * @var ScriptSnippet[]
+     */
+    private $scriptSnippets;
+
+    /**
      * Configuration constructor.
      * @param Script[] $scripts
      * @param Service[] $services
+     * @param ScriptSnippet[] $scriptSnippets
      */
-    public function __construct(array $scripts, array $services)
+    public function __construct(array $scripts, array $services, array $scriptSnippets)
     {
         $this->scripts = $scripts;
         $this->services = $services;
+        $this->scriptSnippets = $scriptSnippets;
     }
 
     /**
@@ -41,5 +49,13 @@ class Configuration
     public function getServices(): array
     {
         return $this->services;
+    }
+
+    /**
+     * @return ScriptSnippet[]
+     */
+    public function getScriptSnippets(): array
+    {
+        return $this->scriptSnippets;
     }
 }

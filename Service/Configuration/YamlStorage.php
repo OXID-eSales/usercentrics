@@ -7,7 +7,7 @@ namespace OxidProfessionalServices\Usercentrics\Service\Configuration;
 use Symfony\Component\Yaml\Dumper;
 use Symfony\Component\Yaml\Parser;
 
-class YamlStorage implements StorageInterface
+final class YamlStorage implements StorageInterface
 {
     /** @var Dumper */
     private $dumper;

@@ -14,7 +14,7 @@ services:
     public: true
     arguments:
       $directory: !php/const INSTALLATION_ROOT_PATH
-      $fileName: usercentrics.yaml
+      $fileName: /var/configuration/usercentrics.yaml
 
   OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapperInterface:
     class: OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper

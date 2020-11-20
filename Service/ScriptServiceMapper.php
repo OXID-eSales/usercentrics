@@ -9,7 +9,7 @@ use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDaoInterface;
 
-class ScriptServiceMapper implements ScriptServiceMapperInterface
+final class ScriptServiceMapper implements ScriptServiceMapperInterface
 {
     /**
      * @var ConfigurationDaoInterface
@@ -22,33 +22,38 @@ class ScriptServiceMapper implements ScriptServiceMapperInterface
      *
      * @var array<string,?Service>
      */
-    private $scriptPathServices;
+    private $scriptPathToServices;
+
+    /**
+     * @var array<string,?Service>
+     */
+    private $snippetToService;
 
     public function __construct(ConfigurationDaoInterface $configurationDao)
     {
         $this->configurationDao = $configurationDao;
-        $this->scriptPathServices = $this->mapScriptPathsToServices();
+        $this->scriptPathToServices = $this->mapScriptPathsToServices();
+        $this->snippetToService = $this->mapScriptSnippetToServices();
     }
 
-    public function checkPathShouldBeProcessed(string $pathOrUrl): bool
+    public function getServiceByScriptPath(string $pathOrUrl): ?Service
     {
-        $scriptsByPath = $this->scriptPathServices;
-        return isset($scriptsByPath[$pathOrUrl]);
+        $scriptsByPath = $this->scriptPathToServices;
+        return $scriptsByPath[$pathOrUrl] ?? null;
     }
 
-    public function getScriptPathService(string $pathOrUrl): ?Service
+    public function getServiceBySnippet(string $snippetId): ?Service
     {
-        $scriptsByPath = $this->scriptPathServices;
-        return isset($scriptsByPath[$pathOrUrl]) ? $scriptsByPath[$pathOrUrl] : null;
+        $snippetToService = $this->snippetToService;
+        return $snippetToService[$snippetId] ?? null;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function checkSnippetShouldBeProcessed(string $snippet): bool
+
+    protected function getServiceById(string $serviceId): ?Service
     {
-        //@todo
-        throw new Exception("Widgets are not yet supported");
+        $config = $this->configurationDao->getConfiguration();
+        $services = $config->getServices();
+        return $services[$serviceId] ?? null;
     }
 
     /**
@@ -58,13 +63,35 @@ class ScriptServiceMapper implements ScriptServiceMapperInterface
     {
         $config = $this->configurationDao->getConfiguration();
         $scripts = $config->getScripts();
-        $services = $config->getServices();
         $result = [];
 
         foreach ($scripts as $oneScript) {
-            $result[$oneScript->getPath()] = $services[$oneScript->getServiceId()] ?? null;
+            $serviceId = $oneScript->getServiceId();
+            $result[$oneScript->getPath()] = $this->getServiceById($serviceId);
         }
 
         return $result;
+    }
+
+    /**
+     * @return array<string,?Service>
+     */
+    public function mapScriptSnippetToServices(): array
+    {
+        $config = $this->configurationDao->getConfiguration();
+        $scripts = $config->getScriptSnippets();
+        $result = [];
+
+        foreach ($scripts as $oneScript) {
+            $serviceId = $oneScript->getServiceId();
+            $result[$oneScript->getId()] = $this->getServiceById($serviceId);
+        }
+
+        return $result;
+    }
+
+    public function getIdForSnippet(string $snippet): string
+    {
+        return md5(trim($snippet));
     }
 }

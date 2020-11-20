@@ -6,13 +6,10 @@ namespace OxidProfessionalServices\Usercentrics\Service\Configuration;
 
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
+use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 
-/***
- * Class Configuration
- * @package OxidProfessionalServices\Usercentrics\Core
- */
-class ConfigurationDao implements ConfigurationDaoInterface
+final class ConfigurationDao implements ConfigurationDaoInterface
 {
     /** @var StorageInterface */
     private $storage;
@@ -28,9 +25,10 @@ class ConfigurationDao implements ConfigurationDaoInterface
     public function getConfiguration(): Configuration
     {
         $scripts = $this->getScriptsConfiguration();
+        $scriptsSnippets = $this->getScriptSnippetsConfiguration();
         $services = $this->getServicesConfiguration();
 
-        return new Configuration($scripts, $services);
+        return new Configuration($scripts, $services, $scriptsSnippets);
     }
 
     /**
@@ -45,6 +43,23 @@ class ConfigurationDao implements ConfigurationDaoInterface
         /** @var string[] $scriptDataArray */
         foreach ($plainScripts as $scriptDataArray) {
             $scripts[] = $this->scriptFromArray($scriptDataArray);
+        }
+
+        return $scripts;
+    }
+
+    /**
+     * @return ScriptSnippet[]
+     */
+    private function getScriptSnippetsConfiguration(): array
+    {
+        $plainConfig = $this->storage->getData();
+        $plainScripts = $this->getConfigTypeFromPlainData('scriptSnippets', $plainConfig);
+
+        $scripts = [];
+        /** @var string[] $scriptDataArray */
+        foreach ($plainScripts as $scriptDataArray) {
+            $scripts[] = $this->scriptSnippetFromArray($scriptDataArray);
         }
 
         return $scripts;
@@ -100,6 +115,17 @@ class ConfigurationDao implements ConfigurationDaoInterface
     /**
      * @param mixed[] $data
      */
+    private function scriptSnippetFromArray(array $data): ScriptSnippet
+    {
+        $id = (string)($data['id'] ?? '');
+        $service = (string)($data['service'] ?? '');
+
+        return new ScriptSnippet($id, $service);
+    }
+
+    /**
+     * @param mixed[] $data
+     */
     private function serviceFromArray(array $data): Service
     {
         $serviceName = (string)($data['name'] ?? '');
@@ -112,7 +138,8 @@ class ConfigurationDao implements ConfigurationDaoInterface
     {
         $plainConfig = [
             'scripts' => $this->preparePlainScriptsArray($configuration->getScripts()),
-            'services' => $this->preparePlainServicesArray($configuration->getServices())
+            'services' => $this->preparePlainServicesArray($configuration->getServices()),
+            'scriptSnippets' => $this->preparePlainSnippetsArray($configuration->getScriptSnippets())
         ];
 
         $this->storage->putData($plainConfig);
@@ -158,5 +185,26 @@ class ConfigurationDao implements ConfigurationDaoInterface
         }
 
         return $plainServices;
+    }
+
+    /**
+     * Converts array of Services to plain array for further saving
+     *
+     * @param ScriptSnippet[] $snippets
+     *
+     * @return mixed[]
+     */
+    private function preparePlainSnippetsArray(array $snippets): array
+    {
+        $plainSnippets = [];
+
+        foreach ($snippets as $snippet) {
+            $plainSnippets[] = [
+                'service' => $snippet->getServiceId(),
+                'id' => $snippet->getId()
+            ];
+        }
+
+        return $plainSnippets;
     }
 }

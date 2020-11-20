@@ -36,8 +36,8 @@ class ScriptRenderer extends ScriptRenderer_parent
      */
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
-        // todo
-        return parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
+        $service = $this->getRendererService();
+        return $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
     }
 
     /**

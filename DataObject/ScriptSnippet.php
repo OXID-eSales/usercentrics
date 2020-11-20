@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace OxidProfessionalServices\Usercentrics\DataObject;
 
 /** @psalm-immutable */
-final class Script
+final class ScriptSnippet
 {
     /**
      * @var string
      */
-    private $path;
+    private $id;
 
     /**
      * @var string
@@ -19,21 +19,21 @@ final class Script
 
     /**
      * Script constructor.
-     * @param string $path
+     * @param string $id
      * @param string $serviceId
      */
-    public function __construct(string $path, string $serviceId)
+    public function __construct(string $id, string $serviceId)
     {
-        $this->path = $path;
+        $this->id = $id;
         $this->serviceId = $serviceId;
     }
 
     /**
      * @return string
      */
-    public function getPath(): string
+    public function getId(): string
     {
-        return $this->path;
+        return $this->id;
     }
 
     /**

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\DataObject;
 
-class Service
+/** @psalm-immutable */
+final class Service
 {
     /**
      * @var string
