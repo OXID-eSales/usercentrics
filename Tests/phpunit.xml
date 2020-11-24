@@ -13,14 +13,9 @@
          stopOnSkipped="false"
          beStrictAboutTestsThatDoNotTestAnything="false"
          verbose="false">
-    <testsuites>
-        <testsuite name="UnitTests">
-            <directory>Unit/</directory>
-        </testsuite>
-    </testsuites>
     <filter>
-        <whitelist addUncoveredFilesFromWhitelist="false"
-                   processUncoveredFilesFromWhitelist="false">
+        <whitelist addUncoveredFilesFromWhitelist="true"
+                   processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../Core</directory>
             <directory suffix=".php">../DataObject</directory>
             <directory suffix=".php">../Service</directory>
