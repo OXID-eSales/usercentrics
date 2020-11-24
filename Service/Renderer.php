@@ -27,6 +27,10 @@ final class Renderer implements RendererInterface
      */
     public function formFilesOutput(array $pathGroups, string $widget): string
     {
+        if ($widget) {
+            throw new Exception("Widgets are not yet supported");
+        }
+
         if (!count($pathGroups)) {
             return '';
         }
@@ -42,10 +46,6 @@ final class Renderer implements RendererInterface
                     $sources[] = (string)$onePath;
                 }
             }
-        }
-
-        if ($widget) {
-            throw new Exception("Widgets are not yet supported");
         }
 
         return $this->prepareScriptUrlsOutput($sources);
@@ -78,10 +78,11 @@ final class Renderer implements RendererInterface
 
     public function encloseScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
     {
+        if ($widget && !$isAjaxRequest) {
+            throw new Exception("Widgets are not yet supported");
+        }
+
         if ($scriptsOutput) {
-            if ($widget && !$isAjaxRequest) {
-                throw new Exception("Widgets are not yet supported");
-            }
             $id = $this->scriptServiceMapper->getIdForSnippet($scriptsOutput);
             $service = $this->scriptServiceMapper->getServiceBySnippet($id);
             $data = '';
