@@ -21,7 +21,7 @@ class ScriptServiceMapperTest extends StorageUnitTestCase
 
         $this->assertNull(
             $scriptServiceMapper->getServiceByScriptPath("test.js"),
-            "test.js should not return a script name"
+            "test.js should not return a service name as its not configured"
         );
     }
 

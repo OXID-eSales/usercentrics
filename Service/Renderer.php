@@ -83,17 +83,15 @@ final class Renderer implements RendererInterface
         }
 
         if ($scriptsOutput) {
-            $id = $this->scriptServiceMapper->getIdForSnippet($scriptsOutput);
-            $service = $this->scriptServiceMapper->getServiceBySnippet($id);
-            $data = '';
-            $type = '';
-            if ($service !== null) {
-                $type = ' type="text/plain"';
-                $data = ' data-usercentrics="' . $service->getName() . '"';
-            }
-            $dataOxid = " data-oxid=\"$id\"";
+            $snippetId = $this->scriptServiceMapper->calculateSnippetId($scriptsOutput);
+            $service = $this->scriptServiceMapper->getServiceBySnippetId($snippetId);
 
-            return "<script{$type}{$data}{$dataOxid}>$scriptsOutput</script>";
+            $serviceData = $service ? ' data-usercentrics="' . $service->getName() . '"' : '';
+            $scriptType = $service ? ' type="text/plain"' : '';
+
+            $snippetIdData = " data-oxid=\"$snippetId\"";
+
+            return "<script{$scriptType}{$serviceData}{$snippetIdData}>$scriptsOutput</script>";
         }
         return "";
     }

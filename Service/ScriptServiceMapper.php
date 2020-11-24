@@ -22,7 +22,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
      *
      * @var array<string,?Service>
      */
-    private $scriptPathToServices;
+    private $scriptPathToService;
 
     /**
      * @var array<string,?Service>
@@ -32,20 +32,18 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     public function __construct(ConfigurationDaoInterface $configurationDao)
     {
         $this->configurationDao = $configurationDao;
-        $this->scriptPathToServices = $this->mapScriptPathsToServices();
+        $this->scriptPathToService = $this->mapScriptPathsToServices();
         $this->snippetToService = $this->mapScriptSnippetToServices();
     }
 
     public function getServiceByScriptPath(string $pathOrUrl): ?Service
     {
-        $scriptsByPath = $this->scriptPathToServices;
-        return $scriptsByPath[$pathOrUrl] ?? null;
+        return $this->scriptPathToService[$pathOrUrl] ?? null;
     }
 
-    public function getServiceBySnippet(string $snippetId): ?Service
+    public function getServiceBySnippetId(string $snippetId): ?Service
     {
-        $snippetToService = $this->snippetToService;
-        return $snippetToService[$snippetId] ?? null;
+        return $this->snippetToService[$snippetId] ?? null;
     }
 
 
@@ -53,6 +51,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     {
         $config = $this->configurationDao->getConfiguration();
         $services = $config->getServices();
+        
         return $services[$serviceId] ?? null;
     }
 
@@ -90,8 +89,8 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
         return $result;
     }
 
-    public function getIdForSnippet(string $snippet): string
+    public function calculateSnippetId(string $snippetContents): string
     {
-        return md5(trim($snippet));
+        return md5(trim($snippetContents));
     }
 }

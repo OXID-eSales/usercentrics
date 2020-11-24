@@ -19,6 +19,7 @@ final class Service
 
     /**
      * Service constructor.
+     *
      * @param string $name
      * @param string $id
      */

@@ -19,6 +19,7 @@ final class ScriptSnippet
 
     /**
      * Script constructor.
+     *
      * @param string $id
      * @param string $serviceId
      */

@@ -56,13 +56,13 @@ final class ConfigurationDao implements ConfigurationDaoInterface
         $plainConfig = $this->storage->getData();
         $plainScripts = $this->getConfigTypeFromPlainData('scriptSnippets', $plainConfig);
 
-        $scripts = [];
+        $scriptSnippets = [];
         /** @var string[] $scriptDataArray */
         foreach ($plainScripts as $scriptDataArray) {
-            $scripts[] = $this->scriptSnippetFromArray($scriptDataArray);
+            $scriptSnippets[] = $this->scriptSnippetFromArray($scriptDataArray);
         }
 
-        return $scripts;
+        return $scriptSnippets;
     }
 
     /**

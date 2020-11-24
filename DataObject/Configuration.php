@@ -24,6 +24,7 @@ final class Configuration
 
     /**
      * Configuration constructor.
+     *
      * @param Script[] $scripts
      * @param Service[] $services
      * @param ScriptSnippet[] $scriptSnippets

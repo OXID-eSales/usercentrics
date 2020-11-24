@@ -17,7 +17,8 @@ interface RendererInterface
     public function formFilesOutput(array $pathGroups, string $widget): string;
 
     /**
-     * encloses script code with a script tag
+     * Encloses script code with a script tag
+     *
      * @param string $scriptsOutput
      * @param string $widget
      * @param bool $isAjaxRequest

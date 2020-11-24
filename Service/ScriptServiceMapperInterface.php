@@ -10,17 +10,17 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 interface ScriptServiceMapperInterface
 {
     /**
-     * Get path/url related service
+     * Get script path/url related service
      */
     public function getServiceByScriptPath(string $pathOrUrl): ?Service;
 
     /**
      * Get script snippet related service
      */
-    public function getServiceBySnippet(string $snippetId): ?Service;
+    public function getServiceBySnippetId(string $snippetId): ?Service;
 
     /**
-     * calculate script snippet id
+     * Calculate script snippet id by snippet contents
      */
-    public function getIdForSnippet(string $snippet): string;
+    public function calculateSnippetId(string $snippet): string;
 }
