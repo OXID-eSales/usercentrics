@@ -26,12 +26,12 @@ $aModule = [
             [
                 'template' => 'layout/base.tpl',
                 'block' => 'base_js',
-                'file' => '/views/blocks/base_js.tpl'
+                'file' => 'src/views/blocks/base_js.tpl'
             ],
             [
                 'template' => 'layout/base.tpl',
                 'block' => 'head_meta_description',
-                'file' => 'views/blocks/head_meta_description.tpl'
+                'file' => 'src/views/blocks/head_meta_description.tpl'
             ],
     ],
 
