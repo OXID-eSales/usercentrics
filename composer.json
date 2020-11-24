@@ -12,12 +12,13 @@
     "symfony/yaml" : "> 3",
     "ext-json": "*"
   },
-  "version": "1.0.1",
+  "version": "1.1.0",
   "require-dev": {
   },
   "autoload": {
     "psr-4": {
-      "OxidProfessionalServices\\Usercentrics\\": ""
+      "OxidProfessionalServices\\Usercentrics\\": "src",
+      "OxidProfessionalServices\\Usercentrics\\Tests\\": "tests"
     }
   }
 }
