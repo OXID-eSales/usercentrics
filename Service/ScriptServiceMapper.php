@@ -51,7 +51,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     {
         $config = $this->configurationDao->getConfiguration();
         $services = $config->getServices();
-        
+
         return $services[$serviceId] ?? null;
     }
 
