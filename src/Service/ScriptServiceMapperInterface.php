@@ -12,7 +12,7 @@ interface ScriptServiceMapperInterface
     /**
      * Get script path/url related service
      */
-    public function getServiceByScriptPath(string $pathOrUrl): ?Service;
+    public function getServiceByScriptUrl(string $url): ?Service;
 
     /**
      * Get script snippet related service

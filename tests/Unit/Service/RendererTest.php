@@ -19,19 +19,19 @@ class RendererTest extends StorageUnitTestCase
     {
         $file = 'Service1.yaml';
         $sut = $this->createRenderer($file);
-        $rendered = $sut->formFilesOutput([0 => ["test.js"]], "");
+        $rendered = $sut->formFilesOutput([0 => ["http://shop.de/out/theme/js/test.js"]], "");
 
-        $this->assertContains('<script src="test.js"></script>', $rendered);
+        $this->assertContains('<script src="http://shop.de/out/theme/js/test.js"></script>', $rendered);
     }
 
     public function testServiceNamedScript(): void
     {
         $file = 'Service1.yaml';
         $sut = $this->createRenderer($file);
-        $rendered = $sut->formFilesOutput([0 => ["test1.js"]], "");
+        $rendered = $sut->formFilesOutput([0 => ["https://shop.de/out/theme/js/test1.js"]], "");
 
         $this->assertContains(
-            '<script type="text/plain" data-usercentrics="name1" src="test1.js"></script>',
+            '<script type="text/plain" data-usercentrics="name1" src="https://shop.de/out/theme/js/test1.js"></script>',
             $rendered
         );
     }
