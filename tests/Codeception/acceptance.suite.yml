@@ -36,3 +36,6 @@ modules:
     - \OxidEsales\Codeception\Module\Translation\TranslationsModule:
         shop_path: '%SHOP_SOURCE_PATH%'
         paths: 'Application/views/flow'
+    - \OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config:
+        shop_path: '%SHOP_SOURCE_PATH%'
+        config_file: '../var/configuration/usercentrics.yaml'
