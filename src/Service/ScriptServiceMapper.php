@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
-use Exception;
-use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDaoInterface;
 
@@ -17,8 +15,8 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     private $configurationDao;
 
     /**
-     * This is a map of service path as key with a service id
-     * @example: ['some/path/to/script.js' => 'SomeConfiguredServiceId']
+     * This is a map of service path regex as key with a service id
+     * @example: ['/some\/path\/to\/script.js$/S' => 'SomeConfiguredServiceId']
      *
      * @var array<string,?Service>
      */
@@ -36,9 +34,14 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
         $this->snippetToService = $this->mapScriptSnippetToServices();
     }
 
-    public function getServiceByScriptPath(string $pathOrUrl): ?Service
+    public function getServiceByScriptUrl(string $url): ?Service
     {
-        return $this->scriptPathToService[$pathOrUrl] ?? null;
+        foreach ($this->scriptPathToService as $pathRegEx => $service) {
+            if (preg_match($pathRegEx, $url)) {
+                return $service;
+            }
+        }
+        return null;
     }
 
     public function getServiceBySnippetId(string $snippetId): ?Service
@@ -58,7 +61,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     /**
      * @return array<string,?Service>
      */
-    protected function mapScriptPathsToServices(): array
+    private function mapScriptPathsToServices(): array
     {
         $config = $this->configurationDao->getConfiguration();
         $scripts = $config->getScripts();
@@ -66,7 +69,10 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
 
         foreach ($scripts as $oneScript) {
             $serviceId = $oneScript->getServiceId();
-            $result[$oneScript->getPath()] = $this->getServiceById($serviceId);
+            $path = $oneScript->getPath();
+            //build a regex that will match if the URL's path ends with this path
+            $regEx = '/' . preg_quote($path, '/') . '(:?\?|#|$)/S';
+            $result[$regEx] = $this->getServiceById($serviceId);
         }
 
         return $result;
@@ -75,7 +81,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     /**
      * @return array<string,?Service>
      */
-    public function mapScriptSnippetToServices(): array
+    private function mapScriptSnippetToServices(): array
     {
         $config = $this->configurationDao->getConfiguration();
         $scripts = $config->getScriptSnippets();

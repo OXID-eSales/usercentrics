@@ -65,7 +65,7 @@ final class Renderer implements RendererInterface
             $type = '';
             $src = ' src="' . $source . '"';
 
-            $service = $this->scriptServiceMapper->getServiceByScriptPath($source);
+            $service = $this->scriptServiceMapper->getServiceByScriptUrl($source);
             if ($service !== null) {
                 $type = ' type="text/plain"';
                 $data = ' data-usercentrics="' . $service->getName() . '"';

@@ -14,26 +14,60 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
  */
 class ScriptServiceMapperTest extends StorageUnitTestCase
 {
-    public function testScriptNoNameConfigured(): void
-    {
-        $scriptServiceMapper = $this->createScriptMapper('EmptyTest.yaml');
 
+    /**
+     * @dataProvider notMatchingScriptUrls
+     */
+    public function testScriptNoNameConfigured($scriptUrl): void
+    {
+        $scriptServiceMapper = $this->createScriptMapper('Service1.yaml');
+
+        $service = $scriptServiceMapper->getServiceByScriptUrl($scriptUrl);
         $this->assertNull(
-            $scriptServiceMapper->getServiceByScriptPath("test.js"),
+            $service,
             "test.js should not return a service name as its not configured"
         );
     }
 
-    public function testScriptNameConfigured(): void
+    /**
+     * @dataProvider matchingScriptUrls
+     */
+    public function testScriptNameConfigured($scriptUrl): void
     {
         $scriptServiceMapper = $this->createScriptMapper('Service1.yaml');
 
         /** @var Service $service */
-        $service = $scriptServiceMapper->getServiceByScriptPath("test1.js");
+        $service = $scriptServiceMapper->getServiceByScriptUrl($scriptUrl);
 
         $this->assertNotNull($service);
         $this->assertEquals("name1", $service->getName());
     }
+
+    public function matchingScriptUrls()
+    {
+        return [
+            ["http://someurl/path/test1.js"],
+            ["http://someurl/path/test1.js?123456"],
+            ["http://someurl/path/test1.js?123456#abc"],
+            ["http://someurl/path/test1.js#abc"],
+            ["https://someurl/path/test2.js#abc"],
+            ["https://someurl/1/test/js/path/test2.js?123456"],
+        ];
+    }
+
+    public function notMatchingScriptUrls()
+    {
+        return [
+            ["http://someurl/path/test.js"],
+            ["http://someurl/path/test.js?123456"],
+            ["http://someurl/path/test.js?123456#abc"],
+            ["http://someurl/path/test.js#abc"],
+            ["https://someurl/test2.js#abc"],
+            ["https://someurl/js/test2.js"],
+            ["https://someurl/path/js/test2.js?123456"],
+        ];
+    }
+
 
     public function testCalculateSnippetIdIsNotEmpty(): void
     {
