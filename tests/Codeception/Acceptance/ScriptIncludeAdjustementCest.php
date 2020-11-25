@@ -41,7 +41,7 @@ final class ScriptIncludeAdjustementCest
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
-        $I->waitForElement("//button[@id='uc-btn-accept-banner']");
+        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 60);
         $I->click("//button[@id='uc-btn-accept-banner']");
 
         $I->canSeeElementInDOM("//script[@type='text/javascript'][@data-usercentrics='testcustomservice']");
@@ -54,7 +54,7 @@ final class ScriptIncludeAdjustementCest
     {
         $config = new Configuration(
             [ //scripts
-                new Script('out/flow/src/js/libs/jquery.min.js', 'testcustomservice')
+                new Script('js/libs/jquery.min.js', 'testcustomservice')
             ],
             [ //services
                 new Service('testcustomservice', 'testcustomservice')
