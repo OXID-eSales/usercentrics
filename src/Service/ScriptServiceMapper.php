@@ -20,8 +20,8 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     private $configurationDao;
 
     /**
-     * This is a map of service path regex as key with a service id
-     * @example: ['/some\/path\/to\/script.js$/S' => 'SomeConfiguredServiceId']
+     * This is a map of service path as key with a service id
+     * @example: ['some/path/to/script.js' => 'SomeConfiguredServiceId']
      *
      * @var array<string,?Service>
      */
@@ -41,12 +41,24 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
 
     public function getServiceByScriptUrl(string $url): ?Service
     {
-        foreach ($this->scriptPathToService as $pathRegEx => $service) {
-            if (preg_match($pathRegEx, $url)) {
+        foreach ($this->scriptPathToService as $path => $service) {
+            if (preg_match($this->prepareScriptPathRegex($path), $url)) {
                 return $service;
             }
         }
+
         return null;
+    }
+
+    /**
+     * Build a regex that will match if the URL's path ends with this path
+     *
+     * @param $path
+     * @return string
+     */
+    private function prepareScriptPathRegex(string $path): string
+    {
+        return '/' . preg_quote($path, '/') . '(:?\?|#|$)/S';
     }
 
     public function getServiceBySnippetId(string $snippetId): ?Service
@@ -64,7 +76,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     }
 
     /**
-     * Gives an array like ["/some\/path\/regex\.to\.js(:?\?|#|$)/S" => 'someServiceId']
+     * Gives an array like ["some/path/to/script.js" => 'someServiceId']
      *
      * @return array<string,?Service>
      */
@@ -77,9 +89,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
         foreach ($scripts as $oneScript) {
             $serviceId = $oneScript->getServiceId();
             $path = $oneScript->getPath();
-            //build a regex that will match if the URL's path ends with this path
-            $regEx = '/' . preg_quote($path, '/') . '(:?\?|#|$)/S';
-            $result[$regEx] = $this->getServiceById($serviceId);
+            $result[$path] = $this->getServiceById($serviceId);
         }
 
         return $result;
