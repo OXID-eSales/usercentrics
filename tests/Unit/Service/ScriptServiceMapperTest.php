@@ -23,7 +23,7 @@ class ScriptServiceMapperTest extends StorageUnitTestCase
     /**
      * @dataProvider notMatchingScriptUrls
      */
-    public function testScriptNoNameConfigured($scriptUrl): void
+    public function testScriptNoNameConfigured(string $scriptUrl): void
     {
         $scriptServiceMapper = $this->createScriptMapper('Service1.yaml');
 
@@ -37,7 +37,7 @@ class ScriptServiceMapperTest extends StorageUnitTestCase
     /**
      * @dataProvider matchingScriptUrls
      */
-    public function testScriptNameConfigured($scriptUrl): void
+    public function testScriptNameConfigured(string $scriptUrl): void
     {
         $scriptServiceMapper = $this->createScriptMapper('Service1.yaml');
 
@@ -48,7 +48,7 @@ class ScriptServiceMapperTest extends StorageUnitTestCase
         $this->assertEquals("name1", $service->getName());
     }
 
-    public function matchingScriptUrls()
+    public function matchingScriptUrls(): array
     {
         return [
             ["http://someurl/path/test1.js"],
@@ -60,7 +60,7 @@ class ScriptServiceMapperTest extends StorageUnitTestCase
         ];
     }
 
-    public function notMatchingScriptUrls()
+    public function notMatchingScriptUrls(): array
     {
         return [
             ["http://someurl/path/test.js"],

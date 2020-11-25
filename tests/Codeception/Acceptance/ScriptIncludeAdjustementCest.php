@@ -1,11 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Copyright © OXID eSales AG. All rights reserved.
  * See LICENSE file for license details.
  */
+
+declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
@@ -15,7 +15,6 @@ use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
-
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
 final class ScriptIncludeAdjustementCest

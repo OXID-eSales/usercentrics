@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © OXID eSales AG. All rights reserved.
  * See LICENSE file for license details.
@@ -27,7 +28,7 @@ class Config extends \Codeception\Module implements DependsOnModule
         return [];
     }
 
-    private function getConfigManager():ConfigurationDao
+    private function getConfigManager(): ConfigurationDao
     {
         $storage =  new YamlStorage(
             $this->config['shop_path'],
@@ -39,13 +40,13 @@ class Config extends \Codeception\Module implements DependsOnModule
 
     public function getConfiguration(): Configuration
     {
-        $cm = $this->getConfigManager();
-        return $cm->getConfiguration();
+        $configManager = $this->getConfigManager();
+        return $configManager->getConfiguration();
     }
 
     public function putConfiguration(Configuration $configuration): void
     {
-        $cm = $this->getConfigManager();
-        $cm->putConfiguration($configuration);
+        $configManager = $this->getConfigManager();
+        $configManager->putConfiguration($configuration);
     }
 }

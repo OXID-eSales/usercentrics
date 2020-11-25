@@ -53,7 +53,7 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     /**
      * Build a regex that will match if the URL's path ends with this path
      *
-     * @param $path
+     * @param string $path
      * @return string
      */
     private function prepareScriptPathRegex(string $path): string
