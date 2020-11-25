@@ -59,6 +59,8 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     }
 
     /**
+     * Gives an array like ["/some\/path\/regex\.to\.js(:?\?|#|$)/S" => 'someServiceId']
+     *
      * @return array<string,?Service>
      */
     private function mapScriptPathsToServices(): array
@@ -79,6 +81,8 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
     }
 
     /**
+     * Gives an array like ['someSnippetId' => 'someServiceId']
+     *
      * @return array<string,?Service>
      */
     private function mapScriptSnippetToServices(): array
