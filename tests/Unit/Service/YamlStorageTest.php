@@ -15,6 +15,7 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
 /**
  * YamlStorageTest Yaml
  * @package OxidProfessionalServices\Usercentrics\Tests\Service
+ * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage
  */
 class YamlStorageTest extends StorageUnitTestCase
 {

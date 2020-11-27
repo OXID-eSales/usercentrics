@@ -16,6 +16,7 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
  * Class RepositoryTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Service
  * @psalm-suppress PropertyNotSetInConstructor
+ * @covers \OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper
  */
 class ScriptServiceMapperTest extends StorageUnitTestCase
 {

@@ -18,6 +18,7 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
  * Class ConfigTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Service
  * @psalm-suppress PropertyNotSetInConstructor
+ * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
  */
 class ConfigTest extends StorageUnitTestCase
 {

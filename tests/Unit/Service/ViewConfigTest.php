@@ -13,7 +13,11 @@ use OxidEsales\Eshop\Core\Registry;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+/**
+ * Class ExampleTest
+ * @covers \OxidProfessionalServices\Usercentrics\Core\ViewConfig
+ */
+class ViewConfigTest extends TestCase
 {
     public function testSmartDataProtectorActiveByDefault(): void
     {
