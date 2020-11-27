@@ -5,16 +5,16 @@
  * See LICENSE file for license details.
  */
 
-namespace OxidProfessionalServices\Usercentrics\Tests\Service;
+namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
-use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
 
 /**
  * Class RepositoryTest
- * @package OxidProfessionalServices\Usercentrics\Tests\Service
+ * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @psalm-suppress PropertyNotSetInConstructor
  * @covers \OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper
  */

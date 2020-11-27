@@ -5,16 +5,16 @@
  * See LICENSE file for license details.
  */
 
-namespace OxidProfessionalServices\Usercentrics\Tests\Service;
+namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
-use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
 
 /**
  * YamlStorageTest Yaml
- * @package OxidProfessionalServices\Usercentrics\Tests\Service
+ * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage
  */
 class YamlStorageTest extends StorageUnitTestCase

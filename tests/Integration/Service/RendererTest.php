@@ -5,17 +5,17 @@
  * See LICENSE file for license details.
  */
 
-namespace OxidProfessionalServices\Usercentrics\Tests\Service;
+namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\Renderer;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlFileFormat;
-use OxidProfessionalServices\Usercentrics\Tests\Unit\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
 
 /**
  * Class RendererTest
- * @package OxidProfessionalServices\Usercentrics\Tests\Service
+ * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @psalm-suppress PropertyNotSetInConstructor
  * @covers \OxidProfessionalServices\Usercentrics\Service\Renderer
  */
@@ -41,6 +41,16 @@ class RendererTest extends StorageUnitTestCase
             $rendered
         );
     }
+
+    public function testNoScript(): void
+    {
+        $file = 'Service1.yaml';
+        $sut = $this->createRenderer($file);
+        $rendered = $sut->formFilesOutput([], "");
+
+        $this->assertEmpty($rendered);
+    }
+
     public function testServiceNamedSnippet(): void
     {
         $file = 'Snippets.yaml';
@@ -56,7 +66,16 @@ HTML;
         $this->assertContains($expectedResult, $rendered);
     }
 
-    private function createRenderer(string $file): Renderer
+    public function testNoSnippet(): void
+    {
+        $file = 'Snippets.yaml';
+        $sut = $this->createRenderer($file);
+        $rendered = $sut->encloseScriptSnippet("", "", false);
+
+        $this->assertEmpty($rendered);
+    }
+
+    protected function createRenderer(string $file): Renderer
     {
         $config = new ConfigurationDao($this->getStorage($file, __DIR__ . '/ConfigTestData'));
         $scriptServiceMapper = new ScriptServiceMapper($config);

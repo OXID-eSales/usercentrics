@@ -5,7 +5,7 @@
  * See LICENSE file for license details.
  */
 
-namespace OxidProfessionalServices\Usercentrics\Tests\Unit;
+namespace OxidProfessionalServices\Usercentrics\Tests\Integration;
 
 use org\bovigo\vfs\vfsStream;
 use OxidEsales\TestingLibrary\UnitTestCase;
