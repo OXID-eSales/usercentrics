@@ -8,14 +8,14 @@
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration;
 
 use org\bovigo\vfs\vfsStream;
-use OxidEsales\TestingLibrary\UnitTestCase;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Helper methods for tests
  */
-class StorageUnitTestCase extends UnitTestCase
+class StorageUnitTestCase extends TestCase
 {
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)

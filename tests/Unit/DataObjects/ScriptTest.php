@@ -7,16 +7,15 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Unit\DataObjects;
 
-use OxidEsales\TestingLibrary\UnitTestCase;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
-use OxidProfessionalServices\Usercentrics\DataObject\Service;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ServiceTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Unit
  * @covers \OxidProfessionalServices\Usercentrics\DataObject\Script
  */
-class ScriptTest extends UnitTestCase
+class ScriptTest extends TestCase
 {
     public function testHasPath(): void
     {
