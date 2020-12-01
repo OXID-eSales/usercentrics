@@ -10,10 +10,9 @@ declare(strict_types=1);
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
 use OxidEsales\Codeception\Page\Home;
-use OxidEsales\Codeception\Module\Translation\Translator;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
 
-final class CodeceptionButtonCest
+final class UsercentricsButtonCest
 {
     /**
      * @param AcceptanceTester $I
