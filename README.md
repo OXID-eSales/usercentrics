@@ -1,4 +1,4 @@
-# oxid-professional-services/usercentrics
+# OXID Cookie Management powered by usercentrics
 
 [![Build Status](https://flat.badgen.net/travis/OXID-eSales/usercentrics/?icon=travis&label=build&cache=300&scale=1.1)](https://travis-ci.com/OXID-eSales/usercentrics)
 [![PHP Version](https://flat.badgen.net/packagist/php/OXID-eSales/usercentrics/?cache=300&scale=1.1)](https://github.com/oxid-esales/usercentrics)
