@@ -10,14 +10,14 @@ use OxidProfessionalServices\Usercentrics\Core\ScriptRenderer;
 $sMetadataVersion = '2.1';
 $aModule = [
     'id' => 'oxps/usercentrics',
-    'title' => 'Usercentrics Cookie Management',
+    'title' => 'OXID Cookie Management powered by usercentrics',
     'description' => [
         'de' => 'Die Usercentrics Consent Management Platform (CMP) ermöglicht Ihnen, Ihre Marketing- und Datenstrategie
                  mit rechtlichen Anforderungen in Einklang zu bringen.',
         'en' => 'The Usercentrics Consent Management Platform (CMP) enables you to harmonize your marketing and data 
                  strategy with legal requirements.'
     ],
-    'version' => '0.1',
+    'version' => '1.0',
     'author' => 'OXID Professional Services',
     'events' => [],
 
