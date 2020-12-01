@@ -1,6 +1,6 @@
 {
   "name": "oxid-professional-services/usercentrics",
-  "description": "Module to manage the cookie consent",
+  "description": " OXID Cookie Management powered by usercentrics",
   "type": "oxideshop-module",
   "minimum-stability": "stable",
   "extra": {
