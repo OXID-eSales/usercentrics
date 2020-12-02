@@ -46,7 +46,7 @@ $aModule = [
             'group' => 'usercentrics_advanced',
             'name'  => 'usercentricsId',
             'type'  => 'str',
-            'value' => '3j0TmWxNS'
+            'value' => ''
         ]
     ],
 
