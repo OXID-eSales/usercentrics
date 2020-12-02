@@ -10,13 +10,14 @@ declare(strict_types=1);
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
 use OxidEsales\Codeception\Page\Home;
+use OxidEsales\Codeception\Step\Basket as BasketSteps;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
-use OxidProfessionalServices\Usercentrics\DataObject\Script;
+use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
-final class ScriptIncludeAdjustementCest
+final class ScriptSnippetAdjustementCest
 {
     private $configBackup;
 
@@ -35,9 +36,9 @@ final class ScriptIncludeAdjustementCest
     /**
      * @param AcceptanceTester $I
      *
-     * @group sieg1
+     * @group sieg2
      */
-    public function snippetIncludeDecorated(AcceptanceTester $I)
+    public function scriptIncludeDecorated(AcceptanceTester $I)
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
@@ -46,7 +47,10 @@ final class ScriptIncludeAdjustementCest
         $I->waitForElement("//button[@id='uc-btn-accept-banner']", 60);
         $I->click("//button[@id='uc-btn-accept-banner']");
 
-        $I->canSeeElementInDOM("//script[@type='text/javascript'][@data-usercentrics='testcustomservice']");
+        $basketSteps = new BasketSteps($I);
+        $basketSteps->addProductToBasketAndOpenBasket('dc5ffdf380e15674b56dd562a7cb6aec', 1);
+
+        $I->canSeeElementInDOM("//script[@data-oxid='3a1dcde97b93a66a76388c69f9c04741'][@data-usercentrics='testcustomservice'][@type='text/javascript']");
     }
 
     /**
@@ -55,13 +59,13 @@ final class ScriptIncludeAdjustementCest
     private function prepareConfiguration(Config $configModule)
     {
         $config = new Configuration(
-            [ //scripts
-                new Script('js/libs/jquery.min.js', 'testcustomservice')
-            ],
+            [],
             [ //services
                 new Service('testcustomservice', 'testcustomservice')
             ],
-            []
+            [ //snippets
+                new ScriptSnippet('3a1dcde97b93a66a76388c69f9c04741', 'testcustomservice')
+            ]
         );
         $configModule->putConfiguration($config);
     }
