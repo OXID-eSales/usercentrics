@@ -12,7 +12,7 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 use OxidEsales\Codeception\Page\Home;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
 
-final class UsercentricsButtonCest
+final class UsercentricsButtonCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I

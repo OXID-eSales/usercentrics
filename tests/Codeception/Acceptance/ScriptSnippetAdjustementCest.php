@@ -17,22 +17,8 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
-final class ScriptSnippetAdjustementCest
+final class ScriptSnippetAdjustementCest extends BaseCest
 {
-    private $configBackup;
-
-    public function _before(AcceptanceTester $I, Config $configModule): void
-    {
-        $I->clearShopCache();
-        $this->configBackup = $configModule->getConfiguration();
-        $this->prepareConfiguration($configModule);
-    }
-
-    public function _after(AcceptanceTester $I, Config $configModule): void
-    {
-        $configModule->putConfiguration($this->configBackup);
-    }
-
     /**
      * @param AcceptanceTester $I
      *
@@ -56,7 +42,7 @@ final class ScriptSnippetAdjustementCest
     /**
      * Prepare some test configuration before tests
      */
-    private function prepareConfiguration(Config $configModule)
+    protected function prepareConfiguration(Config $configModule)
     {
         $config = new Configuration(
             [],
