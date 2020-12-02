@@ -9,14 +9,13 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Core;
 
 use OxidEsales\Eshop\Core\Registry;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class ViewConfigTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Core
  * @covers \OxidProfessionalServices\Usercentrics\Core\ViewConfig
  */
-class ViewConfigTest extends TestCase
+class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
 {
     /**
      * @dataProvider booleanProvider
