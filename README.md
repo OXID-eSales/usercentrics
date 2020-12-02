@@ -12,9 +12,9 @@ This assumes you have OXID eShop (at least the `v6.2.0` compilation) up and runn
 
 ### Install
 
-The Usercentrics module is already included in the OXID eShop `v6.2.4`.
+The Usercentrics module is already included in the OXID eShop `v6.2.4` compilation.
 
-If you use an eShop version below >`v6.2.4` (for example `v6.2.0`), you can install the module with composer like that:
+Module can be installed manually, by using composer:
 ```bash
 $ composer require oxid-professional-services/usercentrics
 ```
@@ -31,23 +31,35 @@ $ vendor/bin/oe-console oe:module:activate oxps/usercentrics
 
 Activate the module and enter your usercentrics ID in the module settings.
 
-## Testing
-
-### Linting, syntax check, static analysis and unit tests
+## Developer installation
 
 ```bash
-$ composer test
+$ git clone https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/usercentrics
+$ composer config repositories.oxid-professional-services/usercentrics path ./source/modules/oxps/usercentrics
+$ composer require oxid-professional-services/usercentrics:*
+
+$ bin/oe-console oe:mod:ins source/modules/oxps/usercentrics/
 ```
 
-### Integration/Acceptance tests
+## Testing
 
-- install this module into a running OXID eShop
-- change the `test_config.yml`
-  - add `oxps/usercentrics` to the `partial_module_paths`
-  - set `activate_all_modules` to `true`
+Modify the `test_config.yml` configuration:
+
+```
+    ...
+    partial_module_paths: oxps/usercentrics
+    ...
+    activate_all_modules: true
+    run_tests_for_shop: false
+    run_tests_for_modules: true
+    ...
+```
+
+Then tests can be run like this:
 
 ```bash
 $ ./vendor/bin/runtests
+$ SELENIUM_SERVER_IP=localhost ./vendor/bin/runtests-codeception
 ```
 
 ## Contributing
