@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
-use Exception;
+use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 
 final class Renderer implements RendererInterface
 {
@@ -29,11 +29,13 @@ final class Renderer implements RendererInterface
 
     /**
      * @param array<int,array<string>> $pathGroups // [ 10 => ["test.js","test2.js"] ]
+     *
+     * @throws WidgetsNotSupported
      */
     public function formFilesOutput(array $pathGroups, string $widget): string
     {
         if ($widget) {
-            throw new Exception("Widgets are not yet supported");
+            throw new WidgetsNotSupported();
         }
 
         if (!count($pathGroups)) {
@@ -67,7 +69,7 @@ final class Renderer implements RendererInterface
 
         foreach ($sources as $source) {
             $data = '';
-            $type = '';
+            $type = ' type="text/javascript"';
             $src = ' src="' . $source . '"';
 
             $service = $this->scriptServiceMapper->getServiceByScriptUrl($source);
@@ -81,10 +83,13 @@ final class Renderer implements RendererInterface
         return implode(PHP_EOL, $outputs);
     }
 
+    /**
+     * @throws WidgetsNotSupported
+     */
     public function encloseScriptSnippet(string $scriptsOutput, string $widget, bool $isAjaxRequest): string
     {
         if ($widget && !$isAjaxRequest) {
-            throw new Exception("Widgets are not yet supported");
+            throw new WidgetsNotSupported();
         }
 
         if ($scriptsOutput) {
@@ -92,7 +97,7 @@ final class Renderer implements RendererInterface
             $service = $this->scriptServiceMapper->getServiceBySnippetId($snippetId);
 
             $serviceData = $service ? ' data-usercentrics="' . $service->getName() . '"' : '';
-            $scriptType = $service ? ' type="text/plain"' : '';
+            $scriptType = $service ? ' type="text/plain"' : ' type="text/javascript"';
 
             $snippetIdData = " data-oxid=\"$snippetId\"";
 

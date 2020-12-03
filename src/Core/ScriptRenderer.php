@@ -10,10 +10,9 @@ declare(strict_types=1);
 namespace OxidProfessionalServices\Usercentrics\Core;
 
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 use OxidProfessionalServices\Usercentrics\Service\RendererInterface;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 class ScriptRenderer extends ScriptRenderer_parent
 {
@@ -42,7 +41,14 @@ class ScriptRenderer extends ScriptRenderer_parent
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
         $service = $this->getRendererService();
-        return $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
+
+        try {
+            $result = $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
+        } catch (WidgetsNotSupported $exception) {
+            $result = parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
+        }
+
+        return $result;
     }
 
     /**
@@ -58,6 +64,13 @@ class ScriptRenderer extends ScriptRenderer_parent
     protected function formFilesOutput($includes, $widget)
     {
         $service = $this->getRendererService();
-        return $service->formFilesOutput($includes, $widget);
+
+        try {
+            $result = $service->formFilesOutput($includes, $widget);
+        } catch (WidgetsNotSupported $exception) {
+            $result = parent::formFilesOutput($includes, $widget);
+        }
+
+        return $result;
     }
 }
