@@ -13,8 +13,11 @@ use Exception;
 
 final class WidgetsNotSupported extends Exception
 {
-    public function __construct($message = "Widgets are not yet supported", $code = 0, \Throwable $previous = null)
-    {
+    public function __construct(
+        string $message = "Widgets are not yet supported",
+        int $code = 0,
+        \Throwable $previous = null
+    ) {
         parent::__construct($message, $code, $previous);
     }
 }
