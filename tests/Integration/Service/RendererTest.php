@@ -27,7 +27,7 @@ class RendererTest extends StorageUnitTestCase
         $sut = $this->createRenderer($file);
         $rendered = $sut->formFilesOutput([0 => ["http://shop.de/out/theme/js/test.js"]], "");
 
-        $this->assertContains('<script src="http://shop.de/out/theme/js/test.js"></script>', $rendered);
+        $this->assertContains('<script type="text/javascript" src="http://shop.de/out/theme/js/test.js"></script>', $rendered);
     }
 
     public function testServiceNamedScript(): void
