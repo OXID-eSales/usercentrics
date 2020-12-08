@@ -45,10 +45,10 @@ final class ScriptSnippetAdjustementCest extends BaseCest
     protected function prepareConfiguration(Config $configModule)
     {
         $config = new Configuration(
-            [],
             [ //services
                 new Service('testcustomservice', 'testcustomservice')
             ],
+            [],
             [ //snippets
                 new ScriptSnippet('3a1dcde97b93a66a76388c69f9c04741', 'testcustomservice')
             ]

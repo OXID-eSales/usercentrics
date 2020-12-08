@@ -41,11 +41,11 @@ final class ScriptIncludeAdjustementCest extends BaseCest
     protected function prepareConfiguration(Config $configModule)
     {
         $config = new Configuration(
-            [ //scripts
-                new Script('js/libs/jquery.min.js', 'testcustomservice')
-            ],
             [ //services
                 new Service('testcustomservice', 'testcustomservice')
+            ],
+            [ //scripts
+                new Script('js/libs/jquery.min.js', 'testcustomservice')
             ],
             []
         );

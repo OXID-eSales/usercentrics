@@ -30,11 +30,11 @@ final class Configuration
     /**
      * Configuration constructor.
      *
-     * @param Script[] $scripts
      * @param Service[] $services
+     * @param Script[] $scripts
      * @param ScriptSnippet[] $scriptSnippets
      */
-    public function __construct(array $scripts, array $services, array $scriptSnippets)
+    public function __construct(array $services, array $scripts, array $scriptSnippets)
     {
         $this->scripts = $scripts;
         $this->services = $services;

@@ -33,7 +33,7 @@ final class ConfigurationDao implements ConfigurationDaoInterface
         $scriptsSnippets = $this->getScriptSnippetsConfiguration();
         $services = $this->getServicesConfiguration();
 
-        return new Configuration($scripts, $services, $scriptsSnippets);
+        return new Configuration($services, $scripts, $scriptsSnippets);
     }
 
     /**

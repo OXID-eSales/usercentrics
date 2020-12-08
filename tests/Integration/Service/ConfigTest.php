@@ -29,10 +29,10 @@ class ConfigTest extends StorageUnitTestCase
 
         $sut = new ConfigurationDao($this->getStorage($file, $directory));
 
-        $scripts = [new Script('test.js', 'TestServiceId')];
         $services = [new Service('name', 'TestServiceId')];
+        $scripts = [new Script('test.js', 'TestServiceId')];
         $snippets = [new ScriptSnippet('123', 'TestServiceId')];
-        $configuration = new Configuration($scripts, $services, $snippets);
+        $configuration = new Configuration($services, $scripts, $snippets);
 
         $sut->putConfiguration($configuration);
 

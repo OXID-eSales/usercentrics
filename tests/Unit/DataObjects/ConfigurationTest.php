@@ -24,8 +24,8 @@ class ConfigurationTest extends TestCase
     {
         $service = new Service('name', 'id');
         $configuration = new Configuration(
-            [],
             [$service],
+            [],
             []
         );
         $services = $configuration->getServices();
@@ -37,8 +37,8 @@ class ConfigurationTest extends TestCase
     {
         $script = new Script('path', 'id');
         $configuration = new Configuration(
-            [$script],
             [],
+            [$script],
             []
         );
         $scripts = $configuration->getScripts();
