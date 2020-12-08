@@ -15,14 +15,14 @@ The Usercentrics module is already included in the OXID eShop `v6.2.4` compilati
 Module can be installed manually, by using composer:
 ```bash
 $ composer require oxid-professional-services/usercentrics
+$ vendor/bin/oe-console oe:module:install source/modules/oxps/usercentrics
 ```
 
 After requiring the module, you need to activate it, either via OXID eShop admin or CLI.
 
 Navigate to oxideshop folder and execute the following: 
 ```bash
-$ vendor/bin/oe-console oe:module:activate oxps/usercentrics
-
+$ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 ```
 
 ### How to use
@@ -36,7 +36,7 @@ $ git clone https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/
 $ composer config repositories.oxid-professional-services/usercentrics path ./source/modules/oxps/usercentrics
 $ composer require oxid-professional-services/usercentrics:*
 
-$ bin/oe-console oe:mod:ins source/modules/oxps/usercentrics/
+$ vendor/bin/oe-console oe:module:install source/modules/oxps/usercentrics
 ```
 
 ## Testing
