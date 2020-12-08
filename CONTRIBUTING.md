@@ -10,7 +10,7 @@ When contributing code for the first time, you must sign our [Contributor Licens
 
 ### Reporting Bugs
 
-So, you stumbled upon a 🐛, those are tracked on the [Oxid Bugtracker](https://bugs.oxid-esales.com/). Create an issue and provide all necessary information by explaining the problem and include additional details to help maintainers reproduce the problem:
+So, you stumbled upon a 🐛, those are tracked on the [Oxid Bugtracker](https://bugs.oxid-esales.com/) (module Usercentrics section). Create an issue and provide all necessary information by explaining the problem and include additional details to help maintainers reproduce the problem:
 
 - **Use a clear and descriptive title** for the issue to identify the problem
 - **Describe the exact steps which reproduce the problem** in as many details as possible
@@ -20,7 +20,7 @@ So, you stumbled upon a 🐛, those are tracked on the [Oxid Bugtracker](https:/
 
 ### Suggesting Enhancements
 
-📈 Enhancement suggestions are tracked on the [Oxid Bugtracker](https://bugs.oxid-esales.com/). Create an issue and provide all necessary information to help maintainers:
+📈 Enhancement suggestions are tracked on the [Oxid Bugtracker](https://bugs.oxid-esales.com/) (module Usercentrics section). Create an issue and provide all necessary information to help maintainers:
 
 - **Use a clear and descriptive title** for the issue to identify the suggestion
 - **Describe the current behavior** and **explain which behavior you expected to see instead**
@@ -41,7 +41,7 @@ We recommend you to create a topic branch to work on, this will come in handy wh
 
 #### What branch to send a Pull Request to?
 
-- Backwards compatibility breaks must go to the `main` branch
+- Backwards compatibility breaks must go to the `master` branch
 - New Features go to the latest major version branch
 - Bugfixes to the latest minor version branch
 
