@@ -1,2 +1,2 @@
-<script type="application/javascript" src="https://app.usercentrics.eu/latest/main.js" id="[{$oViewConf->getUsercentricsID()}]" ></script>
+<script id="usercentrics-cmp" data-settings-id="[{$oViewConf->getUsercentricsID()}]" src="https://app.usercentrics.eu/browser-ui/latest/bundle.js" defer></script>
 [{$smarty.block.parent}]
