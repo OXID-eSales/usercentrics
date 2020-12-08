@@ -9,7 +9,7 @@ use OxidProfessionalServices\Usercentrics\Core\ScriptRenderer;
 
 $sMetadataVersion = '2.1';
 $aModule = [
-    'id' => 'oxps/usercentrics',
+    'id' => 'oxps_usercentrics',
     'title' => 'OXID Cookie Management powered by usercentrics',
     'description' => [
         'de' => 'Die Usercentrics Consent Management Platform (CMP) ermöglicht Ihnen, Ihre Marketing- und Datenstrategie
@@ -17,22 +17,23 @@ $aModule = [
         'en' => 'The Usercentrics Consent Management Platform (CMP) enables you to harmonize your marketing and data 
                  strategy with legal requirements.'
     ],
-    'version' => '1.0',
+    'version' => '1.0.0',
     'author' => 'OXID Professional Services',
     'events' => [],
 
     'templates' => [],
+
     'blocks' => [
-            [
-                'template' => 'layout/base.tpl',
-                'block' => 'base_js',
-                'file' => 'src/views/blocks/base_js.tpl'
-            ],
-            [
-                'template' => 'layout/base.tpl',
-                'block' => 'head_meta_description',
-                'file' => 'src/views/blocks/head_meta_description.tpl'
-            ],
+        [
+            'template' => 'layout/base.tpl',
+            'block' => 'base_js',
+            'file' => 'src/views/blocks/base_js.tpl'
+        ],
+        [
+            'template' => 'layout/base.tpl',
+            'block' => 'head_meta_description',
+            'file' => 'src/views/blocks/head_meta_description.tpl'
+        ],
     ],
 
     'settings' => [
@@ -56,5 +57,4 @@ $aModule = [
         JavaScriptRenderer::class => ScriptRenderer::class,
         ViewConfig::class => UsercentricsViewConfig::class
     ]
-
 ];
