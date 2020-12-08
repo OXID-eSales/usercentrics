@@ -1,8 +1,6 @@
 # OXID Cookie Management powered by usercentrics
 
-[![Build Status](https://flat.badgen.net/travis/OXID-eSales/usercentrics/?icon=travis&label=build&cache=300&scale=1.1)](https://travis-ci.com/OXID-eSales/usercentrics)
-[![PHP Version](https://flat.badgen.net/packagist/php/OXID-eSales/usercentrics/?cache=300&scale=1.1)](https://github.com/oxid-esales/usercentrics)
-[![Stable Version](https://flat.badgen.net/packagist/v/OXID-eSales/usercentrics/latest/?label=latest&cache=300&scale=1.1)](https://packagist.org/packages/oxid-esales/usercentrics)
+[![Packagist](https://img.shields.io/packagist/v/oxid-professional-services/usercentrics.svg)](https://packagist.org/packages/oxid-professional-services/usercentrics)
 
 This module provides the [Usercentrics](https://usercentrics.com/) functionality for the [OXID eShop](https://www.oxid-esales.com/) allowing you to use their Consent Management Platform.
 
