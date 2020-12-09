@@ -7,6 +7,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Core;
 
+use DOMDocument;
 use OxidEsales\Eshop\Core\Registry;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory;
@@ -78,9 +79,9 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
 
     public function assertHtmlEquals(string $expected, string $actual): void
     {
-        $eDom = new \DOMDocument();
+        $eDom = new DOMDocument();
         $eDom->loadHTML($expected, LIBXML_HTML_NOIMPLIED);
-        $aDom = new \DOMDocument();
+        $aDom = new DOMDocument();
         $aDom->loadHTML($actual, LIBXML_HTML_NOIMPLIED);
         $this->assertXmlStringEqualsXmlString($eDom, $aDom);
     }
