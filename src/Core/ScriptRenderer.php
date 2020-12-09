@@ -13,6 +13,7 @@ use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 use OxidProfessionalServices\Usercentrics\Service\RendererInterface;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 class ScriptRenderer extends ScriptRenderer_parent
 {
@@ -40,11 +41,12 @@ class ScriptRenderer extends ScriptRenderer_parent
      */
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
-        $service = $this->getRendererService();
-
         try {
+            $service = $this->getRendererService();
             $result = $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
         } catch (WidgetsNotSupported $exception) {
+            $result = parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
+        } catch (ServiceNotFoundException $exception) {
             $result = parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
         }
 
@@ -63,11 +65,12 @@ class ScriptRenderer extends ScriptRenderer_parent
      */
     protected function formFilesOutput($includes, $widget)
     {
-        $service = $this->getRendererService();
-
         try {
+            $service = $this->getRendererService();
             $result = $service->formFilesOutput($includes, $widget);
         } catch (WidgetsNotSupported $exception) {
+            $result = parent::formFilesOutput($includes, $widget);
+        } catch (ServiceNotFoundException $exception) {
             $result = parent::formFilesOutput($includes, $widget);
         }
 
