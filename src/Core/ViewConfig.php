@@ -8,23 +8,20 @@
 namespace OxidProfessionalServices\Usercentrics\Core;
 
 use OxidEsales\Eshop\Core\Registry;
+use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
 
 class ViewConfig extends ViewConfig_parent
 {
-    /**
-     * @return bool
-     */
     public function isSmartDataProtectorActive(): bool
     {
         /** @var bool */
         return Registry::getConfig()->getConfigParam('smartDataProtectorActive', true);
     }
-    /**
-     * @return string
-     */
-    public function getUsercentricsID(): string
+
+    public function getUsercentricsScript(): string
     {
-        /** @var string */
-        return Registry::getConfig()->getConfigParam('usercentricsId');
+        /** @var IntegrationScriptInterface $service */
+        $service = $this->getContainer()->get(IntegrationScriptInterface::class);
+        return $service->getUsercentricsScript();
     }
 }

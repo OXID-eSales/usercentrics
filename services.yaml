@@ -22,3 +22,12 @@ services:
   OxidProfessionalServices\Usercentrics\Service\RendererInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
+
+  OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactoryInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory
+    public: true
+
+  OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\IntegrationScript
+    public: true
+

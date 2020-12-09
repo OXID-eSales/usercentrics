@@ -6,6 +6,7 @@ use OxidEsales\Eshop\Core\ViewConfig;
 use OxidEsales\Eshop\Core\ViewHelper\JavaScriptRenderer;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig as UsercentricsViewConfig;
 use OxidProfessionalServices\Usercentrics\Core\ScriptRenderer;
+use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory;
 
 $sMetadataVersion = '2.1';
 $aModule = [
@@ -17,7 +18,7 @@ $aModule = [
         'en' => 'The Usercentrics Consent Management Platform (CMP) enables you to harmonize your marketing and data 
                  strategy with legal requirements.'
     ],
-    'version' => '1.0.0',
+    'version' => '1.1.0',
     'author' => 'OXID Professional Services',
     'events' => [],
 
@@ -48,7 +49,20 @@ $aModule = [
             'name'  => 'usercentricsId',
             'type'  => 'str',
             'value' => ''
-        ]
+        ],
+        [
+            'group' => 'usercentrics_advanced',
+            'name'  => 'usercentricsMode',
+            'type'  => 'select',
+            'value' => 'CMPv2',
+            'constraints' =>
+                        IntegrationModeFactory::MODE_CMPV1
+                . '|' . IntegrationModeFactory::MODE_CMPV2
+                . '|' . IntegrationModeFactory::MODE_CMPV2_LEGACY
+                . '|' . IntegrationModeFactory::MODE_CMPV2_TCF
+                . '|' . IntegrationModeFactory::MODE_CMPV2_TCF_LEGACY
+                . '|' . IntegrationModeFactory::MODE_CUSTOM
+        ],
     ],
 
     'controllers' => [],
