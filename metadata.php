@@ -16,7 +16,7 @@ $aModule = [
                  mit rechtlichen Anforderungen in Einklang zu bringen.',
         'en' => 'The Usercentrics Consent Management Platform (CMP) enables you to harmonize your marketing and data 
                  strategy with legal requirements.'
-    ],
+    ],asdfsdf
     'version' => '1.0.0',
     'author' => 'OXID Professional Services',
     'events' => [],
