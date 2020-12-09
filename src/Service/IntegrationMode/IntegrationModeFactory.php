@@ -11,7 +11,8 @@ class IntegrationModeFactory implements IntegrationModeFactoryInterface
     public const MODE_CMPV2_TCF_LEGACY = 'CMPv2TcfLegacy';
     public const MODE_CUSTOM = 'Custom';
 
-    private const MODES = [
+    /** @var array<string, class-string>  */
+    private $mode = [
         self::MODE_CMPV1 => CmpV1::class,
         self::MODE_CMPV2 => CmpV2::class,
         self::MODE_CMPV2_LEGACY => CmpV2Legacy::class,
@@ -22,7 +23,10 @@ class IntegrationModeFactory implements IntegrationModeFactoryInterface
 
     public function createIntegrationMode(string $mode, string $id): IntegrationScriptModeInterface
     {
-        $className = static::MODES[$mode] ?? CmpV2::class;
+        $className = $this->mode[$mode] ?? CmpV2::class;
+        /** @var CmpV1|CmpV2|CmpV2Legacy|CmpTcf|CmpTcfLegacy|CustomCmp
+         *  @psalm-suppress MixedMethodCall
+         */
         return new $className($id);
     }
 }

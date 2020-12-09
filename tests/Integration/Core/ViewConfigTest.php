@@ -35,10 +35,9 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
     }
 
     /**
-     * @dataProvider modesWithSettingsId
-     * @param $mode
+     * @dataProvider modeProvider
      */
-    public function testUsercentricsScriptIncludesId(string $mode): void
+    public function testOutputPerMode(string $mode, string $expected): void
     {
         $config = Registry::getConfig();
         /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
@@ -47,8 +46,43 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
         $html = $viewConfig->getUsercentricsScript();
-        $condition = preg_match('/.*[\- ]id="ABC123".*/', $html) === 1;
-        $this->assertTrue($condition, "script does not contain ID");
+        $this->assertHtmlEquals($expected, $html);
+    }
+
+    public function modeProvider(): array
+    {
+        return [
+            [IntegrationModeFactory::MODE_CMPV2_TCF, '<script id="usercentrics-cmp"
+                                data-settings-id="ABC123"
+                                src="https://app.usercentrics.eu/browser-ui/latest/bundle.js"
+                                data-tcf-enabled
+                                defer></script>'],
+            [IntegrationModeFactory::MODE_CMPV2_TCF_LEGACY, '<script id="usercentrics-cmp"
+                                data-settings-id="ABC123"
+                                src="https://app.usercentrics.eu/browser-ui/latest/bundle_legacy.js"
+                                data-tcf-enabled
+                                defer></script>'],
+            [IntegrationModeFactory::MODE_CMPV2_LEGACY, '<script id="usercentrics-cmp"
+                                data-settings-id="ABC123"
+                                src="https://app.usercentrics.eu/browser-ui/latest/bundle_legacy.js"
+                                defer></script>'],
+            [IntegrationModeFactory::MODE_CMPV2, '<script id="usercentrics-cmp"
+                                data-settings-id="ABC123"
+                                src="https://app.usercentrics.eu/browser-ui/latest/bundle.js"
+                                defer></script>'],
+            [IntegrationModeFactory::MODE_CMPV1, '<script type="application/javascript" 
+                        src="https://app.usercentrics.eu/latest/main.js" 
+                        id="ABC123" ></script>'],
+        ];
+    }
+
+    public function assertHtmlEquals(string $expected, string $actual): void
+    {
+        $eDom = new \DOMDocument();
+        $eDom->loadHTML($expected, LIBXML_HTML_NOIMPLIED);
+        $aDom = new \DOMDocument();
+        $aDom->loadHTML($actual, LIBXML_HTML_NOIMPLIED);
+        $this->assertXmlStringEqualsXmlString($eDom, $aDom);
     }
 
     public function testNoUsercentricsScriptInCustomMode(): void
@@ -62,98 +96,12 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
         $this->assertEmpty($html);
     }
 
-    public function testCmpV1Format(): void
-    {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", IntegrationModeFactory::MODE_CMPV1);
-        $config->setConfigParam("usercentricsId", 'ABC123');
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
-        $html = $viewConfig->getUsercentricsScript();
-        $this->assertHtmlEquals(
-            '<script type="application/javascript" src="https://app.usercentrics.eu/latest/main.js" 
-                        id="ABC123" ></script>',
-            $html
-        );
-    }
-    public function testCmpV2Format(): void
-    {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", IntegrationModeFactory::MODE_CMPV2);
-        $config->setConfigParam("usercentricsId", 'ABC123');
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
-        $html = $viewConfig->getUsercentricsScript();
-        $this->assertHtmlEquals(
-            '<script id="usercentrics-cmp"
-                                data-settings-id="ABC123"
-                                src="https://app.usercentrics.eu/browser-ui/latest/bundle.js"
-                                defer></script>',
-            $html
-        );
-    }
-    public function testCmpV2LegacyFormat(): void
-    {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", IntegrationModeFactory::MODE_CMPV2_LEGACY);
-        $config->setConfigParam("usercentricsId", 'ABC123');
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
-        $html = $viewConfig->getUsercentricsScript();
-        $this->assertHtmlEquals(
-            '<script id="usercentrics-cmp"
-                                data-settings-id="ABC123"
-                                src="https://app.usercentrics.eu/browser-ui/latest/bundle_legacy.js"
-                                defer></script>',
-            $html
-        );
-    }
-    public function testCmpTfcLegacyFormat(): void
-    {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", IntegrationModeFactory::MODE_CMPV2_TCF_LEGACY);
-        $config->setConfigParam("usercentricsId", 'ABC123');
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
-        $html = $viewConfig->getUsercentricsScript();
-        $this->assertHtmlEquals(
-            '<script id="usercentrics-cmp"
-                                data-settings-id="ABC123"
-                                src="https://app.usercentrics.eu/browser-ui/latest/bundle_legacy.js"
-                                data-tcf-enabled
-                                defer></script>',
-            $html
-        );
-    }
-    public function testCmpTfcFormat(): void
-    {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", IntegrationModeFactory::MODE_CMPV2_TCF);
-        $config->setConfigParam("usercentricsId", 'ABC123');
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
-        $html = $viewConfig->getUsercentricsScript();
-        $this->assertHtmlEquals(
-            '<script id="usercentrics-cmp"
-                                data-settings-id="ABC123"
-                                src="https://app.usercentrics.eu/browser-ui/latest/bundle.js"
-                                data-tcf-enabled
-                                defer></script>',
-            $html
-        );
-    }
 
-    public function assertHtmlEquals(string $expected, string $actual): void
-    {
-        /** @var \DOMDocument $eDom */
-        $eDom = \DOMDocument::loadHTML($expected, LIBXML_HTML_NOIMPLIED);
-        /** @var \DOMDocument $aDom */
-        $aDom = \DOMDocument::loadHTML($actual, LIBXML_HTML_NOIMPLIED);
-        $this->assertXmlStringEqualsXmlString($eDom, $aDom);
-    }
-
-
-    public function modesWithSettingsId()
+    /**
+     * @psalm-return list<list<string>>
+     * @return array<string[]>
+     */
+    public function modesWithSettingsId(): array
     {
         return [
             [IntegrationModeFactory::MODE_CMPV1],

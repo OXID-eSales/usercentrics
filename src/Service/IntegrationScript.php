@@ -1,8 +1,6 @@
 <?php
 
-
 namespace OxidProfessionalServices\Usercentrics\Service;
-
 
 use OxidEsales\Eshop\Core\Registry;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory;

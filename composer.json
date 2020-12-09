@@ -14,7 +14,8 @@
     "ext-json": "*"
   },
   "require-dev": {
-    "ext-dom": "*"
+    "ext-dom": "*",
+    "ext-libxml": "*"
   },
   "autoload": {
     "psr-4": {

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace OxidProfessionalServices\Usercentrics\Service\IntegrationMode;
-
 
 class ScriptBuilder implements IntegrationScriptModeInterface
 {
@@ -12,7 +10,7 @@ class ScriptBuilder implements IntegrationScriptModeInterface
     /** @var string */
     protected $template = "";
 
-    public function __construct($id)
+    public function __construct(string $id)
     {
         $this->id = $id;
     }

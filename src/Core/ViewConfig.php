@@ -20,7 +20,10 @@ class ViewConfig extends ViewConfig_parent
 
     public function getUsercentricsScript(): string
     {
-        /** @var IntegrationScriptInterface $service */
+        /**
+         * @psalm-suppress InternalMethod
+         * @var IntegrationScriptInterface $service
+         */
         $service = $this->getContainer()->get(IntegrationScriptInterface::class);
         return $service->getUsercentricsScript();
     }
