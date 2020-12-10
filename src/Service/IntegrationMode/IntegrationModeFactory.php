@@ -4,29 +4,28 @@ namespace OxidProfessionalServices\Usercentrics\Service\IntegrationMode;
 
 class IntegrationModeFactory implements IntegrationModeFactoryInterface
 {
-    public const MODE_CMPV1 = 'CMPv1';
-    public const MODE_CMPV2 = 'CMPv2';
-    public const MODE_CMPV2_LEGACY = 'CMPv2Legacy';
-    public const MODE_CMPV2_TCF = 'CMPv2Tcf';
-    public const MODE_CMPV2_TCF_LEGACY = 'CMPv2TcfLegacy';
+    public const MODE_CMPV1 = 'CmpV1';
+    public const MODE_CMPV2 = 'CmpV2';
+    public const MODE_CMPV2_LEGACY = 'CmpV2Legacy';
+    public const MODE_CMPV2_TCF = 'CmpTcf';
+    public const MODE_CMPV2_TCF_LEGACY = 'CmpTcfLegacy';
     public const MODE_CUSTOM = 'Custom';
-
-    /** @var array<string, class-string>  */
-    private $mode = [
-        self::MODE_CMPV1 => CmpV1::class,
-        self::MODE_CMPV2 => CmpV2::class,
-        self::MODE_CMPV2_LEGACY => CmpV2Legacy::class,
-        self::MODE_CMPV2_TCF => CmpTcf::class,
-        self::MODE_CMPV2_TCF_LEGACY => CmpTcfLegacy::class,
-        self::MODE_CUSTOM => CustomCmp::class
-    ];
 
     public function createIntegrationMode(string $mode, string $id): IntegrationScriptModeInterface
     {
-        $className = $this->mode[$mode] ?? CmpV2::class;
-        /** @var CmpV1|CmpV2|CmpV2Legacy|CmpTcf|CmpTcfLegacy|CustomCmp
-         *  @psalm-suppress MixedMethodCall
-         */
-        return new $className($id);
+        switch ($mode) {
+            case self::MODE_CMPV1:
+                return new CmpV1($id);
+            case self::MODE_CMPV2_LEGACY:
+                return new CmpV2Legacy($id);
+            case self::MODE_CMPV2_TCF:
+                return new CmpTcf($id);
+            case self::MODE_CMPV2_TCF_LEGACY:
+                return new CmpTcfLegacy($id);
+            case self::MODE_CUSTOM:
+                return new Custom();
+            default:
+                return new CmpV2($id);
+        }
     }
 }

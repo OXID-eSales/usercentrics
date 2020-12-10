@@ -2,7 +2,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Service\IntegrationMode;
 
-class CustomCmp implements IntegrationScriptModeInterface
+class Custom implements IntegrationScriptModeInterface
 {
     public function getHtml(): string
     {
