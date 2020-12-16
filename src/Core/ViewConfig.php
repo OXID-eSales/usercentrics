@@ -18,6 +18,17 @@ class ViewConfig extends ViewConfig_parent
         return Registry::getConfig()->getConfigParam('smartDataProtectorActive', true);
     }
 
+    /**
+     * @return string
+     *
+     * @deprecated
+     */
+    public function getUsercentricsID(): string
+    {
+        /** @var string */
+        return Registry::getConfig()->getConfigParam('usercentricsId');
+    }
+
     public function getUsercentricsScript(): string
     {
         /**
