@@ -36,6 +36,6 @@ class ViewConfig extends ViewConfig_parent
          * @var IntegrationScriptInterface $service
          */
         $service = $this->getContainer()->get(IntegrationScriptInterface::class);
-        return $service->getUsercentricsScript();
+        return $service->getIntegrationScript();
     }
 }

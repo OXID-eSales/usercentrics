@@ -4,5 +4,5 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 
 interface IntegrationScriptInterface
 {
-    public function getUsercentricsScript(): string;
+    public function getIntegrationScript(): string;
 }

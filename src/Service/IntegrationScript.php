@@ -15,7 +15,7 @@ class IntegrationScript
         $this->factory = $factory;
     }
 
-    public function getUsercentricsID(): string
+    private function getUsercentricsID(): string
     {
         /** @var string */
         return Registry::getConfig()->getConfigParam('usercentricsId', '');
@@ -27,7 +27,7 @@ class IntegrationScript
         return Registry::getConfig()->getConfigParam('usercentricsMode', '');
     }
 
-    public function getUsercentricsScript(): string
+    public function getIntegrationScript(): string
     {
         $id = $this->getUsercentricsID();
         $mode = $this->getUsercentricsMode();
