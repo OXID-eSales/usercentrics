@@ -25,4 +25,10 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * Define custom actions here
      */
+
+    public function saveShopConfVar($sVarType, $sVarName, $sVarVal, $sShopId = null, $sModule = '')
+    {
+        $config = \OxidEsales\Eshop\Core\Registry::getConfig();
+        $config->saveShopConfVar($sVarType, $sVarName, $sVarVal, $sShopId, $sModule);
+    }
 }

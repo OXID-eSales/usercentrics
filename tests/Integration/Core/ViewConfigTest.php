@@ -41,9 +41,11 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
     public function testOutputPerMode(string $mode, string $expected): void
     {
         $config = Registry::getConfig();
+
         /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", $mode);
-        $config->setConfigParam("usercentricsId", 'ABC123');
+        $config->saveShopConfVar('string', 'usercentricsMode', $mode, 1, 'module:oxps_usercentrics');
+        $config->saveShopConfVar('string', 'usercentricsId', 'ABC123', 1, 'module:oxps_usercentrics');
+
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
         $html = $viewConfig->getUsercentricsScript();
@@ -90,7 +92,8 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
     {
         $config = Registry::getConfig();
         /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("usercentricsMode", IntegrationModeFactory::MODE_CUSTOM);
+        $config->saveShopConfVar('string', 'usercentricsMode', IntegrationModeFactory::MODE_CUSTOM, 1, 'module:oxps_usercentrics');
+
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
         $html = $viewConfig->getUsercentricsScript();

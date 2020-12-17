@@ -20,16 +20,14 @@ final class ScriptIncludeAdjustementCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I
-     *
-     * @group sieg1
      */
-    public function snippetIncludeDecorated(AcceptanceTester $I)
+    public function scriptIncludeDecorated(AcceptanceTester $I)
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
 
         // Accept cookie policy
-        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 60);
+        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 10);
         $I->click("//button[@id='uc-btn-accept-banner']");
 
         $I->canSeeElementInDOM("//script[@type='text/javascript'][@data-usercentrics='testcustomservice']");
