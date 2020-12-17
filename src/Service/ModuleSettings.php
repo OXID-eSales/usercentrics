@@ -34,7 +34,7 @@ final class ModuleSettings implements ModuleSettingsInterface
         $this->context = $context;
     }
 
-    public function getSettingValue(string $settingName): string
+    public function getSettingValue(string $settingName, $defaultValue = null)
     {
         try {
             $setting = $this->settingsDao->get(
@@ -44,7 +44,7 @@ final class ModuleSettings implements ModuleSettingsInterface
             );
             $result = $setting->getValue();
         } catch (ModuleSettingNotFountException $e) {
-            $result = '';
+            $result = $defaultValue;
         }
 
         return $result;

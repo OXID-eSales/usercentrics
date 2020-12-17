@@ -4,5 +4,10 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 
 interface ModuleSettingsInterface
 {
-    public function getSettingValue(string $settingName): string;
+    /**
+     * @param string $settingName
+     * @param mixed|null $defaultValue
+     * @return mixed
+     */
+    public function getSettingValue(string $settingName, $defaultValue = null);
 }
