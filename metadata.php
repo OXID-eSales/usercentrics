@@ -6,7 +6,7 @@ use OxidEsales\Eshop\Core\ViewConfig;
 use OxidEsales\Eshop\Core\ViewHelper\JavaScriptRenderer;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig as UsercentricsViewConfig;
 use OxidProfessionalServices\Usercentrics\Core\ScriptRenderer;
-use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory;
+use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
 
 $sMetadataVersion = '2.1';
 $aModule = [
@@ -46,22 +46,22 @@ $aModule = [
         ],
         [
             'group' => 'usercentrics_advanced',
-            'name'  => 'usercentricsId',
-            'type'  => 'str',
+            'name' => 'usercentricsId',
+            'type' => 'str',
             'value' => ''
         ],
         [
             'group' => 'usercentrics_advanced',
-            'name'  => 'usercentricsMode',
-            'type'  => 'select',
+            'name' => 'usercentricsMode',
+            'type' => 'select',
             'value' => 'CMPv2',
             'constraints' =>
-                        IntegrationModeFactory::MODE_CMPV1
-                . '|' . IntegrationModeFactory::MODE_CMPV2
-                . '|' . IntegrationModeFactory::MODE_CMPV2_LEGACY
-                . '|' . IntegrationModeFactory::MODE_CMPV2_TCF
-                . '|' . IntegrationModeFactory::MODE_CMPV2_TCF_LEGACY
-                . '|' . IntegrationModeFactory::MODE_CUSTOM
+                Pattern\CmpV1::VERSION_NAME . '|' .
+                Pattern\CmpV2::VERSION_NAME . '|' .
+                Pattern\CmpV2Legacy::VERSION_NAME . '|' .
+                Pattern\CmpV2Tcf::VERSION_NAME . '|' .
+                Pattern\CmpV2TcfLegacy::VERSION_NAME . '|' .
+                Pattern\Custom::VERSION_NAME
         ],
     ],
 

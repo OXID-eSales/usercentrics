@@ -2,21 +2,22 @@
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
+use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilderInterface;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactoryInterface;
 
 class IntegrationScript
 {
-    /** @var IntegrationModeFactoryInterface */
-    private $factory;
+    /** @var IntegrationScriptBuilderInterface */
+    private $scriptBuilder;
 
     /** @var ModuleSettings */
     private $moduleSettings;
 
     public function __construct(
-        IntegrationModeFactoryInterface $factory,
+        IntegrationScriptBuilderInterface $scriptBuilder,
         ModuleSettings $moduleSettings
     ) {
-        $this->factory = $factory;
+        $this->scriptBuilder = $scriptBuilder;
         $this->moduleSettings = $moduleSettings;
     }
 
@@ -25,8 +26,10 @@ class IntegrationScript
         $id = $this->moduleSettings->getSettingValue('usercentricsId');
         $mode = $this->moduleSettings->getSettingValue('usercentricsMode');
 
-        $integration = $this->factory->createIntegrationMode($mode, $id);
+        $params = [
+            '{USERCENTRICS_CLIENT_ID}' => $id
+        ];
 
-        return $integration->getHtml();
+        return $this->scriptBuilder->getIntegrationScript($mode, $params);
     }
 }

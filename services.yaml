@@ -26,10 +26,6 @@ services:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
 
-  OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactoryInterface:
-    class: OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory
-    public: true
-
   OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface:
     class: OxidProfessionalServices\Usercentrics\Service\IntegrationScript
     public: true
@@ -39,3 +35,10 @@ services:
     public: true
     arguments:
       $moduleId: '%oxid_professional_services.usercentrics.module_id%'
+
+  OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilderInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder
+    public: true
+
+  OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactoryInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory
