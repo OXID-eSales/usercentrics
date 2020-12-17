@@ -2,36 +2,31 @@
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
-use OxidEsales\Eshop\Core\Registry;
-use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactoryInterface;
 
 class IntegrationScript
 {
     /** @var IntegrationModeFactoryInterface */
     private $factory;
-    public function __construct(IntegrationModeFactoryInterface $factory)
-    {
+
+    /** @var ModuleSettings */
+    private $moduleSettings;
+
+    public function __construct(
+        IntegrationModeFactoryInterface $factory,
+        ModuleSettings $moduleSettings
+    ) {
         $this->factory = $factory;
-    }
-
-    private function getUsercentricsID(): string
-    {
-        /** @var string */
-        return Registry::getConfig()->getConfigParam('usercentricsId', '');
-    }
-
-    private function getUsercentricsMode(): string
-    {
-        /** @var string */
-        return Registry::getConfig()->getConfigParam('usercentricsMode', '');
+        $this->moduleSettings = $moduleSettings;
     }
 
     public function getIntegrationScript(): string
     {
-        $id = $this->getUsercentricsID();
-        $mode = $this->getUsercentricsMode();
+        $id = $this->moduleSettings->getSettingValue('usercentricsId');
+        $mode = $this->moduleSettings->getSettingValue('usercentricsMode');
+
         $integration = $this->factory->createIntegrationMode($mode, $id);
+
         return $integration->getHtml();
     }
 }

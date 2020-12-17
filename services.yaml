@@ -1,3 +1,6 @@
+parameters:
+  oxid_professional_services.usercentrics.module_id: 'oxps_usercentrics'
+
 services:
 
   _defaults:
@@ -31,3 +34,7 @@ services:
     class: OxidProfessionalServices\Usercentrics\Service\IntegrationScript
     public: true
 
+  OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\ModuleSettings
+    arguments:
+      $moduleId: '%oxid_professional_services.usercentrics.module_id%'
