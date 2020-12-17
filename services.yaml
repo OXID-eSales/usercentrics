@@ -36,5 +36,6 @@ services:
 
   OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface:
     class: OxidProfessionalServices\Usercentrics\Service\ModuleSettings
+    public: true
     arguments:
       $moduleId: '%oxid_professional_services.usercentrics.module_id%'

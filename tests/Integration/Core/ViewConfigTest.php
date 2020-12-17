@@ -26,7 +26,7 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
     {
         $config = Registry::getConfig();
         /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->setConfigParam("smartDataProtectorActive", $setting);
+        $config->saveShopConfVar('bool', 'smartDataProtectorActive', $setting, 1, 'module:oxps_usercentrics');
 
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
