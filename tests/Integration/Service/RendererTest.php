@@ -7,6 +7,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
+use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\Renderer;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
@@ -72,6 +73,24 @@ HTML;
         $rendered = $sut->encloseScriptSnippet("", "", false);
 
         $this->assertEmpty($rendered);
+    }
+
+    public function testFormFilesOutputDoesNotSupportWidgets(): void
+    {
+        $this->expectException(WidgetsNotSupported::class);
+
+        $file = 'Snippets.yaml';
+        $sut = $this->createRenderer($file);
+        $sut->formFilesOutput([], "widgetName");
+    }
+
+    public function testEncloseScriptSnippetDoesNotSupportWidgets(): void
+    {
+        $this->expectException(WidgetsNotSupported::class);
+
+        $file = 'Snippets.yaml';
+        $sut = $this->createRenderer($file);
+        $sut->encloseScriptSnippet("", "widgetName", false);
     }
 
     protected function createRenderer(string $file): Renderer
