@@ -2,6 +2,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Service\Integration;
 
+use OxidProfessionalServices\Usercentrics\Exception\PatternNotFound;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\IntegrationPatternInterface;
 
@@ -19,7 +20,7 @@ class IntegrationVersionFactory implements IntegrationVersionFactoryInterface
     public function getPatternByVersion(string $integrationVersion): IntegrationPatternInterface
     {
         if (!isset($this->versionMap[$integrationVersion])) {
-            throw new \Exception('Integration script building error');
+            throw new PatternNotFound();
         }
 
         /** @var IntegrationPatternInterface $integrationVersionPattern */

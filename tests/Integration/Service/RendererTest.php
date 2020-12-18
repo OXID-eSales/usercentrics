@@ -10,8 +10,7 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\Renderer;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
-use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlFileFormat;
-use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
 
 /**
  * Class RendererTest
@@ -19,7 +18,7 @@ use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
  * @psalm-suppress PropertyNotSetInConstructor
  * @covers \OxidProfessionalServices\Usercentrics\Service\Renderer
  */
-class RendererTest extends StorageUnitTestCase
+class RendererTest extends UnitTestCase
 {
     public function testWhiteListedScript(): void
     {

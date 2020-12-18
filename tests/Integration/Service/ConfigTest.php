@@ -12,7 +12,7 @@ use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
-use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
 
 /**
  * Class ConfigTest
@@ -20,7 +20,7 @@ use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
  * @psalm-suppress PropertyNotSetInConstructor
  * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
  */
-class ConfigTest extends StorageUnitTestCase
+class ConfigTest extends UnitTestCase
 {
     public function testConfigPut(): void
     {

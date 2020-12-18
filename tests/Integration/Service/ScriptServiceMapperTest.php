@@ -10,7 +10,7 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
-use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
 
 /**
  * Class RepositoryTest
@@ -18,7 +18,7 @@ use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
  * @psalm-suppress PropertyNotSetInConstructor
  * @covers \OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper
  */
-class ScriptServiceMapperTest extends StorageUnitTestCase
+class ScriptServiceMapperTest extends UnitTestCase
 {
 
     /**

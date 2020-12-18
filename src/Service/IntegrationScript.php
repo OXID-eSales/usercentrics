@@ -3,7 +3,6 @@
 namespace OxidProfessionalServices\Usercentrics\Service;
 
 use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilderInterface;
-use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactoryInterface;
 
 class IntegrationScript
 {

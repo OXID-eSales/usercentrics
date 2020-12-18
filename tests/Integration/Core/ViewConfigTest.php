@@ -11,12 +11,10 @@ use DOMDocument;
 use OxidEsales\Eshop\Core\Registry;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
-use OxidProfessionalServices\Usercentrics\Service\IntegrationMode\IntegrationModeFactory;
 
 /**
  * Class ViewConfigTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Core
- * @covers \OxidProfessionalServices\Usercentrics\Core\ViewConfig
  */
 class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
 {
