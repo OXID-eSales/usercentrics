@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Configuration\Exception\ModuleSettingNotFountException;
+use OxidEsales\EshopCommunity\Internal\Framework\Dao\EntryDoesNotExistDaoException;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Setting\SettingDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 
@@ -43,7 +43,7 @@ final class ModuleSettings implements ModuleSettingsInterface
                 $this->context->getCurrentShopId()
             );
             $result = $setting->getValue();
-        } catch (ModuleSettingNotFountException $e) {
+        } catch (EntryDoesNotExistDaoException $e) {
             $result = $defaultValue;
         }
 
