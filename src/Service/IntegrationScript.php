@@ -9,12 +9,12 @@ class IntegrationScript
     /** @var IntegrationScriptBuilderInterface */
     private $scriptBuilder;
 
-    /** @var ModuleSettings */
+    /** @var ModuleSettingsInterface */
     private $moduleSettings;
 
     public function __construct(
         IntegrationScriptBuilderInterface $scriptBuilder,
-        ModuleSettings $moduleSettings
+        ModuleSettingsInterface $moduleSettings
     ) {
         $this->scriptBuilder = $scriptBuilder;
         $this->moduleSettings = $moduleSettings;

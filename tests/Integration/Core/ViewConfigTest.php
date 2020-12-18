@@ -14,7 +14,7 @@ use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
 
 /**
  * Class ViewConfigTest
- * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Core
+ * @covers \OxidProfessionalServices\Usercentrics\Core\ViewConfig
  */
 class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
 {
