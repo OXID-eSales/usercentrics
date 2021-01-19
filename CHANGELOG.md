@@ -27,5 +27,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module provides a possibility to turn on "Smart data protection" function provided by UserCentrics.
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
-[1.1.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.0.0...master
+[1.1.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/OXID-eSales/usercentrics/commits/v1.0.0
