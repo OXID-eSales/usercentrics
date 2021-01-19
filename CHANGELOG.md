@@ -4,15 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0] - Unreleased
+## [1.1.0] - 2021-01-19
 
 ### Added
-- Support for Usercentrics CmpV2 including legacy browser mode
-- Support for Usercentrics CmpV2 TFC (experimental)
-- ``Service\ModuleSettings`` class for accessing this module settings
+- Support for Usercentrics CmpV2 including legacy browser mode.
+- Support for Usercentrics CmpV2 TFC (experimental).
+- ``Service\ModuleSettings`` class for accessing this module settings.
 
 ### Deprecated
 - ``Core\ViewConfig::getUsercentricsID``
+
+### Changed
+- ``ModuleSettingsInterface`` is used to access module settings in the shop.
+
+### Fixed
+- Tests improved and cleaned up.
+- Added tests for several edge cases.
 
 ## [1.0.0] - 2020-12-09
 
