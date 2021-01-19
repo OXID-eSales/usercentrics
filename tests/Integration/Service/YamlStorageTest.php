@@ -10,14 +10,14 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
-use OxidProfessionalServices\Usercentrics\Tests\Integration\StorageUnitTestCase;
+use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
 
 /**
  * YamlStorageTest Yaml
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage
  */
-class YamlStorageTest extends StorageUnitTestCase
+class YamlStorageTest extends UnitTestCase
 {
     public function testIntegration(): void
     {

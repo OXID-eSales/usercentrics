@@ -5,8 +5,9 @@
  * See LICENSE file for license details.
  */
 
-namespace OxidProfessionalServices\Usercentrics\Tests\Integration;
+namespace OxidProfessionalServices\Usercentrics\Tests\Unit;
 
+use DOMDocument;
 use org\bovigo\vfs\vfsStream;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
@@ -15,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Helper methods for tests
  */
-class StorageUnitTestCase extends TestCase
+class UnitTestCase extends TestCase
 {
     /**
      * @SuppressWarnings(PHPMD.StaticAccess)
@@ -33,5 +34,16 @@ class StorageUnitTestCase extends TestCase
             $directory,
             $file
         );
+    }
+
+    public function assertHtmlEquals(string $expected, string $actual): void
+    {
+        $eDom = new DOMDocument();
+        $eDom->loadHTML($expected, LIBXML_HTML_NOIMPLIED);
+
+        $aDom = new DOMDocument();
+        $aDom->loadHTML($actual, LIBXML_HTML_NOIMPLIED);
+
+        $this->assertXmlStringEqualsXmlString($eDom, $aDom);
     }
 }

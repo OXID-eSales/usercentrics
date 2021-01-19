@@ -13,6 +13,7 @@ use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 use OxidProfessionalServices\Usercentrics\Service\RendererInterface;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 class ScriptRenderer extends ScriptRenderer_parent
 {
@@ -32,6 +33,8 @@ class ScriptRenderer extends ScriptRenderer_parent
     /**
      * Enclose with script tag or add in function for wiget.
      *
+     * @todo: remove ServiceNotFoundException from catch when service availability during module activation fixed
+     *
      * @param string $scriptsOutput javascript to be enclosed.
      * @param string $widget        widget name.
      * @param bool   $isAjaxRequest is ajax request
@@ -40,11 +43,10 @@ class ScriptRenderer extends ScriptRenderer_parent
      */
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
-        $service = $this->getRendererService();
-
         try {
+            $service = $this->getRendererService();
             $result = $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
-        } catch (WidgetsNotSupported $exception) {
+        } catch (WidgetsNotSupported | ServiceNotFoundException $exception) {
             $result = parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
         }
 
@@ -53,6 +55,8 @@ class ScriptRenderer extends ScriptRenderer_parent
 
     /**
      * Form output for includes.
+     *
+     * @todo: remove ServiceNotFoundException from catch when service availability during module activation fixed
      *
      * @param array<int,array<string>> $includes String files to include.
      * @param string $widget   Widget name.
@@ -63,11 +67,10 @@ class ScriptRenderer extends ScriptRenderer_parent
      */
     protected function formFilesOutput($includes, $widget)
     {
-        $service = $this->getRendererService();
-
         try {
+            $service = $this->getRendererService();
             $result = $service->formFilesOutput($includes, $widget);
-        } catch (WidgetsNotSupported $exception) {
+        } catch (WidgetsNotSupported | ServiceNotFoundException $exception) {
             $result = parent::formFilesOutput($includes, $widget);
         }
 

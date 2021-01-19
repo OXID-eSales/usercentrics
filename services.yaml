@@ -1,3 +1,6 @@
+parameters:
+  oxid_professional_services.usercentrics.module_id: 'oxps_usercentrics'
+
 services:
 
   _defaults:
@@ -22,3 +25,20 @@ services:
   OxidProfessionalServices\Usercentrics\Service\RendererInterface:
     class: OxidProfessionalServices\Usercentrics\Service\Renderer
     public: true
+
+  OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\IntegrationScript
+    public: true
+
+  OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\ModuleSettings
+    public: true
+    arguments:
+      $moduleId: '%oxid_professional_services.usercentrics.module_id%'
+
+  OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilderInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder
+    public: true
+
+  OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactoryInterface:
+    class: OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory

@@ -7,24 +7,35 @@
 
 namespace OxidProfessionalServices\Usercentrics\Core;
 
-use OxidEsales\Eshop\Core\Registry;
+use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
+use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 
 class ViewConfig extends ViewConfig_parent
 {
-    /**
-     * @return bool
-     */
     public function isSmartDataProtectorActive(): bool
     {
-        /** @var bool */
-        return Registry::getConfig()->getConfigParam('smartDataProtectorActive', true);
+        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
+        return $moduleSettings->getSettingValue('smartDataProtectorActive', true);
     }
+
     /**
      * @return string
+     *
+     * @deprecated
      */
     public function getUsercentricsID(): string
     {
-        /** @var string */
-        return Registry::getConfig()->getConfigParam('usercentricsId');
+        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
+        return $moduleSettings->getSettingValue('usercentricsId', '');
+    }
+
+    public function getUsercentricsScript(): string
+    {
+        /**
+         * @psalm-suppress InternalMethod
+         * @var IntegrationScriptInterface $service
+         */
+        $service = $this->getContainer()->get(IntegrationScriptInterface::class);
+        return $service->getIntegrationScript();
     }
 }

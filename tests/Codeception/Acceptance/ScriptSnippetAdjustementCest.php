@@ -21,8 +21,6 @@ final class ScriptSnippetAdjustementCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I
-     *
-     * @group sieg2
      */
     public function scriptIncludeDecorated(AcceptanceTester $I)
     {
@@ -30,7 +28,7 @@ final class ScriptSnippetAdjustementCest extends BaseCest
         $I->amOnPage($homePage->URL);
 
         // Accept cookie policy
-        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 60);
+        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 10);
         $I->click("//button[@id='uc-btn-accept-banner']");
 
         $basketSteps = new BasketSteps($I);
