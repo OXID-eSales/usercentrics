@@ -20,5 +20,5 @@ $aLang = [
     'SHOP_MODULE_usercentricsMode_CmpTcf'        => 'TCF 2.0',
     'SHOP_MODULE_usercentricsMode_CmpTcfLegacy'  => 'TCF 2.0 für alte Browsers',
     'SHOP_MODULE_usercentricsMode_Custom'        => 'Usercentrics Skript selbst einbinden',
-    'HELP_SHOP_MODULE_usercentricsMode'          => 'Bitte wählen Sie hier den Modus aus in dem Usercentrics läuft. Eine Erklärung der Versionen, Legacy Support und TCF Support finden Sie unter <a href="https://docs.usercentrics.com/">docs.usercentrics.com</a>. Nutzen Sie die Option "Usercentrics Skript selbst einbinden", wenn das Modul das Usercentrics Skript nicht hinzufügen soll',
+    'HELP_SHOP_MODULE_usercentricsMode'          => 'Bitte wählen Sie hier den Modus aus in dem Usercentrics läuft. Eine Erklärung der Versionen, Legacy Support und TCF Support finden Sie unter <a target="_blank" href="https://docs.usercentrics.com/">docs.usercentrics.com</a>. Nutzen Sie die Option "Usercentrics Skript selbst einbinden", wenn das Modul das Usercentrics Skript nicht hinzufügen soll',
 ];
