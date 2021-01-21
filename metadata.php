@@ -14,9 +14,29 @@ $aModule = [
     'title' => 'OXID Cookie Management powered by usercentrics',
     'description' => [
         'de' => 'Die Usercentrics Consent Management Platform (CMP) ermöglicht Ihnen, Ihre Marketing- und Datenstrategie
-                 mit rechtlichen Anforderungen in Einklang zu bringen.',
+                 mit rechtlichen Anforderungen in Einklang zu bringen.</p>
+                 <h2>Registrieren Sie sich deshalb jetzt bei Usercentrics</h2>  
+                 <form target="_top" method="GET" action="https://usercentrics.com/de/?partnerid=16967">               
+                     <input type="submit" value="Jetzt registrieren">
+                     <p>
+                         Sollte jemand anderes in Ihrem Unternehmen die Bestellung durchführen geben Sie bitte zwingend die Oxid Partner Id 16967 bei der Bestellung an
+                         um die Integration vollständig nutzen zu können.<br>
+                         Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/?partnerid=16967        
+                     </p>
+                 </form>
+                 ',
         'en' => 'The Usercentrics Consent Management Platform (CMP) enables you to harmonize your marketing and data 
-                 strategy with legal requirements.'
+                 strategy with legal requirements.</p>
+                 <h2>Register now for Usercentrics</h2>  
+                 <form target="_top" method="GET" action="https://usercentrics.com/?partnerid=16967">               
+                     <input type="submit" value="Register Now">
+                     <p>
+                         In case someone else is doing the registration for you, they have to use the partner id 16967
+                         during the registration.<br>
+                         For that reason you can forward this link to them: https://usercentrics.com/?partnerid=16967
+                     </p>
+                 </form>
+                 '
     ],
     'version' => '1.1.0',
     'author' => 'OXID Professional Services',

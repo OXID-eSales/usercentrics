@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Admin area: open API documentation in new browser tab
+- Admin area: added registration link
 
 ## [1.1.0] - 2021-01-19
 
