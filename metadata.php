@@ -17,7 +17,7 @@ $aModule = [
                  mit rechtlichen Anforderungen in Einklang zu bringen.</p>
                  <h2>Registrieren Sie sich deshalb jetzt bei Usercentrics</h2>  
                  <form target="_top" method="GET" action="https://usercentrics.com/de/?partnerid=16967">               
-                     <input type="submit" value="Jetzt registrieren">
+                     <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Jetzt registrieren">
                      <p>
                          Sollte jemand anderes in Ihrem Unternehmen die Bestellung durchführen geben Sie bitte zwingend die Oxid Partner Id 16967 bei der Bestellung an
                          um die Integration vollständig nutzen zu können.<br>
@@ -29,7 +29,7 @@ $aModule = [
                  strategy with legal requirements.</p>
                  <h2>Register now for Usercentrics</h2>  
                  <form target="_top" method="GET" action="https://usercentrics.com/?partnerid=16967">               
-                     <input type="submit" value="Register Now">
+                     <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Register Now">
                      <p>
                          In case someone else is doing the registration for you, they have to use the partner id 16967
                          during the registration.<br>
