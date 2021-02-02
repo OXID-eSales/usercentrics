@@ -59,16 +59,16 @@ $aModule = [
 
     'settings' => [
         [
+            'group' => 'usercentrics_main',
+            'name' => 'usercentricsId',
+            'type' => 'str',
+            'value' => ''
+        ],
+        [
             'group' => 'usercentrics_advanced',
             'name'  => 'smartDataProtectorActive',
             'type'  => 'bool',
             'value' => true
-        ],
-        [
-            'group' => 'usercentrics_advanced',
-            'name' => 'usercentricsId',
-            'type' => 'str',
-            'value' => ''
         ],
         [
             'group' => 'usercentrics_advanced',
