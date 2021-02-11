@@ -9,7 +9,7 @@ $sLangName = "Deutsch";
 
 $aLang = [
     "charset"                                    => "UTF-8",
-    'SHOP_MODULE_GROUP_usercentrics_main'        => 'Einstellungen',
+    'SHOP_MODULE_GROUP_usercentrics_main'        => 'Usercentrics Integration',
     'SHOP_MODULE_GROUP_usercentrics_advanced'    => 'Erweiterte Einstellungen',
     'SHOP_MODULE_smartDataProtectorActive'       => 'Smart Data Protector aktivieren',
     'HELP_SHOP_MODULE_smartDataProtectorActive'  => 'Die Deaktivierung dieser Funktion könnte rechtliche Folgen haben.',
@@ -20,6 +20,6 @@ $aLang = [
     'SHOP_MODULE_usercentricsMode_CmpV2Legacy'   => 'CMP V2 für alte Browser',
     'SHOP_MODULE_usercentricsMode_CmpV2Tcf'      => 'TCF 2.0',
     'SHOP_MODULE_usercentricsMode_CmpV2TcfLegacy' => 'TCF 2.0 für alte Browser',
-    'SHOP_MODULE_usercentricsMode_Custom'        => 'Usercentrics Skript selbst einbinden',
+    'SHOP_MODULE_usercentricsMode_Custom'        => 'Usercentrics Script selbst einbinden',
     'HELP_SHOP_MODULE_usercentricsMode'          => 'Bitte wählen Sie hier den Modus aus, in dem Usercentrics läuft! Eine Erklärung der Versionen, Legacy Support und TCF Support finden Sie unter docs.usercentrics.com. Nutzen Sie die Option „Usercentrics Script selbst einbinden“ nur, wenn das Modul das Usercentrics Script nicht hinzufügen soll.',
 ];
