@@ -19,7 +19,7 @@ $aModule = [
                  <form target="_blank" method="GET" action="https://usercentrics.com/de/?partnerid=16967">               
                      <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Jetzt registrieren">
                      <p>
-                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können. .<br>
+                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können.<br>
                          Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/?partnerid=16967        
                      </p>
                  </form>
