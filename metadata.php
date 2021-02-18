@@ -54,7 +54,7 @@ $aModule = [
             'group' => 'usercentrics_advanced',
             'name' => 'usercentricsMode',
             'type' => 'select',
-            'value' => 'CMPv2',
+            'value' => Pattern\CmpV2::VERSION_NAME,
             'constraints' =>
                 Pattern\CmpV1::VERSION_NAME . '|' .
                 Pattern\CmpV2::VERSION_NAME . '|' .
