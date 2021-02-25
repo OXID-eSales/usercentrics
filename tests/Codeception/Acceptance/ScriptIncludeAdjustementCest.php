@@ -20,6 +20,7 @@ final class ScriptIncludeAdjustementCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I
+     * @group includeScript
      */
     public function scriptIncludeDecorated(AcceptanceTester $I)
     {

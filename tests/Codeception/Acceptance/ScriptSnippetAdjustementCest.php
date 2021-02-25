@@ -21,6 +21,7 @@ final class ScriptSnippetAdjustementCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I
+     * @group includeSnippet
      */
     public function scriptIncludeDecorated(AcceptanceTester $I)
     {
