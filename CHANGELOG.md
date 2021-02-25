@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix default value for usercentricsMode
+- Improved the tests to be more stable on different shop modules configurations
 
 ## [1.1.0] - 2021-01-19
 
