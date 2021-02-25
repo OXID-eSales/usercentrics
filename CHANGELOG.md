@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.1] - Unreleased
 
+### Changed
+- Admin area: open API documentation in new browser tab
+- Admin area: added registration link
+
 ### Fixed
 - Fix default value for usercentricsMode
 

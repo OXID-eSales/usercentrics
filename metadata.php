@@ -14,11 +14,29 @@ $aModule = [
     'title' => 'OXID Cookie Management powered by usercentrics',
     'description' => [
         'de' => 'Die Usercentrics Consent Management Platform (CMP) ermöglicht Ihnen, Ihre Marketing- und Datenstrategie
-                 mit rechtlichen Anforderungen in Einklang zu bringen.',
+                 mit rechtlichen Anforderungen in Einklang zu bringen.</p>
+                 <h2>Registrieren Sie sich deshalb jetzt bei Usercentrics</h2>  
+                 <form target="_blank" method="GET" action="https://usercentrics.com/de/?partnerid=16967">               
+                     <input name="partnerid" value="16967">
+                     <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Jetzt registrieren">
+                     <p>
+                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können. Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/?partnerid=16967        
+                     </p>
+                 </form>
+                 ',
         'en' => 'The Usercentrics Consent Management Platform (CMP) enables you to harmonize your marketing and data 
-                 strategy with legal requirements.'
+                 strategy with legal requirements.</p>
+                 <h2>Register now for Usercentrics</h2>  
+                 <form target="_blank" method="GET" action="https://usercentrics.com/?partnerid=16967">               
+                     <input name="partnerid" value="16967">
+                     <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Register Now">
+                     <p>
+                         If another employee in your company registers, please make sure to enter the OXID partner ID 16967 in order to be able to fully use the integration. For that reason you can forward this link to them: https://usercentrics.com/?partnerid=16967
+                     </p>
+                 </form>
+                 '
     ],
-    'version' => '1.1.0',
+    'version' => '1.1.1',
     'author' => 'OXID Professional Services',
     'events' => [],
 
@@ -39,16 +57,16 @@ $aModule = [
 
     'settings' => [
         [
+            'group' => 'usercentrics_main',
+            'name' => 'usercentricsId',
+            'type' => 'str',
+            'value' => ''
+        ],
+        [
             'group' => 'usercentrics_advanced',
             'name'  => 'smartDataProtectorActive',
             'type'  => 'bool',
             'value' => true
-        ],
-        [
-            'group' => 'usercentrics_advanced',
-            'name' => 'usercentricsId',
-            'type' => 'str',
-            'value' => ''
         ],
         [
             'group' => 'usercentrics_advanced',
