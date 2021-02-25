@@ -23,7 +23,7 @@ final class ScriptSnippetAdjustementCest extends BaseCest
      * @param AcceptanceTester $I
      * @group includeSnippet
      */
-    public function scriptIncludeDecorated(AcceptanceTester $I)
+    public function scriptIncludeDecorated(AcceptanceTester $I, Config $configModule)
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
@@ -35,13 +35,18 @@ final class ScriptSnippetAdjustementCest extends BaseCest
         $basketSteps = new BasketSteps($I);
         $basketSteps->addProductToBasketAndOpenBasket('dc5ffdf380e15674b56dd562a7cb6aec', 1);
 
-        $I->canSeeElementInDOM("//script[@data-oxid='3a1dcde97b93a66a76388c69f9c04741'][@data-usercentrics='testcustomservice'][@type='text/javascript']");
+        $value = $I->grabAttributeFrom("//script[@data-oxid][1]", "data-oxid");
+        $this->prepareSpecialConfiguration($configModule, $value);
+
+        $I->reloadPage();
+
+        $I->canSeeElementInDOM("//script[@data-oxid='{$value}'][@data-usercentrics='testcustomservice'][@type='text/javascript']");
     }
 
     /**
      * Prepare some test configuration before tests
      */
-    protected function prepareConfiguration(Config $configModule)
+    protected function prepareSpecialConfiguration(Config $configModule, string $value): void
     {
         $config = new Configuration(
             [ //services
@@ -49,7 +54,7 @@ final class ScriptSnippetAdjustementCest extends BaseCest
             ],
             [],
             [ //snippets
-                new ScriptSnippet('3a1dcde97b93a66a76388c69f9c04741', 'testcustomservice')
+                new ScriptSnippet($value, 'testcustomservice')
             ]
         );
         $configModule->putConfiguration($config);
