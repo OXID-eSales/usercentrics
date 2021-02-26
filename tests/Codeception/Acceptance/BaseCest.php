@@ -18,18 +18,22 @@ abstract class BaseCest
 
     public function _before(AcceptanceTester $I, Config $configModule): void
     {
+        $this->configBackup = $configModule->getConfiguration();
+        $this->prepareConfiguration($configModule);
+
         $I->saveShopConfVar('string', 'usercentricsId', '3j0TmWxNS', 1, 'module:oxps_usercentrics');
         $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV1', 1, 'module:oxps_usercentrics');
 
         $I->clearShopCache();
-        $this->configBackup = $configModule->getConfiguration();
-        $this->prepareConfiguration($configModule);
     }
 
     public function _after(AcceptanceTester $I, Config $configModule): void
     {
-        $I->saveShopConfVar('string', 'usercentricsId', '', 1, 'module:oxps_usercentrics');
         $configModule->putConfiguration($this->configBackup);
+
+        $I->saveShopConfVar('string', 'usercentricsId', '', 1, 'module:oxps_usercentrics');
+
+        $I->clearShopCache();
     }
 
     /**

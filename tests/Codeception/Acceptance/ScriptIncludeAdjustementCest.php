@@ -44,7 +44,7 @@ final class ScriptIncludeAdjustementCest extends BaseCest
                 new Service('testcustomservice', 'testcustomservice')
             ],
             [ //scripts
-                new Script('js/libs/jquery.min.js', 'testcustomservice')
+                new Script('.min.js', 'testcustomservice')
             ],
             []
         );
