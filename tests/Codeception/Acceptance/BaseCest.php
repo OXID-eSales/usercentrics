@@ -32,8 +32,6 @@ abstract class BaseCest
         $configModule->putConfiguration($this->configBackup);
 
         $I->saveShopConfVar('string', 'usercentricsId', '', 1, 'module:oxps_usercentrics');
-
-        $I->clearShopCache();
     }
 
     /**
