@@ -31,7 +31,7 @@ final class ScriptIncludeAdjustementCest extends BaseCest
         $I->waitForElement("//button[@id='uc-btn-accept-banner']", 10);
         $I->click("//button[@id='uc-btn-accept-banner']");
 
-        $I->canSeeElementInDOM("//script[@type='text/javascript'][@data-usercentrics='testcustomservice']");
+        $I->waitForElement("//script[@type='text/javascript'][@data-usercentrics='testcustomservice']");
     }
 
     /**

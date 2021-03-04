@@ -40,7 +40,7 @@ final class ScriptSnippetAdjustementCest extends BaseCest
 
         $I->reloadPage();
 
-        $I->canSeeElementInDOM("//script[@data-oxid='{$value}'][@data-usercentrics='testcustomservice'][@type='text/javascript']");
+        $I->waitForElement("//script[@data-oxid='{$value}'][@data-usercentrics='testcustomservice'][@type='text/javascript']");
     }
 
     /**
