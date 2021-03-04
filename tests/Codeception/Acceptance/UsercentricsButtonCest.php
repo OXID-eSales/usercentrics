@@ -23,7 +23,6 @@ final class UsercentricsButtonCest extends BaseCest
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
-        $I->waitForElement("#usercentrics-button", 1);
-        $I->seeElement("#usercentrics-button");
+        $I->waitForElement("#uc-privacy-button");
     }
 }
