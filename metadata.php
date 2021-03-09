@@ -20,7 +20,7 @@ $aModule = [
                      <input type="hidden" name="partnerid" value="16967">
                      <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Jetzt registrieren">
                      <p>
-                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können. Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/?partnerid=16967        
+                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können. Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/preise/?partnerid=16967#business-package
                      </p>
                  </form>
                  ',
@@ -31,12 +31,12 @@ $aModule = [
                      <input type="hidden" name="partnerid" value="16967">
                      <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Register Now">
                      <p>
-                         If another employee in your company registers, please make sure to enter the OXID partner ID 16967 in order to be able to fully use the integration. For that reason you can forward this link to them: https://usercentrics.com/?partnerid=16967
+                         If another employee in your company registers, please make sure to enter the OXID partner ID 16967 in order to be able to fully use the integration. For that reason you can forward this link to them: https://usercentrics.com/pricing/?partnerid=16967#business-package
                      </p>
                  </form>
                  '
     ],
-    'version' => '1.1.1',
+    'version' => '1.1.2',
     'author' => 'OXID Professional Services',
     'events' => [],
 
