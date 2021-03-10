@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.2] - unreleased
+## [1.1.2] - 2021-03-10
 
 ### Changed
 - Admin area: the link with the partnerid that is showed points directly to price and order form from usercentrics
@@ -42,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module provides a possibility to turn on "Smart data protection" function provided by UserCentrics.
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
+[1.1.2]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/OXID-eSales/usercentrics/commits/v1.0.0
