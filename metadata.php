@@ -20,7 +20,7 @@ $aModule = [
                      <input type="hidden" name="partnerid" value="16967">
                      <input style="background: #0A2; color: #fff; font-weight: bold;" type="submit" value="Jetzt registrieren">
                      <p>
-                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können. Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/preise/?partnerid=16967#business-package
+                         Sollte ein anderer Mitarbeiter in Ihrem Unternehmen die Registrierung durchführen, bitte dabei zwingend die OXID Partner-ID 16967 angeben, um die Integration vollständig nutzen zu können. Zu diesem Zweck können Sie diesen Link weitergeben: https://usercentrics.com/de/preise/?partnerid=16967#business-paket
                      </p>
                  </form>
                  ',
