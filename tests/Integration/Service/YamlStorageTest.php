@@ -52,7 +52,7 @@ class YamlStorageTest extends UnitTestCase
             'ConfigReadTest.yaml'
         );
 
-        $this->assertFileNotExists($path . DIRECTORY_SEPARATOR . $file);
+        $this->assertFileDoesNotExist($path . DIRECTORY_SEPARATOR . $file);
 
         $this->assertEquals([], $sut->getData());
     }

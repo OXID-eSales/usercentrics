@@ -4,11 +4,11 @@ namespace OxidProfessionalServices\Usercentrics\Service\Integration;
 
 class IntegrationScriptBuilder implements IntegrationScriptBuilderInterface
 {
-    /** @var IntegrationVersionFactory */
+    /** @var IntegrationVersionFactoryInterface */
     private $integrationVersionFactory;
 
     public function __construct(
-        IntegrationVersionFactory $integrationVersionFactory
+        IntegrationVersionFactoryInterface $integrationVersionFactory
     ) {
         $this->integrationVersionFactory = $integrationVersionFactory;
     }
