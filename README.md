@@ -29,6 +29,13 @@ $ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 
 Activate the module and enter your usercentrics ID in the module settings.
 
+## Compatibility
+
+Currently there are 2 main branches for *Usercentrics module*:
+
+* Branch ``b-6.x`` contains *Usercentrics* module for OXID eShop version 6.2.x and up
+* Branch ``master`` contain *Usercentrics* for OXID eShop master branch latest commits
+
 ## Developer installation
 
 ```bash
