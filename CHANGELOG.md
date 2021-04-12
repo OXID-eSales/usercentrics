@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix tests to work with shop compilation master
 
+## [1.1.3] - 2021-04-12
+
+### Fixed
+- Fixed tests for never phpunit versions
+
 ## [1.1.2] - 2021-03-10
 
 ### Changed
@@ -48,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
 [2.0.0]: https://github.com/OXID-eSales/usercentrics/compare/b-6.x...master
+[1.1.3]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.0.0...v1.1.0
