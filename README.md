@@ -72,6 +72,10 @@ $ SELENIUM_SERVER_IP=localhost ./vendor/bin/runtests-codeception
 You like to contribute? 🙌 AWESOME 🙌\
 Go and check the [contribution guidelines](CONTRIBUTING.md)
 
+## Issues
+
+To report issues with the module, please use the [OXID eShop bugtracking system](https://bugs.oxid-esales.com/) - module Usercentrics project.
+
 ## License
 
 GPLv3, see [LICENSE file](LICENSE).
