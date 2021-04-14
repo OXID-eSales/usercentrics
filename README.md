@@ -71,6 +71,10 @@ $ SELENIUM_SERVER_IP=selenium BROWSER_NAME=chrome ./vendor/bin/runtests-codecept
 You like to contribute? 🙌 AWESOME 🙌\
 Go and check the [contribution guidelines](CONTRIBUTING.md)
 
+## Issues
+
+To report issues with the module, please use the [OXID eShop bugtracking system](https://bugs.oxid-esales.com/) - module Usercentrics project.
+
 ## License
 
 GPLv3, see [LICENSE file](LICENSE).
