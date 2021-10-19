@@ -22,7 +22,7 @@ abstract class BaseCest
         $this->prepareConfiguration($configModule);
 
         $I->saveShopConfVar('string', 'usercentricsId', '3j0TmWxNS', 1, 'module:oxps_usercentrics');
-        $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV1', 1, 'module:oxps_usercentrics');
+        $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV2', 1, 'module:oxps_usercentrics');
 
         $I->clearShopCache();
     }
@@ -39,5 +39,16 @@ abstract class BaseCest
      */
     protected function prepareConfiguration(Config $configModule)
     {
+    }
+
+    protected function waitForUserCentrics($I, $accept = false)
+    {
+        $I->waitForElement("#usercentrics-root", 10);
+        $I->waitForJS("return document.querySelector('#usercentrics-root').shadowRoot !== null");
+        $I->waitForJS("return document.querySelector('#usercentrics-root').shadowRoot.querySelector('button[aria-label=\"Accept All\"]') !== null");
+
+        if ($accept) {
+            $I->executeJS("return document.querySelector('#usercentrics-root').shadowRoot.querySelector('button[aria-label=\"Accept All\"]').click()");
+        }
     }
 }

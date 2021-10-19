@@ -22,16 +22,30 @@ final class ScriptIncludeAdjustementCest extends BaseCest
      * @param AcceptanceTester $I
      * @group includeScript
      */
-    public function scriptIncludeDecorated(AcceptanceTester $I)
+    public function scriptIncludeDecoratedNotAccepted(AcceptanceTester $I)
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
 
-        // Accept cookie policy
-        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 10);
-        $I->click("//button[@id='uc-btn-accept-banner']");
+        $I->seeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
+        $this->waitForUserCentrics($I, false);
 
-        $I->waitForElement("//script[@type='text/javascript'][@data-usercentrics='testcustomservice']");
+        $I->seeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
+    }
+
+    /**
+     * @param AcceptanceTester $I
+     * @group includeScript
+     */
+    public function scriptIncludeDecoratedAccepted(AcceptanceTester $I)
+    {
+        $homePage = new Home($I);
+        $I->amOnPage($homePage->URL);
+
+        $I->seeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
+        $this->waitForUserCentrics($I, true);
+
+        $I->dontSeeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
     }
 
     /**

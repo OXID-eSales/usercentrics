@@ -19,10 +19,11 @@ final class UsercentricsButtonCest extends BaseCest
      * @throws \Exception
      * @group frontendInteraction
      */
-    public function frontPageWorks(AcceptanceTester $I)
+    public function frontPageWorksAndShowsUserCentricsWallOrBanner(AcceptanceTester $I)
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
-        $I->waitForElement("#uc-privacy-button");
+
+        $this->waitForUserCentrics($I);
     }
 }
