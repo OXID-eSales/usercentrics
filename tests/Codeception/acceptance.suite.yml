@@ -7,8 +7,8 @@ modules:
     - Asserts
     - WebDriver:
         url: '%SHOP_URL%'
-        host: '%SELENIUM_SERVER_IP%'
-        browser: firefox
+        host: '%SELENIUM_SERVER_HOST%'
+        browser: chrome
         port: '%SELENIUM_SERVER_PORT%'
         window_size: 1920x1080
         clear_cookies: true

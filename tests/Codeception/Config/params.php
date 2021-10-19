@@ -16,7 +16,7 @@ $facts = new Facts();
 $seleniumServerPortEnv = getenv('SELENIUM_SERVER_PORT');
 $seleniumServerPortEnv = ($seleniumServerPortEnv) ? : '4444';
 
-$seleniumServerIpEnv = getenv('SELENIUM_SERVER_IP');
+$seleniumServerIpEnv = getenv('SELENIUM_SERVER_HOST');
 $seleniumServerIpEnv = ($seleniumServerIpEnv) ? : 'selenium';
 
 $phpBinEnv = (getenv('PHPBIN')) ? : 'php';
@@ -36,7 +36,7 @@ return [
     'DUMP_PATH' => getTestDataDumpFilePath(),
     'MYSQL_CONFIG_PATH' => getMysqlConfigPath(),
     'SELENIUM_SERVER_PORT' => $seleniumServerPortEnv,
-    'SELENIUM_SERVER_IP' => $seleniumServerIpEnv,
+    'SELENIUM_SERVER_HOST' => $seleniumServerIpEnv,
     'PHP_BIN' => $phpBinEnv,
     'SCREEN_SHOT_URL' => $screenShotPathEnv
 ];
