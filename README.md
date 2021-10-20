@@ -57,7 +57,7 @@ Then tests can be run like this:
 
 ```bash
 $ ./vendor/bin/runtests
-$ SELENIUM_SERVER_IP=localhost ./vendor/bin/runtests-codeception
+$ SELENIUM_SERVER_IP=selenium BROWSER_NAME=chrome ./vendor/bin/runtests-codeception
 ```
 
 ## Contributing
