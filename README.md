@@ -29,6 +29,12 @@ $ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 
 Activate the module and enter your usercentrics ID in the module settings.
 
+## Branch Compatibility
+
+* master branch for master shop compilation branches
+* b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
+* b-6.2.x branch for b-6.2.x shop compilation branches
+
 ## Developer installation
 
 ```bash
