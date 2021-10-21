@@ -38,4 +38,10 @@ class ViewConfig extends ViewConfig_parent
         $service = $this->getContainer()->get(IntegrationScriptInterface::class);
         return $service->getIntegrationScript();
     }
+
+    public function isDevelopmentAutomaticConsentActive(): bool
+    {
+        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
+        return $moduleSettings->getSettingValue('developmentAutomaticConsent', false);
+    }
 }

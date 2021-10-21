@@ -23,6 +23,7 @@ abstract class BaseCest
 
         $I->saveShopConfVar('string', 'usercentricsId', '3j0TmWxNS', 1, 'module:oxps_usercentrics');
         $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV2', 1, 'module:oxps_usercentrics');
+        $I->saveShopConfVar('bool', 'developmentAutomaticConsent', false, 1, 'module:oxps_usercentrics');
 
         $I->clearShopCache();
     }
