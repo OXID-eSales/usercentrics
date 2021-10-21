@@ -44,11 +44,10 @@ abstract class BaseCest
     protected function waitForUserCentrics($I, $accept = false)
     {
         $I->waitForElement("#usercentrics-root", 10);
-        $I->waitForJS("return document.querySelector('#usercentrics-root').shadowRoot !== null");
-        $I->waitForJS("return document.querySelector('#usercentrics-root').shadowRoot.querySelector('button[aria-label=\"Accept All\"]') !== null");
+        $I->waitForJS("return typeof UC_UI !== 'undefined' && UC_UI !== null && UC_UI.isInitialized()");
 
         if ($accept) {
-            $I->executeJS("return document.querySelector('#usercentrics-root').shadowRoot.querySelector('button[aria-label=\"Accept All\"]').click()");
+            $I->executeJS("UC_UI.acceptAllConsents() && UC_UI.restartCMP()");
         }
     }
 }
