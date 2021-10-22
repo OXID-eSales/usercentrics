@@ -20,7 +20,7 @@ final class ScriptIncludeAdjustementCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I
-     * @group includeScript
+     * @group usercentrics
      */
     public function scriptIncludeDecoratedNotAccepted(AcceptanceTester $I)
     {
@@ -35,7 +35,7 @@ final class ScriptIncludeAdjustementCest extends BaseCest
 
     /**
      * @param AcceptanceTester $I
-     * @group includeScript
+     * @group usercentrics
      */
     public function scriptIncludeDecoratedAccepted(AcceptanceTester $I)
     {

@@ -17,7 +17,7 @@ final class UsercentricsButtonCest extends BaseCest
     /**
      * @param AcceptanceTester $I
      * @throws \Exception
-     * @group frontendInteraction
+     * @group usercentrics
      */
     public function frontPageWorksAndShowsUserCentricsWallOrBanner(AcceptanceTester $I)
     {
