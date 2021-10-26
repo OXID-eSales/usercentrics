@@ -81,6 +81,12 @@ $aModule = [
                 Pattern\CmpV2TcfLegacy::VERSION_NAME . '|' .
                 Pattern\Custom::VERSION_NAME
         ],
+        [
+            'group' => '',
+            'name'  => 'developmentAutomaticConsent',
+            'type'  => 'bool',
+            'value' => false
+        ],
     ],
 
     'controllers' => [],

@@ -21,26 +21,26 @@ final class ScriptSnippetAdjustementCest extends BaseCest
 {
     /**
      * @param AcceptanceTester $I
-     * @group includeSnippet
+     * @group usercentrics
      */
     public function scriptIncludeDecorated(AcceptanceTester $I, Config $configModule)
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
 
-        // Accept cookie policy
-        $I->waitForElement("//button[@id='uc-btn-accept-banner']", 10);
-        $I->click("//button[@id='uc-btn-accept-banner']");
-
         $basketSteps = new BasketSteps($I);
         $basketSteps->addProductToBasketAndOpenBasket('dc5ffdf380e15674b56dd562a7cb6aec', 1);
 
         $value = $I->grabAttributeFrom("//script[@data-oxid][1]", "data-oxid");
         $this->prepareSpecialConfiguration($configModule, $value);
-
         $I->reloadPage();
 
-        $I->waitForElement("//script[@data-oxid='{$value}'][@data-usercentrics='testcustomservice'][@type='text/javascript']");
+        $I->waitForElement("//script[@data-oxid='{$value}'][@data-usercentrics='testcustomservice'][@type='text/plain']");
+
+        // Accept cookie policy
+        $this->waitForUserCentrics($I, true);
+
+        $I->waitForElement("//script[@data-oxid='{$value}'][@type='text/javascript']");
     }
 
     /**

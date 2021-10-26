@@ -29,12 +29,11 @@ $ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 
 Activate the module and enter your usercentrics ID in the module settings.
 
-## Compatibility
+## Branch Compatibility
 
-Currently there are 2 main branches for *Usercentrics module*:
-
-* Branch ``b-6.x`` contains *Usercentrics* module for OXID eShop version 6.2.x and up
-* Branch ``master`` contain *Usercentrics* for OXID eShop master branch latest commits
+* master branch for master shop compilation branches
+* b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
+* b-6.2.x branch for b-6.2.x shop compilation branches
 
 ## Developer installation
 
@@ -64,7 +63,7 @@ Then tests can be run like this:
 
 ```bash
 $ ./vendor/bin/runtests
-$ SELENIUM_SERVER_IP=localhost ./vendor/bin/runtests-codeception
+$ SELENIUM_SERVER_IP=selenium BROWSER_NAME=chrome ./vendor/bin/runtests-codeception
 ```
 
 ## Contributing

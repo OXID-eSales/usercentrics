@@ -3,3 +3,17 @@
 <meta data-privacy-proxy-server="https://privacy-proxy-server.usercentrics.eu">
 <script type="application/javascript" src="https://privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js"></script>
 [{/if}]
+
+[{if $oViewConf->isDevelopmentAutomaticConsentActive()}]
+    <script type="application/javascript">
+        console.log('Warning! Development section. Not intended to be used in Live environment!');
+        function consentsCheck() {
+            if (typeof UC_UI !== 'undefined' && UC_UI.isInitialized()) {
+                UC_UI.acceptAllConsents();
+                UC_UI.restartCMP();
+                clearInterval(consentsCheckInterval);
+            }
+        }
+        var consentsCheckInterval = setInterval(consentsCheck, 500);
+    </script>
+[{/if}]

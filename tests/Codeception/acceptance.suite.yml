@@ -8,7 +8,7 @@ modules:
     - WebDriver:
         url: '%SHOP_URL%'
         host: '%SELENIUM_SERVER_IP%'
-        browser: firefox
+        browser: '%BROWSER_NAME%'
         port: '%SELENIUM_SERVER_PORT%'
         window_size: 1920x1080
         clear_cookies: true

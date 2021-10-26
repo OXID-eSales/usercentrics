@@ -22,7 +22,8 @@ abstract class BaseCest
         $this->prepareConfiguration($configModule);
 
         $I->saveShopConfVar('string', 'usercentricsId', '3j0TmWxNS', 1, 'module:oxps_usercentrics');
-        $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV1', 1, 'module:oxps_usercentrics');
+        $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV2', 1, 'module:oxps_usercentrics');
+        $I->saveShopConfVar('bool', 'developmentAutomaticConsent', false, 1, 'module:oxps_usercentrics');
 
         $I->clearShopCache();
     }
@@ -39,5 +40,15 @@ abstract class BaseCest
      */
     protected function prepareConfiguration(Config $configModule)
     {
+    }
+
+    protected function waitForUserCentrics($I, $accept = false)
+    {
+        $I->waitForElement("#usercentrics-root", 10);
+        $I->waitForJS("return typeof UC_UI !== 'undefined' && UC_UI !== null && UC_UI.isInitialized()");
+
+        if ($accept) {
+            $I->executeJS("UC_UI.acceptAllConsents() && UC_UI.restartCMP()");
+        }
     }
 }
