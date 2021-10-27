@@ -44,7 +44,7 @@ final class UsercentricsDeactivateBlockingCest extends BaseCest
     /**
      * @param AcceptanceTester $I
      * @throws \Exception
-     * @group sieg
+     * @group usercentrics
      */
     public function protectorBlockingDeactivationConfigurationPresent(AcceptanceTester $I)
     {
