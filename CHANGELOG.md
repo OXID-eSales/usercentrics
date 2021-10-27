@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.2.0] - Unreleased
 
 ### Added
+- Add deactivateBlocking configuration feature
 - Development related hidden parameter developmentAutomaticConsent
 
 ### Fixed

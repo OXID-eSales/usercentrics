@@ -70,6 +70,12 @@ $aModule = [
         ],
         [
             'group' => 'usercentrics_advanced',
+            'name' => 'smartDataProtectorDeactivateBlocking',
+            'type' => 'str',
+            'value' => ''
+        ],
+        [
+            'group' => 'usercentrics_advanced',
             'name' => 'usercentricsMode',
             'type' => 'select',
             'value' => Pattern\CmpV2::VERSION_NAME,
