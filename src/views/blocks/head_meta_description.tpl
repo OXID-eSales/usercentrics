@@ -11,6 +11,7 @@
             if (typeof UC_UI !== 'undefined' && UC_UI.isInitialized()) {
                 UC_UI.acceptAllConsents();
                 UC_UI.restartCMP();
+                document.body.style.overflow='scroll';
                 clearInterval(consentsCheckInterval);
             }
         }
