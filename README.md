@@ -2,7 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/oxid-professional-services/usercentrics.svg)](https://packagist.org/packages/oxid-professional-services/usercentrics)
 
-This module provides the [Usercentrics](https://usercentrics.com/) functionality for the [OXID eShop](https://www.oxid-esales.com/) allowing you to use their Consent Management Platform.
+This module provides the [Usercentrics](https://usercentrics.com/de/preise/?partnerid=16967#business-paket) functionality for the [OXID eShop](https://www.oxid-esales.com/) allowing you to use their Consent Management Platform.
 
 ## Usage
 
