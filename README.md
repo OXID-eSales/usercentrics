@@ -29,6 +29,8 @@ $ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 
 Activate the module and enter your usercentrics ID in the module settings.
 
+User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/latest/)
+
 ## Branch Compatibility
 
 * master branch for master shop compilation branches
