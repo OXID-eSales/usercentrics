@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix tests to work with shop compilation master
 
+## [1.2.1] - 2022-06-01
+
+### Fixed
+- `OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder` constructor's type-hint
+
 ## [1.2.0] - 2021-11-03
 
 ### Added
@@ -64,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
 [2.0.0]: https://github.com/OXID-eSales/usercentrics/compare/b-6.5.x...master
+[1.2.1]: https://github.com/OXID-eSales/usercentrics/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.1...v1.1.2
