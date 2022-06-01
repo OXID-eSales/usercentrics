@@ -34,6 +34,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 ## Branch Compatibility
 
 * master branch for master shop compilation branches
+* b-6.5.x branch for b-6.5.x shop compilation branches
 * b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
 * b-6.2.x branch for b-6.2.x shop compilation branches
 
