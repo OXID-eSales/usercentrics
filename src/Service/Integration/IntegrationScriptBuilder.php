@@ -8,7 +8,7 @@ class IntegrationScriptBuilder implements IntegrationScriptBuilderInterface
     private $integrationVersionFactory;
 
     public function __construct(
-        IntegrationVersionFactory $integrationVersionFactory
+        IntegrationVersionFactoryInterface $integrationVersionFactory
     ) {
         $this->integrationVersionFactory = $integrationVersionFactory;
     }
