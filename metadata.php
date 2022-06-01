@@ -36,7 +36,7 @@ $aModule = [
                  </form>
                  '
     ],
-    'version' => '1.1.3',
+    'version' => '1.2.0',
     'author' => 'OXID Professional Services',
     'events' => [],
 
@@ -67,6 +67,12 @@ $aModule = [
             'name'  => 'smartDataProtectorActive',
             'type'  => 'bool',
             'value' => true
+        ],
+        [
+            'group' => 'usercentrics_advanced',
+            'name' => 'smartDataProtectorDeactivateBlocking',
+            'type' => 'str',
+            'value' => ''
         ],
         [
             'group' => 'usercentrics_advanced',

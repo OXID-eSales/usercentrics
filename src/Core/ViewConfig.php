@@ -44,4 +44,14 @@ class ViewConfig extends ViewConfig_parent
         $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
         return $moduleSettings->getSettingValue('developmentAutomaticConsent', false);
     }
+
+    public function getSmartDataProtectorDeactivateBlockingServices(): array
+    {
+        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
+        $value = $moduleSettings->getSettingValue('smartDataProtectorDeactivateBlocking', '');
+
+        return array_map(function ($value) {
+            return trim($value);
+        }, explode(",", $value));
+    }
 }

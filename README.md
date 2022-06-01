@@ -2,7 +2,7 @@
 
 [![Packagist](https://img.shields.io/packagist/v/oxid-professional-services/usercentrics.svg)](https://packagist.org/packages/oxid-professional-services/usercentrics)
 
-This module provides the [Usercentrics](https://usercentrics.com/) functionality for the [OXID eShop](https://www.oxid-esales.com/) allowing you to use their Consent Management Platform.
+This module provides the [Usercentrics](https://usercentrics.com/de/preise/?partnerid=16967#business-paket) functionality for the [OXID eShop](https://www.oxid-esales.com/) allowing you to use their Consent Management Platform.
 
 ## Usage
 
@@ -29,9 +29,12 @@ $ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 
 Activate the module and enter your usercentrics ID in the module settings.
 
+User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/latest/)
+
 ## Branch Compatibility
 
 * master branch for master shop compilation branches
+* b-6.5.x branch for b-6.5.x shop compilation branches
 * b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
 * b-6.2.x branch for b-6.2.x shop compilation branches
 
