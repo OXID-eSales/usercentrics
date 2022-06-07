@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fix tests to work with shop compilation master
 
-## [1.2.1] - 2022-06-01
+## [1.2.1] - 2022-06-07
 
 ### Fixed
 - `OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder` constructor's type-hint
