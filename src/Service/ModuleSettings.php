@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace OxidProfessionalServices\Usercentrics\Service;
 
 use OxidEsales\EshopCommunity\Internal\Framework\Dao\EntryDoesNotExistDaoException;
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Setting\SettingDaoInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Config\Dao\ShopConfigurationSettingDaoInterface;
 use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
 
 final class ModuleSettings implements ModuleSettingsInterface
@@ -18,7 +18,7 @@ final class ModuleSettings implements ModuleSettingsInterface
     /** @var string */
     private $moduleId;
 
-    /** @var SettingDaoInterface */
+    /** @var ShopConfigurationSettingDaoInterface */
     private $settingsDao;
 
     /** @var ContextInterface */
@@ -26,7 +26,7 @@ final class ModuleSettings implements ModuleSettingsInterface
 
     public function __construct(
         string $moduleId,
-        SettingDaoInterface $settingsDao,
+        ShopConfigurationSettingDaoInterface $settingsDao,
         ContextInterface $context
     ) {
         $this->moduleId = $moduleId;
