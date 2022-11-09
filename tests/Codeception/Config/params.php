@@ -8,9 +8,10 @@ declare(strict_types=1);
  * See LICENSE file for license details.
  */
 
+use OxidEsales\Codeception\Module\Database\DatabaseDefaultsFileGenerator;
 use OxidEsales\Facts\Facts;
-use OxidEsales\Eshop\Core\ConfigFile;
-use OxidEsales\TestingLibrary\Services\Library\DatabaseDefaultsFileGenerator;
+use OxidEsales\Facts\Config\ConfigFile;
+use Symfony\Component\Filesystem\Path;
 
 $facts = new Facts();
 
@@ -65,11 +66,11 @@ function getShopTestPath()
     return $shopTestPath;
 }
 
-function getMysqlConfigPath()
+function getMysqlConfigPath(): string
 {
     $facts = new Facts();
-    $configFile = new ConfigFile($facts->getSourcePath() . '/config.inc.php');
-
+    $configFilePath = Path::join($facts->getSourcePath(), 'config.inc.php');
+    $configFile = new ConfigFile($configFilePath);
     $generator = new DatabaseDefaultsFileGenerator($configFile);
 
     return $generator->generate();
