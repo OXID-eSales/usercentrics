@@ -51,7 +51,7 @@ class ViewConfig extends ViewConfig_parent
     public function getSmartDataProtectorDeactivateBlockingServices(): array
     {
         $moduleSettings = $this->getServiceFromContainer(ModuleSettingsInterface::class);
-        $value = $moduleSettings->isSmartProtectorBlockingDisabled();
+        $value = $moduleSettings->getSmartProtectorBlockingDisabledList();
 
         return array_map(function ($value) {
             return trim($value);

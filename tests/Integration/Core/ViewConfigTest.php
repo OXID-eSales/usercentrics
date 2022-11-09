@@ -7,10 +7,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Core;
 
-use DOMDocument;
 use OxidEsales\Eshop\Core\Registry;
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
-use OxidEsales\EshopCommunity\Tests\ContainerTrait;
 use OxidProfessionalServices\Usercentrics\Core\Module;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
