@@ -74,15 +74,6 @@ jobs:
           docker-compose exec -T \
             php composer require ${{ env.PACKAGE_NAME }}:* --no-interaction --no-update
 
-      - name: Configure shop smarty components to be installed
-        run: |
-          docker-compose exec -T php composer config repositories.oxid-esales/flow-theme git https://github.com/OXID-eSales/flow_theme.git
-          docker-compose exec -T php composer config repositories.oxid-esales/smarty-admin-theme git https://github.com/OXID-eSales/smarty-admin-theme.git
-          docker-compose exec -T php composer config repositories.oxid-esales/smarty-component git https://github.com/OXID-eSales/smarty-component.git
-          docker-compose exec -T php composer require oxid-esales/flow-theme:dev-master --no-update
-          docker-compose exec -T php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-update
-          docker-compose exec -T php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-update
-
       - name: Install all configured dependencies and reset shop
         run: |
           docker-compose exec -T php composer update --no-interaction
@@ -144,3 +135,58 @@ jobs:
           path: |
             source/coverage.xml
             source/junit-log.xml
+
+  codeception_smarty:
+    strategy:
+      matrix:
+        php:
+          - '8.0'
+        group:
+          - 'usercentrics'
+    needs: [ install_shop_with_module ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load current installation from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+          key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+          restore-keys: |
+            development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+
+      - name: Start containers
+        run: |
+          make up
+          sleep 2
+
+      - name: Install smarty components
+        run: |
+          docker-compose exec -T php composer require oxid-esales/flow-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer update --no-interaction
+
+      - name: Run tests
+        run: |
+          docker-compose exec -T \
+            -e SELENIUM_SERVER_HOST=selenium \
+            -e MODULE_IDS=oxps_usercentrics \
+            php php vendor/bin/codecept run acceptance \
+              --bootstrap=/var/www/source/bootstrap.php \
+              -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
+              -g ${{ matrix.group }}
+
+      - name: Stop containers
+        if: always()
+        run: |
+          make down
+          sleep 2
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Output-${{ matrix.php }}-flow
+          path: |
+            ./source/test-module/tests/Codeception/_output/*

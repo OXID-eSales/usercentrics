@@ -17,13 +17,13 @@ use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
  */
 class Config extends \Codeception\Module implements DependsOnModule
 {
-    protected $requiredFields = ['shop_path', 'config_file'];
-    protected $config = [
+    protected array $requiredFields = ['shop_path', 'config_file'];
+    protected array $config = [
         'shop_path' => '',
         'config_file' => ''
     ];
 
-    public function _depends()
+    public function _depends(): array
     {
         return [];
     }
