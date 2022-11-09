@@ -46,12 +46,12 @@ $aModule = [
         [
             'template' => 'layout/base.tpl',
             'block' => 'base_js',
-            'file' => 'src/views/blocks/base_js.tpl'
+            'file' => 'views/blocks/base_js.tpl'
         ],
         [
             'template' => 'layout/base.tpl',
             'block' => 'head_meta_description',
-            'file' => 'src/views/blocks/head_meta_description.tpl'
+            'file' => 'views/blocks/head_meta_description.tpl'
         ],
     ],
 
