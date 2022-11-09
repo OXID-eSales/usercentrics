@@ -9,29 +9,31 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Core;
 
 use DOMDocument;
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
+use OxidEsales\EshopCommunity\Tests\ContainerTrait;
+use OxidProfessionalServices\Usercentrics\Core\Module;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
+use OxidProfessionalServices\Usercentrics\Service\ModuleSettings;
+use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
 
 /**
  * Class ViewConfigTest
  * @covers \OxidProfessionalServices\Usercentrics\Core\ViewConfig
  */
-class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
+class ViewConfigTest extends UnitTestCase
 {
+    use ServiceContainer;
+
     /**
      * @dataProvider booleanProvider
      */
     public function testSmartDataProtectorActive(bool $setting): void
     {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->saveShopConfVar(
-            'bool',
-            'smartDataProtectorActive',
-            $setting,
-            1,
-            'module:oxps_usercentrics'
-        );
+        $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+        $settingsService->saveBoolean(ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED, $setting, Module::MODULE_ID);
 
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
@@ -45,23 +47,9 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
      */
     public function testOutputPerMode(string $mode, string $expected): void
     {
-        $config = Registry::getConfig();
-
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->saveShopConfVar(
-            'string',
-            'usercentricsMode',
-            $mode,
-            1,
-            'module:oxps_usercentrics'
-        );
-        $config->saveShopConfVar(
-            'string',
-            'usercentricsId',
-            'ABC123',
-            1,
-            'module:oxps_usercentrics'
-        );
+        $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+        $settingsService->saveString(ModuleSettings::USERCENTRICS_MODE, $mode, Module::MODULE_ID);
+        $settingsService->saveString(ModuleSettings::USERCENTRICS_ID, 'ABC123', Module::MODULE_ID);
 
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
@@ -124,15 +112,8 @@ class ViewConfigTest extends \OxidEsales\TestingLibrary\UnitTestCase
 
     public function testNoUsercentricsScriptInCustomMode(): void
     {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->saveShopConfVar(
-            'string',
-            'usercentricsMode',
-            Pattern\Custom::VERSION_NAME,
-            1,
-            'module:oxps_usercentrics'
-        );
+        $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+        $settingsService->saveString(ModuleSettings::USERCENTRICS_MODE, Pattern\Custom::VERSION_NAME, Module::MODULE_ID);
 
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);

@@ -9,44 +9,64 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Service;
 
-use OxidEsales\EshopCommunity\Internal\Framework\Dao\EntryDoesNotExistDaoException;
-use OxidEsales\EshopCommunity\Internal\Framework\Config\Dao\ShopConfigurationSettingDaoInterface;
-use OxidEsales\EshopCommunity\Internal\Transition\Utility\ContextInterface;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use OxidProfessionalServices\Usercentrics\Core\Module;
 
 final class ModuleSettings implements ModuleSettingsInterface
 {
-    /** @var string */
-    private $moduleId;
+    public const USERCENTRICS_ID = 'usercentricsId';
+    public const USERCENTRICS_MODE = 'usercentricsMode';
 
-    /** @var ShopConfigurationSettingDaoInterface */
-    private $settingsDao;
+    public const USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED = 'smartDataProtectorActive';
+    public const USERCENTRICS_SMART_DATA_PROTECTOR_BLOCKING_DISABLED = 'smartDataProtectorDeactivateBlocking';
 
-    /** @var ContextInterface */
-    private $context;
+    public const USERCENTRICS_DEVELOPMENT_AUTO_CONSENT = 'developmentAutomaticConsent';
+
+    /** @var ModuleSettingServiceInterface */
+    private $moduleSettingService;
 
     public function __construct(
-        string $moduleId,
-        ShopConfigurationSettingDaoInterface $settingsDao,
-        ContextInterface $context
+        ModuleSettingServiceInterface $moduleSettingService
     ) {
-        $this->moduleId = $moduleId;
-        $this->settingsDao = $settingsDao;
-        $this->context = $context;
+        $this->moduleSettingService = $moduleSettingService;
     }
 
-    public function getSettingValue(string $settingName, $defaultValue = null)
+    public function getUsercentricsId(): string
     {
-        try {
-            $setting = $this->settingsDao->get(
-                $settingName,
-                $this->moduleId,
-                $this->context->getCurrentShopId()
-            );
-            $result = $setting->getValue();
-        } catch (EntryDoesNotExistDaoException $e) {
-            $result = $defaultValue;
-        }
+        return $this->getStringSettingValue(self::USERCENTRICS_ID);
+    }
 
-        return $result;
+    public function getUsercentricsMode(): string
+    {
+        return $this->getStringSettingValue(self::USERCENTRICS_MODE);
+    }
+
+    public function isSmartProtectorEnabled(): bool
+    {
+        return $this->moduleSettingService->getBoolean(
+            self::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED,
+            Module::MODULE_ID
+        );
+    }
+
+    public function getSmartProtectorBlockingDisabledList(): string
+    {
+        return $this->getStringSettingValue(self::USERCENTRICS_SMART_DATA_PROTECTOR_BLOCKING_DISABLED);
+    }
+
+    public function isDevelopmentAutoConsentEnabled(): bool
+    {
+        return $this->moduleSettingService->getBoolean(
+            self::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT,
+            Module::MODULE_ID
+        );
+    }
+
+    protected function getStringSettingValue($key): string
+    {
+        return $this->moduleSettingService->getString(
+            $key,
+            Module::MODULE_ID
+        )->trim()->toString();
     }
 }

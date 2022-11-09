@@ -7,11 +7,13 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
-use OxidEsales\Eshop\Core\Registry;
-use OxidEsales\EshopCommunity\Tests\Integration\Internal\ContainerTrait;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use OxidProfessionalServices\Usercentrics\Core\Module;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\CmpV1;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
+use OxidProfessionalServices\Usercentrics\Service\ModuleSettings;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
 
 /**
  * Class RendererTest
@@ -19,29 +21,15 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
  */
 class IntegrationScriptTest extends UnitTestCase
 {
-    use ContainerTrait;
+    use ServiceContainer;
 
     public function testWhiteListedScript(): void
     {
-        $config = Registry::getConfig();
-        /** @psalm-suppress InvalidScalarArgument fails because of wrong typehint in used oxid version */
-        $config->saveShopConfVar(
-            'string',
-            'usercentricsId',
-            'SomeId',
-            1,
-            'module:oxps_usercentrics'
-        );
-        $config->saveShopConfVar(
-            'string',
-            'usercentricsMode',
-            CmpV1::VERSION_NAME,
-            1,
-            'module:oxps_usercentrics'
-        );
+        $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+        $settingsService->saveString(ModuleSettings::USERCENTRICS_MODE, CmpV1::VERSION_NAME, Module::MODULE_ID);
+        $settingsService->saveString(ModuleSettings::USERCENTRICS_ID, 'SomeId', Module::MODULE_ID);
 
-        /** @var IntegrationScriptInterface $integrationScript */
-        $integrationScript = $this->get(IntegrationScriptInterface::class);
+        $integrationScript = $this->getServiceFromContainer(IntegrationScriptInterface::class);
         $script = $integrationScript->getIntegrationScript();
 
         $this->assertHtmlEquals(

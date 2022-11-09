@@ -9,13 +9,16 @@ namespace OxidProfessionalServices\Usercentrics\Core;
 
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
+use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
 
 class ViewConfig extends ViewConfig_parent
 {
+    use ServiceContainer;
+
     public function isSmartDataProtectorActive(): bool
     {
-        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
-        return $moduleSettings->getSettingValue('smartDataProtectorActive', true);
+        $moduleSettings = $this->getServiceFromContainer(ModuleSettingsInterface::class);
+        return $moduleSettings->isSmartProtectorEnabled();
     }
 
     /**
@@ -25,8 +28,8 @@ class ViewConfig extends ViewConfig_parent
      */
     public function getUsercentricsID(): string
     {
-        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
-        return $moduleSettings->getSettingValue('usercentricsId', '');
+        $moduleSettings = $this->getServiceFromContainer(ModuleSettingsInterface::class);
+        return $moduleSettings->getUsercentricsId();
     }
 
     public function getUsercentricsScript(): string
@@ -35,20 +38,20 @@ class ViewConfig extends ViewConfig_parent
          * @psalm-suppress InternalMethod
          * @var IntegrationScriptInterface $service
          */
-        $service = $this->getContainer()->get(IntegrationScriptInterface::class);
+        $service = $this->getServiceFromContainer(IntegrationScriptInterface::class);
         return $service->getIntegrationScript();
     }
 
     public function isDevelopmentAutomaticConsentActive(): bool
     {
-        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
-        return $moduleSettings->getSettingValue('developmentAutomaticConsent', false);
+        $moduleSettings = $this->getServiceFromContainer(ModuleSettingsInterface::class);
+        return $moduleSettings->isDevelopmentAutoConsentEnabled();
     }
 
     public function getSmartDataProtectorDeactivateBlockingServices(): array
     {
-        $moduleSettings = $this->getContainer()->get(ModuleSettingsInterface::class);
-        $value = $moduleSettings->getSettingValue('smartDataProtectorDeactivateBlocking', '');
+        $moduleSettings = $this->getServiceFromContainer(ModuleSettingsInterface::class);
+        $value = $moduleSettings->isSmartProtectorBlockingDisabled();
 
         return array_map(function ($value) {
             return trim($value);

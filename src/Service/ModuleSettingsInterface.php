@@ -4,10 +4,11 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 
 interface ModuleSettingsInterface
 {
-    /**
-     * @param string $settingName
-     * @param mixed|null $defaultValue
-     * @return mixed
-     */
-    public function getSettingValue(string $settingName, $defaultValue = null);
+    public function getUsercentricsId(): string;
+    public function getUsercentricsMode(): string;
+
+    public function getSmartProtectorBlockingDisabledList(): string;
+
+    public function isSmartProtectorEnabled(): bool;
+    public function isDevelopmentAutoConsentEnabled(): bool;
 }

@@ -22,8 +22,8 @@ class IntegrationScript
 
     public function getIntegrationScript(): string
     {
-        $id = $this->moduleSettings->getSettingValue('usercentricsId');
-        $mode = $this->moduleSettings->getSettingValue('usercentricsMode');
+        $id = $this->moduleSettings->getUsercentricsId();
+        $mode = $this->moduleSettings->getUsercentricsMode();
 
         $params = [
             '{USERCENTRICS_CLIENT_ID}' => $id
