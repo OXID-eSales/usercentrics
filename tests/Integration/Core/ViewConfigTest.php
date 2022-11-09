@@ -99,17 +99,6 @@ class ViewConfigTest extends UnitTestCase
         ];
     }
 
-    public function assertHtmlEquals(string $expected, string $actual): void
-    {
-        $eDom = new DOMDocument();
-        $eDom->loadHTML($expected, LIBXML_HTML_NOIMPLIED);
-
-        $aDom = new DOMDocument();
-        $aDom->loadHTML($actual, LIBXML_HTML_NOIMPLIED);
-
-        $this->assertXmlStringEqualsXmlString($eDom, $aDom);
-    }
-
     public function testNoUsercentricsScriptInCustomMode(): void
     {
         $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);

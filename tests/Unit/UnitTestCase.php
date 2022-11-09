@@ -40,10 +40,12 @@ class UnitTestCase extends TestCase
     {
         $eDom = new DOMDocument();
         $eDom->loadHTML($expected, LIBXML_HTML_NOIMPLIED);
+        $eXml = $eDom->saveXML($eDom->html);
 
         $aDom = new DOMDocument();
         $aDom->loadHTML($actual, LIBXML_HTML_NOIMPLIED);
+        $aXml = $aDom->saveXML($aDom->html);
 
-        $this->assertXmlStringEqualsXmlString($eDom, $aDom);
+        $this->assertXmlStringEqualsXmlString($eXml, $aXml);
     }
 }
