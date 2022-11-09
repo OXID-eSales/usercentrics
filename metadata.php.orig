@@ -46,12 +46,20 @@ $aModule = [
         [
             'template' => 'layout/base.tpl',
             'block' => 'base_js',
-            'file' => 'views/smarty/blocks/base_js.tpl'
+<<<<<<< HEAD
+            'file' => 'src/views/smarty/blocks/base_js.tpl'
+=======
+            'file' => 'views/blocks/base_js.tpl'
+>>>>>>> refs/remotes/origin/b-7.0.x
         ],
         [
             'template' => 'layout/base.tpl',
             'block' => 'head_meta_description',
-            'file' => 'views/smarty/blocks/head_meta_description.tpl'
+<<<<<<< HEAD
+            'file' => 'src/views/smarty/blocks/head_meta_description.tpl'
+=======
+            'file' => 'views/blocks/head_meta_description.tpl'
+>>>>>>> refs/remotes/origin/b-7.0.x
         ],
     ],
 
