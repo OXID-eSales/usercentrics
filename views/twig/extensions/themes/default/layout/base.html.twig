@@ -2,7 +2,7 @@
 
 {% block base_js %}
 
-{{ oViewConf.getUsercentricsScript() }}
+{{ oViewConf.getUsercentricsScript()|raw }}
 {{ parent() }}
 
 {% endblock %}
