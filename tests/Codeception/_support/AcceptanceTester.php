@@ -2,6 +2,10 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception;
 
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
+use OxidProfessionalServices\Usercentrics\Core\Module;
+use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
+
 /**
  * Inherited Methods
  *
@@ -21,14 +25,21 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Codeception;
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
+    use ServiceContainer;
 
     /**
      * Define custom actions here
      */
 
-    public function saveShopConfVar($sVarType, $sVarName, $sVarVal, $sShopId = null, $sModule = '')
+    public function saveConfStringVar($sVarName, $sVarVal)
     {
-        $config = \OxidEsales\Eshop\Core\Registry::getConfig();
-        $config->saveShopConfVar($sVarType, $sVarName, $sVarVal, $sShopId, $sModule);
+        $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+        $moduleSettingsService->saveString($sVarName, $sVarVal, Module::MODULE_ID);
+    }
+
+    public function saveConfBoolVar($sVarName, $sVarVal)
+    {
+        $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+        $moduleSettingsService->saveBoolean($sVarName, $sVarVal, Module::MODULE_ID);
     }
 }

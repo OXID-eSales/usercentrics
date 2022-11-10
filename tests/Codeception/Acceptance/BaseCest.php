@@ -21,9 +21,9 @@ abstract class BaseCest
         $this->configBackup = $configModule->getConfiguration();
         $this->prepareConfiguration($configModule);
 
-        $I->saveShopConfVar('string', 'usercentricsId', '3j0TmWxNS', 1, 'module:oxps_usercentrics');
-        $I->saveShopConfVar('string', 'usercentricsMode', 'CmpV2', 1, 'module:oxps_usercentrics');
-        $I->saveShopConfVar('bool', 'developmentAutomaticConsent', false, 1, 'module:oxps_usercentrics');
+        $I->saveConfStringVar('usercentricsId', '3j0TmWxNS');
+        $I->saveConfStringVar('usercentricsMode', 'CmpV2');
+        $I->saveConfBoolVar('developmentAutomaticConsent', false);
 
         $I->clearShopCache();
     }
@@ -32,7 +32,7 @@ abstract class BaseCest
     {
         $configModule->putConfiguration($this->configBackup);
 
-        $I->saveShopConfVar('string', 'usercentricsId', '', 1, 'module:oxps_usercentrics');
+        $I->saveConfStringVar('usercentricsId', '');
     }
 
     /**

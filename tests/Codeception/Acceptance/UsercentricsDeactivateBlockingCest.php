@@ -19,26 +19,16 @@ final class UsercentricsDeactivateBlockingCest extends BaseCest
     {
         parent::_before($I, $configModule);
 
-        $I->saveShopConfVar(
-            'string',
-            'smartDataProtectorDeactivateBlocking',
-            'xxx , yyy',
-            1,
-            'module:oxps_usercentrics'
-        );
+        $I->saveConfBoolVar('smartDataProtectorActive', true);
+        $I->saveConfStringVar('smartDataProtectorDeactivateBlocking', 'xxx , yyy');
     }
 
     public function _after(AcceptanceTester $I, Config $configModule): void
     {
         parent::_after($I, $configModule);
 
-        $I->saveShopConfVar(
-            'string',
-            'smartDataProtectorDeactivateBlocking',
-            '',
-            1,
-            'module:oxps_usercentrics'
-        );
+        $I->saveConfBoolVar('smartDataProtectorActive', false);
+        $I->saveConfStringVar('smartDataProtectorDeactivateBlocking','');
     }
 
     /**
