@@ -185,7 +185,6 @@ jobs:
       - name: Stop containers
         if: always()
         run: |
-          make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
           make down
           sleep 2
 
@@ -235,6 +234,7 @@ jobs:
 
       - name: Start containers
         run: |
+          make file=services/selenium-chrome.yml addservice
           make up
           sleep 2
 
