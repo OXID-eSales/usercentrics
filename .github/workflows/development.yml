@@ -155,12 +155,6 @@ jobs:
           restore-keys: |
             development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
 
-      - name: Put module settings
-        continue-on-error: true
-        run: |
-          mkdir -p source/var/configuration/environment/shops/1/modules/
-          echo "${{ secrets.MODULE_SETTINGS }}" > source/var/configuration/environment/shops/1/modules/oxps_usercentrics.yaml
-
       - name: Start containers
         run: |
           make file=services/selenium-chrome.yml addservice
