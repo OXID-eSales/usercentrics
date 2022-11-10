@@ -79,12 +79,6 @@ jobs:
           docker-compose exec -T php composer update --no-interaction
           docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
 
-      - name: Put module settings
-        continue-on-error: true
-        run: |
-          mkdir -p source/var/configuration/environment/shops/1/modules/
-          echo "${{ secrets.MODULE_SETTINGS }}" > source/var/configuration/environment/shops/1/modules/oxps_usercentrics.yaml
-
       - name: Activate the module
         run: |
           docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
@@ -160,6 +154,12 @@ jobs:
           key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
           restore-keys: |
             development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+
+      - name: Put module settings
+        continue-on-error: true
+        run: |
+          mkdir -p source/var/configuration/environment/shops/1/modules/
+          echo "${{ secrets.MODULE_SETTINGS }}" > source/var/configuration/environment/shops/1/modules/oxps_usercentrics.yaml
 
       - name: Start containers
         run: |
