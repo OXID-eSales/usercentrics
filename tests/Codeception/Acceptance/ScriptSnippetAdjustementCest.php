@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
+use OxidEsales\Codeception\Page\Account\UserRegistration;
 use OxidEsales\Codeception\Page\Home;
 use OxidEsales\Codeception\Step\Basket as BasketSteps;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
@@ -25,11 +26,8 @@ final class ScriptSnippetAdjustementCest extends BaseCest
      */
     public function scriptIncludeDecorated(AcceptanceTester $I, Config $configModule)
     {
-        $homePage = new Home($I);
-        $I->amOnPage($homePage->URL);
-
-        $basketSteps = new BasketSteps($I);
-        $basketSteps->addProductToBasketAndOpenBasket('dc5ffdf380e15674b56dd562a7cb6aec', 1);
+        $userRegistrationPage = new UserRegistration($I);
+        $I->amOnPage($userRegistrationPage->URL);
 
         $value = $I->grabAttributeFrom("//script[@data-oxid][1]", "data-oxid");
         $this->prepareSpecialConfiguration($configModule, $value);
