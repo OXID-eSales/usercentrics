@@ -185,6 +185,7 @@ jobs:
       - name: Stop containers
         if: always()
         run: |
+          make file=recipes/oxid-esales/services/selenium-firefox-old.yml addservice
           make down
           sleep 2
 
@@ -274,7 +275,7 @@ jobs:
         run: |
           c=$(docker ps -q) && [[ $c ]] && docker kill $c
           docker system prune --force
-          
+
       - name: Upload test artifacts
         if: always()
         uses: actions/upload-artifact@v3
