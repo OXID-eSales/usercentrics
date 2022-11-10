@@ -79,10 +79,6 @@ jobs:
           docker-compose exec -T php composer update --no-interaction
           docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
 
-      - name: Activate the module
-        run: |
-          docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
-
       - name: Stop containers
         run: |
           docker-compose down
@@ -108,6 +104,10 @@ jobs:
         run: |
           make up
           sleep 2
+
+      - name: Activate the module
+        run: |
+          docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
 
       - name: Run tests
         run: |
@@ -167,6 +167,10 @@ jobs:
           docker-compose exec -T php composer require oxid-esales/smarty-component:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer update --no-interaction
+
+      - name: Activate the module
+        run: |
+          docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
 
       - name: Run tests
         run: |
