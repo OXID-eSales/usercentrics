@@ -195,3 +195,90 @@ jobs:
           name: Output-${{ matrix.php }}-flow
           path: |
             ./source/test-module/tests/Codeception/_output/*
+
+  codeception_twig:
+    strategy:
+      matrix:
+        php: [ '8.0' ]
+        group:
+          - 'usercentrics'
+    needs: [ install_shop_with_module ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cleanup workspace
+        run: |
+          ls -la ./
+          rm -rf ./* || true
+          rm -rf ./.??* || true
+          ls -la ./
+
+      - name: Cleanup Docker
+        run: |
+          c=$(docker ps -q) && [[ $c ]] && docker kill $c
+          docker system prune --force
+
+      - name: Load current installation from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./*
+          key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+          restore-keys: |
+            development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USER }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Start containers
+        run: |
+          make up
+          sleep 2
+
+      - name: Install twig components
+        run: |
+          docker-compose exec -T \
+            php composer require oxid-esales/twig-component:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T \
+            php composer require oxid-esales/twig-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T \
+            php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer update --no-interaction
+
+      - name: Configure codeception Theme switcher
+        run: |
+          perl -pi \
+          -e 's#theme_id:\s?flow#theme_id: twig#g;' \
+          source/test-module/tests/Codeception/acceptance.suite.yml
+
+      - name: Run tests
+        run: |
+          docker-compose exec -T \
+            -e SELENIUM_SERVER_HOST=selenium \
+            -e MODULE_IDS=oxps_usercentrics \
+            php php vendor/bin/codecept run acceptance \
+              --bootstrap=/var/www/source/bootstrap.php \
+              -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
+              -g ${{ matrix.group }}
+
+      - name: Stop containers
+        if: always()
+        run: |
+          make down
+          sleep 2
+
+      - name: Cleanup Docker
+        if: always()
+        run: |
+          c=$(docker ps -q) && [[ $c ]] && docker kill $c
+          docker system prune --force
+          
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Output-${{ matrix.php }}-twig
+          path: |
+            ./source/test-module/tests/Codeception/_output/
