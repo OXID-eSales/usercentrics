@@ -18,7 +18,7 @@
 
     {% set deactivateBlocking = oViewConf.getSmartDataProtectorDeactivateBlockingServices() %}
     {% if deactivateBlocking %}
-        <script>uc.deactivateBlocking(["{{ '", "'|join("deactivateBlocking") }}"]);</script>
+        <script>uc.deactivateBlocking(["{{ deactivateBlocking|join('\", \"')|raw }}"]);</script>
     {% endif %}
 {% endif %}
 
