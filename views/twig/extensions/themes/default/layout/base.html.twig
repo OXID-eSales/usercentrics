@@ -1,3 +1,15 @@
+{% extends "layout/base.html.twig" %}
+
+{% block base_js %}
+
+{{ oViewConf.getUsercentricsScript() }}
+{{ parent() }}
+
+{% endblock %}
+
+
+{% block head_meta_description %}
+
 {{ parent() }}
 
 {% if oViewConf.isSmartDataProtectorActive() %}
@@ -6,7 +18,7 @@
 
     {% set deactivateBlocking = oViewConf.getSmartDataProtectorDeactivateBlockingServices() %}
     {% if deactivateBlocking %}
-        <script>uc.deactivateBlocking(["{{ '", "'|implode("deactivateBlocking") }}"]);</script>
+        <script>uc.deactivateBlocking(["{{ '", "'|join("deactivateBlocking") }}"]);</script>
     {% endif %}
 {% endif %}
 
@@ -24,3 +36,5 @@
         var consentsCheckInterval = setInterval(consentsCheck, 500);
     </script>
 {% endif %}
+
+{% endblock %}
