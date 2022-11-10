@@ -157,6 +157,7 @@ jobs:
 
       - name: Start containers
         run: |
+          make file=services/selenium-chrome.yml addservice
           make up
           sleep 2
 
