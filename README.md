@@ -33,7 +33,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 
 ## Branch Compatibility
 
-* master branch for master shop compilation branches
+* b-7.0.x branch for b-7.0.x shop compilation branches
 * b-6.5.x branch for b-6.5.x shop compilation branches
 * b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
 * b-6.2.x branch for b-6.2.x shop compilation branches
@@ -41,33 +41,16 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 ## Developer installation
 
 ```bash
-$ git clone https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/usercentrics
+$ git clone --branch=b-7.0.x https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/usercentrics
 $ composer config repositories.oxid-professional-services/usercentrics path ./source/modules/oxps/usercentrics
 $ composer require oxid-professional-services/usercentrics:*
 
-$ vendor/bin/oe-console oe:module:install source/modules/oxps/usercentrics
+$ vendor/bin/oe-console oe:module:activate oxps_usercentrics
 ```
 
 ## Testing
 
-Modify the `test_config.yml` configuration:
-
-```
-    ...
-    partial_module_paths: oxps/usercentrics
-    ...
-    activate_all_modules: true
-    run_tests_for_shop: false
-    run_tests_for_modules: true
-    ...
-```
-
-Then tests can be run like this:
-
-```bash
-$ ./vendor/bin/runtests
-$ SELENIUM_SERVER_IP=selenium BROWSER_NAME=chrome ./vendor/bin/runtests-codeception
-```
+For instructions on running tests, please refer to current version github development workflow.
 
 ## Contributing
 
