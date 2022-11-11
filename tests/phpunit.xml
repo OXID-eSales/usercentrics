@@ -1,6 +1,7 @@
-<phpunit backupGlobals="true"
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         backupGlobals="true"
          backupStaticAttributes="false"
-         cacheTokens="true"
          colors="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -12,13 +13,11 @@
          stopOnIncomplete="false"
          stopOnSkipped="false"
          beStrictAboutTestsThatDoNotTestAnything="true"
-         verbose="false">
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true"
-                   processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../src/Core</directory>
-            <directory suffix=".php">../src/DataObject</directory>
-            <directory suffix=".php">../src/Service</directory>
-        </whitelist>
-    </filter>
+         verbose="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage includeUncoveredFiles="true" processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">../src</directory>
+        </include>
+    </coverage>
 </phpunit>
