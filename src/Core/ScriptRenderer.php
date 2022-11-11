@@ -9,26 +9,14 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Core;
 
-use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 use OxidProfessionalServices\Usercentrics\Service\RendererInterface;
-use Psr\Container\ContainerInterface;
+use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 class ScriptRenderer extends ScriptRenderer_parent
 {
-
-    protected function getContainer(): ContainerInterface
-    {
-        return ContainerFactory::getInstance()->getContainer();
-    }
-
-    protected function getRendererService(): RendererInterface
-    {
-        $container = $this->getContainer();
-        /** @var RendererInterface */
-        return $container->get(RendererInterface::class);
-    }
+    use ServiceContainer;
 
     /**
      * Enclose with script tag or add in function for wiget.
@@ -44,7 +32,7 @@ class ScriptRenderer extends ScriptRenderer_parent
     protected function enclose($scriptsOutput, $widget, $isAjaxRequest)
     {
         try {
-            $service = $this->getRendererService();
+            $service = $this->getServiceFromContainer(RendererInterface::class);
             $result = $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
         } catch (WidgetsNotSupported | ServiceNotFoundException $exception) {
             $result = parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
@@ -68,7 +56,7 @@ class ScriptRenderer extends ScriptRenderer_parent
     protected function formFilesOutput($includes, $widget)
     {
         try {
-            $service = $this->getRendererService();
+            $service = $this->getServiceFromContainer(RendererInterface::class);
             $result = $service->formFilesOutput($includes, $widget);
         } catch (WidgetsNotSupported | ServiceNotFoundException $exception) {
             $result = parent::formFilesOutput($includes, $widget);
