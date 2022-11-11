@@ -10,8 +10,10 @@
     }
   },
   "require": {
+    "php": ">=8.0",
     "symfony/yaml" : "> 3",
-    "ext-json": "*"
+    "ext-json": "*",
+    "oxid-esales/oxideshop-ce": "^7.0.0-rc.2 | 7.0.x-dev"
   },
   "require-dev": {
     "ext-dom": "*",

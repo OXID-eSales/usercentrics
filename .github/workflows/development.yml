@@ -9,7 +9,7 @@ jobs:
   install_shop_with_module:
     strategy:
       matrix:
-        php: [ '8.0' ]
+        php: [ '8.0', '8.1' ]
     runs-on: ubuntu-latest
     steps:
       - name: Clone testing environment
@@ -87,7 +87,7 @@ jobs:
   unit_tests:
     strategy:
       matrix:
-        php: [ '8.0' ]
+        php: [ '8.0', '8.1' ]
     needs: [ install_shop_with_module ]
     runs-on: ubuntu-latest
     steps:
@@ -139,8 +139,7 @@ jobs:
   codeception_smarty:
     strategy:
       matrix:
-        php:
-          - '8.0'
+        php: [ '8.0', '8.1' ]
         group:
           - 'usercentrics'
     needs: [ install_shop_with_module ]
@@ -199,7 +198,7 @@ jobs:
   codeception_twig:
     strategy:
       matrix:
-        php: [ '8.0' ]
+        php: [ '8.0', '8.1' ]
         group:
           - 'usercentrics'
     needs: [ install_shop_with_module ]

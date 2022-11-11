@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Supports Twig shop configuration
 - Github workflow with tests runs added
+- PHP 8.0 and 8.1 support
 
 ### Changed
 - Not autowired container access goes through the `OxidProfessionalServices\Usercentrics\Traits\ServiceContainer` trait
@@ -19,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Templates extracted from `src` directory and moved one level up
+
+### Removed
+- Php 7.x are not supported anymore
 
 ## [1.2.1] - 2022-06-07
 
