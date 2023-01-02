@@ -15,7 +15,6 @@ The Usercentrics module is already included in the OXID eShop `v6.2.4` compilati
 Module can be installed manually, by using composer:
 ```bash
 $ composer require oxid-professional-services/usercentrics
-$ vendor/bin/oe-console oe:module:install source/modules/oxps/usercentrics
 ```
 
 After requiring the module, you need to activate it, either via OXID eShop admin or CLI.
