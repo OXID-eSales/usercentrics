@@ -11,7 +11,6 @@ declare(strict_types=1);
 use OxidEsales\Codeception\Module\Database\DatabaseDefaultsFileGenerator;
 use OxidEsales\Facts\Facts;
 use OxidEsales\Facts\Config\ConfigFile;
-use Symfony\Component\Filesystem\Path;
 
 $facts = new Facts();
 
@@ -30,15 +29,22 @@ return [
     'DB_HOST' => $facts->getDatabaseHost(),
     'DB_PORT' => $facts->getDatabasePort(),
     'DUMP_PATH' => getTestDataDumpFilePath(),
+    'FIXTURES_PATH' => getTestFixtureSqlFilePath(),
     'MYSQL_CONFIG_PATH' => getMysqlConfigPath(),
     'SELENIUM_SERVER_PORT' => getenv('SELENIUM_SERVER_PORT') ?: '4444',
     'SELENIUM_SERVER_IP' => getenv('SELENIUM_SERVER_IP') ?: 'selenium',
+    'THEME_ID' => getenv('THEME_ID') ?: 'twig',
     'BROWSER_NAME' => getenv('BROWSER_NAME') ?: 'chrome',
     'PHP_BIN' => $phpBinEnv,
     'SCREEN_SHOT_URL' => $screenShotPathEnv
 ];
 
-function getTestDataDumpFilePath()
+function getTestDataDumpFilePath(): string
+{
+    return getShopTestPath() . '/Codeception/_data/generated/shop-dump.sql';
+}
+
+function getTestFixtureSqlFilePath(): string
 {
     return getShopTestPath() . '/Codeception/_data/dump.sql';
 }
@@ -68,10 +74,7 @@ function getShopTestPath()
 
 function getMysqlConfigPath(): string
 {
-    $facts = new Facts();
-    $configFilePath = Path::join($facts->getSourcePath(), 'config.inc.php');
-    $configFile = new ConfigFile($configFilePath);
-    $generator = new DatabaseDefaultsFileGenerator($configFile);
+    $configFile = new ConfigFile();
 
-    return $generator->generate();
+    return (new DatabaseDefaultsFileGenerator($configFile))->generate();
 }

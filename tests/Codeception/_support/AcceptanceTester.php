@@ -2,6 +2,8 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception;
 
+use Codeception\Step\Action;
+use OxidEsales\Codeception\Page\Home;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
 use OxidProfessionalServices\Usercentrics\Core\Module;
 use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
@@ -41,5 +43,24 @@ class AcceptanceTester extends \Codeception\Actor
     {
         $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
         $moduleSettingsService->saveBoolean($sVarName, $sVarVal, Module::MODULE_ID);
+    }
+
+    /**
+     * Open shop first page.
+     */
+    public function openShop()
+    {
+        $I = $this;
+        $homePage = new Home($I);
+        $I->amOnPage($homePage->URL);
+
+        return $homePage;
+    }
+
+    public function waitForPageLoad(int $timeout = 60): void
+    {
+        if (getenv('THEME_ID') !== 'apex') {
+            $this->getScenario()->runStep(new Action('waitForPageLoad', func_get_args()));
+        }
     }
 }

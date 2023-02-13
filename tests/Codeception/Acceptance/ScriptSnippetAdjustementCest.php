@@ -9,9 +9,7 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
-use OxidEsales\Codeception\Page\Account\UserRegistration;
-use OxidEsales\Codeception\Page\Home;
-use OxidEsales\Codeception\Step\Basket as BasketSteps;
+use OxidEsales\Codeception\Step\Basket;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
@@ -26,19 +24,21 @@ final class ScriptSnippetAdjustementCest extends BaseCest
      */
     public function scriptIncludeDecorated(AcceptanceTester $I, Config $configModule)
     {
-        $userRegistrationPage = new UserRegistration($I);
-        $I->amOnPage($userRegistrationPage->URL);
+        $I->updateConfigInDatabase('iNewBasketItemMessage', 2, 'str');
+        $basket = new Basket($I);
+
+        $I->openShop();
+        $basket->addProductToBasket('1000', 1);
 
         $value = $I->grabAttributeFrom("//script[@data-oxid][1]", "data-oxid");
         $this->prepareSpecialConfiguration($configModule, $value);
-        $I->reloadPage();
 
-        $I->waitForElement("//script[@data-oxid='{$value}'][@data-usercentrics='testcustomservice'][@type='text/plain']");
+        $I->openShop();
+        $basket->addProductToBasket('1000', 1);
 
-        // Accept cookie policy
-        $this->waitForUserCentrics($I, true);
-
-        $I->waitForElement("//script[@data-oxid='{$value}'][@type='text/javascript']");
+        $I->waitForElement("//script[@data-oxid='$value'][@data-usercentrics='testcustomservice'][@type='text/plain']");
+        $this->waitForUserCentrics($I, true); // Accept cookie policy
+        $I->waitForElement("//script[@data-oxid='$value'][@type='text/javascript']");
     }
 
     /**
