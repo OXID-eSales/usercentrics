@@ -1,0 +1,22 @@
+name: Trigger
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'b-7.0.x*'
+
+jobs:
+  php80both:
+    name: 'PHP-8.0'
+    uses: ./.github/workflows/development.yml
+    secrets: inherit
+    with:
+      php: '8.0'
+
+  php81both:
+    name: 'PHP-8.1'
+    uses: ./.github/workflows/development.yml
+    secrets: inherit
+    with:
+      php: '8.1'

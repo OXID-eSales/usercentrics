@@ -1,17 +1,60 @@
 name: Development
 
-on: [ push, pull_request ]
+on:
+  workflow_call:
+    inputs:
+      php:
+        required: true
+        type: string
+      template_engine:
+        type: string
+        default: 'both'
+      module_codecept_test_group:
+        type: string
+        default: 'usercentrics'
+
+  workflow_dispatch:
+    inputs:
+      php:
+        description: 'PHP version'
+        required: true
+        default: '8.0'
+        type: choice
+        options:
+          - '8.0'
+          - '8.1'
+      template_engine:
+        description: 'Template engine - smarty with flow theme, twig with twig or apex theme'
+        required: true
+        default: 'twig-apex'
+        type: choice
+        options:
+          - 'both'
+          - 'twig-apex'
+          - 'twig-twig'
+          - 'smarty'
+      module_codecept_test_group:
+        description: 'Module codeception test group'
+        required: true
+        default: 'usercentrics'
+        type: string
 
 env:
   PACKAGE_NAME: 'oxid-professional-services/usercentrics'
+  MODULE_ID: 'oxps_usercentrics'
 
 jobs:
   install_shop_with_module:
-    strategy:
-      matrix:
-        php: [ '8.0', '8.1' ]
     runs-on: ubuntu-latest
     steps:
+      - name: Print run parameters
+        run: |
+          echo "Running job with:\
+            PHP version: ${{ inputs.php }}\
+            Template engine: ${{ inputs.template_engine }}\
+            Tests group: ${{ inputs.module_codecept_test_group }}\
+            Trigger event: ${{ github.event_name }}"
+
       - name: Clone testing environment
         run: git clone https://github.com/OXID-eSales/docker-eshop-sdk.git .
 
@@ -19,18 +62,20 @@ jobs:
         run: git clone --depth 1 https://github.com/OXID-eSales/oxideshop_ce.git --branch b-7.0.x --single-branch source
 
       - name: Cache current installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./*
-          key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+          key: installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
 
       - name: Prepare container configuration
         run: |
           make setup
           make addbasicservices
+          make file=services/selenium-chrome.yml addservice
+
           perl -pi\
-            -e "s#PHP_VERSION=.*#PHP_VERSION=${{ matrix.php }}#g;"\
+            -e "s#PHP_VERSION=.*#PHP_VERSION=${{ inputs.php }}#g;"\
             .env
 
           perl -pi\
@@ -78,6 +123,7 @@ jobs:
         run: |
           docker-compose exec -T php composer update --no-interaction
           docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+          docker-compose exec -T php bin/oe-console oe:module:activate ${{ env.MODULE_ID }}
 
       - name: Stop containers
         run: |
@@ -85,29 +131,22 @@ jobs:
           sleep 2
 
   unit_tests:
-    strategy:
-      matrix:
-        php: [ '8.0', '8.1' ]
     needs: [ install_shop_with_module ]
     runs-on: ubuntu-latest
     steps:
       - name: Load current installation from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./*
-          key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+          key: installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
           restore-keys: |
-            development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+            installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
 
       - name: Start containers
         run: |
           make up
           sleep 2
-
-      - name: Activate the module
-        run: |
-          docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
 
       - name: Run tests
         run: |
@@ -131,32 +170,36 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: TestsLog-${{ matrix.php }}
+          name: TestsLog-${{ inputs.php }}-${{ inputs.template_engine }}
           path: |
             source/coverage.xml
             source/junit-log.xml
 
   codeception_smarty:
-    strategy:
-      matrix:
-        php: [ '8.0', '8.1' ]
-        group:
-          - 'usercentrics'
     needs: [ install_shop_with_module ]
+    if: ${{ inputs.template_engine == 'both' || inputs.template_engine == 'smarty' }}
     runs-on: ubuntu-latest
     steps:
       - name: Load current installation from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./*
-          key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+          key: installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
           restore-keys: |
-            development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+            installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
+
+      - name: Reconfigure codeception for smarty themes
+        run: |
+          perl -pi \
+          -e 's#views/twig#views/flow/translations#g;' \
+          source/test-module/tests/Codeception/acceptance.suite.yml
+          perl -pi \
+          -e 's#views/apex#views/flow/translations#g;' \
+          source/test-module/tests/Codeception/acceptance.suite.yml
 
       - name: Start containers
         run: |
-          make file=services/selenium-chrome.yml addservice
           make up
           sleep 2
 
@@ -167,19 +210,16 @@ jobs:
           docker-compose exec -T php composer require oxid-esales/smarty-admin-theme:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer update --no-interaction
 
-      - name: Activate the module
-        run: |
-          docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
-
       - name: Run tests
         run: |
           docker-compose exec -T \
             -e SELENIUM_SERVER_HOST=selenium \
-            -e MODULE_IDS=oxps_usercentrics \
+            -e THEME_ID=flow \
+            -e MODULE_IDS=${{ env.MODULE_ID }} \
             php php vendor/bin/codecept run acceptance \
               --bootstrap=/var/www/source/bootstrap.php \
               -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
-              -g ${{ matrix.group }}
+              -g ${{ inputs.module_codecept_test_group }}
 
       - name: Stop containers
         if: always()
@@ -191,60 +231,82 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: Output-${{ matrix.php }}-flow
+          name: sModuleCodeceptionTestsLog-${{ inputs.php }}-${{ inputs.template_engine }}
           path: |
             ./source/test-module/tests/Codeception/_output/*
 
   codeception_twig:
-    strategy:
-      matrix:
-        php: [ '8.0', '8.1' ]
-        group:
-          - 'usercentrics'
     needs: [ install_shop_with_module ]
+    if: ${{ inputs.template_engine == 'both' || inputs.template_engine == 'twig-twig' || inputs.template_engine == 'twig-apex' }}
     runs-on: ubuntu-latest
     steps:
       - name: Load current installation from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./*
-          key: development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+          key: installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
           restore-keys: |
-            development-${{ matrix.php }}-${{ github.run_number }}-${{ github.run_attempt }}
+            installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
 
       - name: Start containers
         run: |
-          make file=services/selenium-chrome.yml addservice
           make up
           sleep 2
 
-      - name: Install twig components
+      - name: Set Github dependencies
+        run: |
+          docker-compose run -T --rm php composer config github-protocols https
+          docker-compose run -T --rm php composer config -g github-oauth.github.com ${{ secrets.GH_CI_JENKINS_TOKEN }}
+
+      - name: Install twig template engine with twig and apex theme
         run: |
           docker-compose exec -T php composer require oxid-esales/twig-component:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer require oxid-esales/twig-theme:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T \
+          php composer config repositories.oxid-esales/apex-theme \
+            --json '{"type":"git", "url":"https://github.com/OXID-eSales/apex-theme.git"}'
+          docker-compose exec -T php composer require oxid-esales/apex-theme:dev-main --no-update
           docker-compose exec -T php composer update --no-interaction
 
-      - name: Configure codeception Theme switcher
+      - name: Reconfigure codeception for twig theme
+        if: ${{ inputs.template_engine == 'both' || inputs.template_engine == 'twig-twig' }}
         run: |
           perl -pi \
-          -e 's#theme_id:\s?flow#theme_id: twig#g;' \
+          -e 's#views/apex#views/twig#g;' \
           source/test-module/tests/Codeception/acceptance.suite.yml
 
-      - name: Activate the module
-        run: |
-          docker-compose exec -T php bin/oe-console oe:module:activate oxps_usercentrics
-
-      - name: Run tests
+      - name: Run tests with twig theme
+        if: ${{ inputs.template_engine == 'both' || inputs.template_engine == 'twig-twig' }}
         run: |
           docker-compose exec -T \
             -e SELENIUM_SERVER_HOST=selenium \
-            -e MODULE_IDS=oxps_usercentrics \
+            -e THEME_ID=twig \
+            -e MODULE_IDS=${{ env.MODULE_ID }} \
             php php vendor/bin/codecept run acceptance \
               --bootstrap=/var/www/source/bootstrap.php \
               -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
-              -g ${{ matrix.group }}
+              -g ${{ inputs.module_codecept_test_group }}
+
+      - name: Reconfigure codeception for apex theme
+        if: ${{ inputs.template_engine == 'both' || inputs.template_engine == 'twig-apex' }}
+        run: |
+          perl -pi \
+          -e 's#views/twig#views/apex#g;' \
+          source/test-module/tests/Codeception/acceptance.suite.yml
+
+      - name: Run tests with apex theme
+        if: ${{ inputs.template_engine == 'both' || inputs.template_engine == 'twig-apex' }}
+        run: |
+          docker-compose exec -T \
+            -e SELENIUM_SERVER_HOST=selenium \
+            -e THEME_ID=apex \
+            -e MODULE_IDS=${{ env.MODULE_ID }} \
+            php php vendor/bin/codecept run acceptance \
+              --bootstrap=/var/www/source/bootstrap.php \
+              -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
+              -g ${{ inputs.module_codecept_test_group }}
 
       - name: Stop containers
         if: always()
@@ -256,6 +318,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: Output-${{ matrix.php }}-twig
+          name: ModuleCodeceptionTestsLog-${{ inputs.php }}-${{ inputs.template_engine }}
           path: |
             ./source/test-module/tests/Codeception/_output/*
