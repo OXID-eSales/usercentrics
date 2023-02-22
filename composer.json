@@ -4,11 +4,6 @@
   "type": "oxideshop-module",
   "license": ["GPL-3.0"],
   "minimum-stability": "stable",
-  "extra": {
-    "oxideshop": {
-      "target-directory": "oxps/usercentrics"
-    }
-  },
   "require": {
     "php": ">=8.0",
     "symfony/yaml" : "> 3",
