@@ -217,7 +217,6 @@ jobs:
             -e THEME_ID=flow \
             -e MODULE_IDS=${{ env.MODULE_ID }} \
             php php vendor/bin/codecept run acceptance \
-              --bootstrap=/var/www/source/bootstrap.php \
               -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
               -g ${{ inputs.module_codecept_test_group }}
 
@@ -285,7 +284,6 @@ jobs:
             -e THEME_ID=twig \
             -e MODULE_IDS=${{ env.MODULE_ID }} \
             php php vendor/bin/codecept run acceptance \
-              --bootstrap=/var/www/source/bootstrap.php \
               -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
               -g ${{ inputs.module_codecept_test_group }}
 
@@ -310,7 +308,6 @@ jobs:
             -e THEME_ID=apex \
             -e MODULE_IDS=${{ env.MODULE_ID }} \
             php php vendor/bin/codecept run acceptance \
-              --bootstrap=/var/www/source/bootstrap.php \
               -c /var/www/vendor/${{ env.PACKAGE_NAME }}/tests/codeception.yml \
               -g ${{ inputs.module_codecept_test_group }}
 
