@@ -42,6 +42,7 @@ on:
 env:
   PACKAGE_NAME: 'oxid-professional-services/usercentrics'
   MODULE_ID: 'oxps_usercentrics'
+  MODULE_IDS: 'oxps_usercentrics'
 
 jobs:
   install_shop_with_module:
@@ -324,3 +325,86 @@ jobs:
           name: ModuleCodeceptionTestsLog-${{ inputs.php }}-${{ inputs.template_engine }}
           path: |
             ./source/test-module/tests/Codeception/_output/*
+
+  deprecated_shop_integration_tests:
+    needs: [ install_shop_with_module ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load current installation from cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./*
+          key: installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
+          restore-keys: |
+            installation-${{ join(inputs, '-') }}-${{ github.run_number }}-${{ github.run_attempt }}
+
+      - name: Start containers
+        run: |
+          make up
+          sleep 2
+
+      - name: Set Github dependencies
+        run: |
+          docker-compose run -T --rm php composer config github-protocols https
+          docker-compose run -T --rm php composer config -g github-oauth.github.com ${{ secrets.GH_CI_JENKINS_TOKEN }}
+
+      - name: Install twig template engine with twig and apex theme
+        run: |
+          docker-compose exec -T php composer require oxid-esales/twig-component:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require oxid-esales/twig-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require oxid-esales/twig-admin-theme:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T \
+          php composer config repositories.oxid-esales/apex-theme \
+            --json '{"type":"git", "url":"https://github.com/OXID-eSales/apex-theme.git"}'
+          docker-compose exec -T php composer require oxid-esales/apex-theme:dev-main --no-update
+          docker-compose exec -T php composer update --no-interaction
+
+      - name: Install TL and deprecated tests
+        run: |
+          docker-compose exec -T php composer require oxid-esales/tests-deprecated-ce:dev-b-7.0.x --with-all-dependencies
+
+      - name: Reset and prepare
+        run: |
+          docker-compose exec -T php bin/oe-console oe:cache:clear
+          docker-compose exec -T php bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 \
+                     --db-name=example --db-user=root --db-password=root --force
+
+      - name: Add test_config.yml
+        run: |
+          cp ./source/vendor/oxid-esales/testing-library/test_config.yml.dist ./source/test_config.yml
+          perl -pi\
+             -e 's#module_ids:#module_ids: ${{ env.MODULE_IDS }}#g;'\
+             -e 's#activate_all_modules: false#activate_all_modules: true#g;'\
+             -e 's#run_tests_for_modules: true#run_tests_for_modules: false#g;'\
+            ./source/test_config.yml
+          cat ./source/test_config.yml
+
+      - name: Run tests
+          run: |
+            docker-compose exec -T \
+            php vendor/bin/runtests AllTestsUnit
+
+      - name: Upload log artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ShopDeprecatedIntegrationTestsLog-${{ env.PHP_VERSION }}-${{ env.MYSQL_VERSION }}-${{ env.TEMPLATE_ENGINE }}-${{ github.sha }}
+          path: |
+            docker-compose.yml
+            source/composer.json
+            source/composer.lock
+            source/source/config.inc.php
+            source/phpunit.xml
+            source/source/log/oxideshop.log
+            data/php/logs/error_log.txt
+
+      - name: Stop containers
+        if: always()
+        run: |
+          docker-compose down
+          sleep 2
+      - name: Cleanup Docker
+        run: |
+          c=$(docker ps -q) && [[ $c ]] && docker kill $c
+          docker system prune --force
