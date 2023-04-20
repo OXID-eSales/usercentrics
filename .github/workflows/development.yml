@@ -121,7 +121,6 @@ jobs:
             php composer require ${{ env.PACKAGE_NAME }}:* --no-interaction --no-update
           docker-compose exec -T php composer require ddoe/wysiwyg-editor-module:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer require oxid-esales/gdpr-optin-module:dev-b-7.0.x --no-interaction --no-update
-          docker-compose exec -T php composer require oxid-professional-services/usercentrics:dev-b-7.0.x --no-interaction --no-update
           docker-compose exec -T php composer require makaira/oxid-connect-essential:dev-MAKAIRA-3410-add-snapshots-for-oxid-pe-ee --no-interaction --no-update
 
       - name: Install all configured dependencies and reset shop
