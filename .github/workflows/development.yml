@@ -390,10 +390,10 @@ jobs:
           -e ACTIVATE_ALL_MODULES=1 \
           -e RUN_TESTS_FOR_MODULES=0 \
           -e RUN_TESTS_FOR_SHOP=0 \
-          -e ADDITIONAL_TEST_PATHS=/var/www/vendor/oxid-esales/tests-deprecated-ce/ \
+          -e ADDITIONAL_TEST_PATHS=/var/www/vendor/oxid-esales/tests-deprecated-ce/Integration \
           -e ACTIVE_THEME=apex \
           -e THEME_ID=apex \
-          php vendor/bin/runtests /var/www/vendor/oxid-esales/testing-library/AllTestsIntegration
+          php vendor/bin/runtests
 
       - name: Upload log artifact
         if: always()
