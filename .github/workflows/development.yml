@@ -394,7 +394,7 @@ jobs:
           -e ACTIVE_THEME=apex \
           -e THEME_ID=apex \
           -e TEST_DIRS=integration,Integration \
-          php vendor/bin/runtests --filter '/^((?!(testAllTablesHasOxTimestamp)).)*$/'
+          php vendor/bin/runtests
 
       - name: Upload log artifact
         if: always()
