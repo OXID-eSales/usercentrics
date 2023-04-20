@@ -42,7 +42,7 @@ on:
 env:
   PACKAGE_NAME: 'oxid-professional-services/usercentrics'
   MODULE_ID: 'oxps_usercentrics'
-  MODULE_IDS: 'oxps_usercentrics'
+  MODULE_IDS: 'makaira_oxid-connect-essential,oxps_usercentrics,ddoewysiwyg,oegdproptin'
 
 jobs:
   install_shop_with_module:
@@ -119,6 +119,10 @@ jobs:
             --json '{"type":"path", "url":"./test-module", "options": {"symlink": true}}'
           docker-compose exec -T \
             php composer require ${{ env.PACKAGE_NAME }}:* --no-interaction --no-update
+          docker-compose exec -T php composer require ddoe/wysiwyg-editor-module:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require oxid-esales/gdpr-optin-module:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require oxid-professional-services/usercentrics:dev-b-7.0.x --no-interaction --no-update
+          docker-compose exec -T php composer require makaira/oxid-connect-essential:dev-MAKAIRA-3410-add-snapshots-for-oxid-pe-ee --no-interaction --no-update
 
       - name: Install all configured dependencies and reset shop
         run: |
