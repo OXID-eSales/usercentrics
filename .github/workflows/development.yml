@@ -386,6 +386,13 @@ jobs:
       - name: Run tests
         run: |
           docker-compose exec -T \
+          -e MODULE_IDS=${{ env.MODULE_ID }} \
+          -e ACTIVATE_ALL_MODULES=1 \
+          -e RUN_TESTS_FOR_MODULES=0 \
+          -e RUN_TESTS_FOR_SHOP=0 \
+          -e ADDITIONAL_TEST_PATHS=/var/www/vendor/oxid-esales/tests-deprecated-ce/ \
+          -e ACTIVE_THEME=apex \
+          -e THEME_ID=apex \
           php vendor/bin/runtests AllTestsUnit
 
       - name: Upload log artifact
