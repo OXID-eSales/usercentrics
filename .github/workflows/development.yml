@@ -381,9 +381,9 @@ jobs:
           cat ./source/test_config.yml
 
       - name: Run tests
-          run: |
-            docker-compose exec -T \
-            php vendor/bin/runtests AllTestsUnit
+        run: |
+          docker-compose exec -T \
+          php vendor/bin/runtests AllTestsUnit
 
       - name: Upload log artifact
         if: always()
