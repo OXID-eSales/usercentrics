@@ -393,7 +393,7 @@ jobs:
           -e ADDITIONAL_TEST_PATHS=/var/www/vendor/oxid-esales/tests-deprecated-ce/ \
           -e ACTIVE_THEME=apex \
           -e THEME_ID=apex \
-          php vendor/bin/runtests AllTestsUnit
+          php vendor/bin/runtests AllTestsIntegration
 
       - name: Upload log artifact
         if: always()
