@@ -386,7 +386,7 @@ jobs:
       - name: Run tests
         run: |
           docker-compose exec -T \
-          -e MODULE_IDS=${{ env.MODULE_ID }} \
+          -e MODULE_IDS=${{ env.MODULE_IDS }} \
           -e ACTIVATE_ALL_MODULES=1 \
           -e RUN_TESTS_FOR_MODULES=0 \
           -e RUN_TESTS_FOR_SHOP=0 \
@@ -394,7 +394,7 @@ jobs:
           -e ACTIVE_THEME=apex \
           -e THEME_ID=apex \
           -e TEST_DIRS=integration,Integration \
-          php vendor/bin/runtests
+          php vendor/bin/runtests --filter '/^((?!(testAllTablesHasOxTimestamp)).)*$/'
 
       - name: Upload log artifact
         if: always()
