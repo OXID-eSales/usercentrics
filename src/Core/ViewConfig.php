@@ -10,6 +10,7 @@ namespace OxidProfessionalServices\Usercentrics\Core;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
 
 class ViewConfig extends ViewConfig_parent
 {
@@ -17,8 +18,12 @@ class ViewConfig extends ViewConfig_parent
 
     public function isSmartDataProtectorActive(): bool
     {
-        $moduleSettings = $this->getServiceFromContainer(ModuleSettingsInterface::class);
-        return $moduleSettings->isSmartProtectorEnabled();
+        $moduleSettings = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
+
+        return $moduleSettings->getBoolean(
+            'smartDataProtectorActive',
+            Module::MODULE_ID
+        );
     }
 
     /**
