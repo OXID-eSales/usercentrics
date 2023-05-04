@@ -10,7 +10,7 @@ This assumes you have OXID eShop (at least the `v6.2.0` compilation) up and runn
 
 ### Install
 
-The Usercentrics module is already included in the OXID eShop `v6.2.4` compilation.
+The Usercentrics module is already included in the OXID eShop compilation.
 
 Module can be installed manually, by using composer:
 ```bash
@@ -62,4 +62,4 @@ To report issues with the module, please use the [OXID eShop bugtracking system]
 
 ## License
 
-GPLv3, see [LICENSE file](LICENSE).
+OXID Module and Component License, see [LICENSE file](LICENSE).
