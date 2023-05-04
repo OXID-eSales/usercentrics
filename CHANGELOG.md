@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - Unreleased
+## [2.0.0] - 2023-05-04
 
 ### Added
 - Supports Twig shop configuration
@@ -83,7 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module provides a possibility to turn on "Smart data protection" function provided by UserCentrics.
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
-[2.0.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.2.1...b-7.0.x
+[2.0.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.2.1...v2.0.0
 [1.2.1]: https://github.com/OXID-eSales/usercentrics/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.3...v1.2.0
 [1.1.3]: https://github.com/OXID-eSales/usercentrics/compare/v1.1.2...v1.1.3
