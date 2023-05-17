@@ -2,7 +2,7 @@
   "name": "oxid-professional-services/usercentrics",
   "description": " OXID Cookie Management powered by usercentrics",
   "type": "oxideshop-module",
-  "license": ["GPL-3.0"],
+  "license": ["proprietary"],
   "minimum-stability": "stable",
   "extra": {
     "oxideshop": {
