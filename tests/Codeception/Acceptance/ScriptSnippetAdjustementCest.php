@@ -13,7 +13,7 @@ use OxidEsales\Codeception\Step\Basket;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
-use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
+use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
 final class ScriptSnippetAdjustementCest extends BaseCest

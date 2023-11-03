@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
 use OxidEsales\Codeception\Page\Home;
-use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
+use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTester;
 
 final class UsercentricsButtonCest extends BaseCest
 {

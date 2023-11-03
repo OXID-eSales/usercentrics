@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
-use OxidProfessionalServices\Usercentrics\Tests\Codeception\AcceptanceTester;
+use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
 abstract class BaseCest

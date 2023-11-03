@@ -1,6 +1,6 @@
 <?php
 
-namespace OxidProfessionalServices\Usercentrics\Tests\Codeception;
+namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Support;
 
 use Codeception\Step\Action;
 use OxidEsales\Codeception\Page\Home;
