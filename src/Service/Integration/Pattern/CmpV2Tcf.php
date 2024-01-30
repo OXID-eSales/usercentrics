@@ -6,7 +6,7 @@ class CmpV2Tcf implements IntegrationPatternInterface
 {
     public const VERSION_NAME = 'CmpV2Tcf';
 
-    protected $scriptSource = 'https://app.usercentrics.eu/browser-ui/latest/bundle.js';
+    protected string $scriptSource = 'https://app.usercentrics.eu/browser-ui/latest/bundle.js';
 
     public function getIntegrationScriptPattern(): string
     {

@@ -33,12 +33,10 @@ class ScriptRenderer extends ScriptRenderer_parent
     {
         try {
             $service = $this->getServiceFromContainer(RendererInterface::class);
-            $result = $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
-        } catch (WidgetsNotSupported | ServiceNotFoundException $exception) {
-            $result = parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
+            return $service->encloseScriptSnippet($scriptsOutput, $widget, $isAjaxRequest);
+        } catch (WidgetsNotSupported | ServiceNotFoundException) {
+            return parent::enclose($scriptsOutput, $widget, $isAjaxRequest);
         }
-
-        return $result;
     }
 
     /**
@@ -57,11 +55,9 @@ class ScriptRenderer extends ScriptRenderer_parent
     {
         try {
             $service = $this->getServiceFromContainer(RendererInterface::class);
-            $result = $service->formFilesOutput($includes, $widget);
-        } catch (WidgetsNotSupported | ServiceNotFoundException $exception) {
-            $result = parent::formFilesOutput($includes, $widget);
+            return $service->formFilesOutput($includes, $widget);
+        } catch (WidgetsNotSupported | ServiceNotFoundException) {
+            return parent::formFilesOutput($includes, $widget);
         }
-
-        return $result;
     }
 }

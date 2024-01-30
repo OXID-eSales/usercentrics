@@ -11,18 +11,19 @@
 {% block head_meta_description %}
 
 {{ parent() }}
+{% set settings = oViewConf.getUsercentricsModuleSettings %}
 
-{% if oViewConf.isSmartDataProtectorActive() %}
+{% if settings.isSmartProtectorEnabled %}
     <meta data-privacy-proxy-server="https://privacy-proxy-server.usercentrics.eu">
     <script type="application/javascript" src="https://privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js"></script>
 
-    {% set deactivateBlocking = oViewConf.getSmartDataProtectorDeactivateBlockingServices() %}
+    {% set deactivateBlocking = settings.getSmartProtectorBlockingDisabledServices %}
     {% if deactivateBlocking %}
         <script>uc.deactivateBlocking(["{{ deactivateBlocking|join('\", \"')|raw }}"]);</script>
     {% endif %}
 {% endif %}
 
-{% if oViewConf.isDevelopmentAutomaticConsentActive() %}
+{% if settings.isDevelopmentAutomaticConsentActive %}
     <script type="application/javascript">
         console.log('Warning! Development section. Not intended to be used in Live environment!');
         function consentsCheck() {

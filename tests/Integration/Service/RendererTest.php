@@ -27,7 +27,7 @@ class RendererTest extends UnitTestCase
         $sut = $this->createRenderer($file);
         $rendered = $sut->formFilesOutput([0 => ["http://shop.de/out/theme/js/test.js"]], "");
 
-        $this->doAssertStringContainsString('<script type="text/javascript" src="http://shop.de/out/theme/js/test.js"></script>', $rendered);
+        $this->assertStringContainsString('<script type="text/javascript" src="http://shop.de/out/theme/js/test.js"></script>', $rendered);
     }
 
     public function testServiceNamedScript(): void
@@ -36,7 +36,7 @@ class RendererTest extends UnitTestCase
         $sut = $this->createRenderer($file);
         $rendered = $sut->formFilesOutput([0 => ["https://shop.de/out/theme/js/test1.js"]], "");
 
-        $this->doAssertStringContainsString(
+        $this->assertStringContainsString(
             '<script type="text/plain" data-usercentrics="name1" src="https://shop.de/out/theme/js/test1.js"></script>',
             $rendered
         );
@@ -63,7 +63,7 @@ alert('Service2')
 </script>
 HTML;
         $expectedResult = str_replace("\n", '', $expectedResult);
-        $this->doAssertStringContainsString($expectedResult, $rendered);
+        $this->assertStringContainsString($expectedResult, $rendered);
     }
 
     public function testNoSnippet(): void
@@ -98,19 +98,5 @@ HTML;
         $config = new ConfigurationDao($this->getStorage($file, __DIR__ . '/ConfigTestData'));
         $scriptServiceMapper = new ScriptServiceMapper($config);
         return new Renderer($scriptServiceMapper);
-    }
-
-    /**
-     * @param string $needle
-     * @param string $haystack
-     * @param string $message
-     */
-    protected function doAssertStringContainsString($needle, $haystack, $message = ''): void
-    {
-        if (method_exists($this, 'assertStringContainsString')) {
-            parent::assertStringContainsString($needle, $haystack, $message);
-        } else {
-            parent::assertContains($needle, $haystack, $message);
-        }
     }
 }

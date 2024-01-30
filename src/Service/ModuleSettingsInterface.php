@@ -7,7 +7,10 @@ interface ModuleSettingsInterface
     public function getUsercentricsId(): string;
     public function getUsercentricsMode(): string;
 
-    public function getSmartProtectorBlockingDisabledList(): string;
+    /**
+     * @return string[]
+     */
+    public function getSmartProtectorBlockingDisabledServices(): array;
 
     public function isSmartProtectorEnabled(): bool;
     public function isDevelopmentAutoConsentEnabled(): bool;

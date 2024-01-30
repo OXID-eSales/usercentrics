@@ -14,24 +14,13 @@ use Symfony\Component\Yaml\Parser;
 
 final class YamlStorage implements StorageInterface
 {
-    /** @var Dumper */
-    private $dumper;
+    private Dumper $dumper;
+    private Parser $parser;
 
-    /** @var Parser */
-    private $parser;
-
-    /** @var string */
-    private $directory;
-
-    /** @var string */
-    private $fileName;
-
-    public function __construct(string $directory, string $fileName)
+    public function __construct(private readonly string $directory, private readonly string $fileName)
     {
         $this->dumper = new Dumper();
         $this->parser = new Parser();
-        $this->directory = $directory;
-        $this->fileName = $fileName;
     }
 
 

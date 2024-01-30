@@ -15,26 +15,20 @@ use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
 final class ScriptServiceMapper implements ScriptServiceMapperInterface
 {
     /**
-     * @var ConfigurationDaoInterface
-     */
-    private $configurationDao;
-
-    /**
      * This is a map of service path as key with a service id
      * @example: ['some/path/to/script.js' => 'SomeConfiguredServiceId']
      *
      * @var array<string,?Service>
      */
-    private $scriptPathToService;
+    private array $scriptPathToService;
 
     /**
      * @var array<string,?Service>
      */
-    private $snippetToService;
+    private array $snippetToService;
 
-    public function __construct(ConfigurationDaoInterface $configurationDao)
+    public function __construct(private readonly ConfigurationDaoInterface $configurationDao)
     {
-        $this->configurationDao = $configurationDao;
         $this->scriptPathToService = $this->mapScriptPathsToServices();
         $this->snippetToService = $this->mapScriptSnippetToServices();
     }
@@ -52,9 +46,6 @@ final class ScriptServiceMapper implements ScriptServiceMapperInterface
 
     /**
      * Build a regex that will match if the URL's path ends with this path
-     *
-     * @param string $path
-     * @return string
      */
     private function prepareScriptPathRegex(string $path): string
     {

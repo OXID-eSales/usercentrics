@@ -16,17 +16,10 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 
 final class ConfigurationDao implements ConfigurationDaoInterface
 {
-    /** @var StorageInterface */
-    private $storage;
-
-    public function __construct(StorageInterface $storage)
+    public function __construct(private readonly StorageInterface $storage)
     {
-        $this->storage = $storage;
     }
 
-    /**
-     * @return Configuration
-     */
     public function getConfiguration(): Configuration
     {
         $scripts = $this->getScriptsConfiguration();

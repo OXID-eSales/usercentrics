@@ -15,15 +15,14 @@ use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTe
 final class UsercentricsButtonCest extends BaseCest
 {
     /**
-     * @param AcceptanceTester $I
      * @throws \Exception
      * @group usercentrics
      */
-    public function frontPageWorksAndShowsUserCentricsWallOrBanner(AcceptanceTester $I)
+    public function frontPageWorksAndShowsUsercentricsWallOrBanner(AcceptanceTester $I): void
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
 
-        $this->waitForUserCentrics($I);
+        $this->waitForUsercentrics($I);
     }
 }

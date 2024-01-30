@@ -49,7 +49,7 @@ function getTestFixtureSqlFilePath(): string
     return getShopTestPath() . '/Codeception/Support/Data/dump.sql';
 }
 
-function getShopSuitePath($facts)
+function getShopSuitePath($facts): string
 {
     $testSuitePath = getenv('TEST_SUITE');
     if (!$testSuitePath) {
@@ -59,7 +59,7 @@ function getShopSuitePath($facts)
     return $testSuitePath;
 }
 
-function getShopTestPath()
+function getShopTestPath(): string
 {
     $facts = new Facts();
 

@@ -8,6 +8,7 @@
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Core;
 
 use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\ViewConfig as EshopViewConfig;
 use OxidProfessionalServices\Usercentrics\Core\Module;
 use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
@@ -24,19 +25,10 @@ class ViewConfigTest extends UnitTestCase
 {
     use ServiceContainer;
 
-    /**
-     * @dataProvider booleanProvider
-     */
-    public function testSmartDataProtectorActive(bool $setting): void
+    public function testGetSettings(): void
     {
-        $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
-        $settingsService->saveBoolean(ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED, $setting, Module::MODULE_ID);
-
-        /** @var ViewConfig $viewConfig */
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
-        // $this->assertInstanceOf(JavaScriptRenderer::class, $viewConfig);
-        $enabled = $viewConfig->isSmartDataProtectorActive();
-        $this->assertSame($setting, $enabled);
+        $viewConfig = Registry::get(EshopViewConfig::class);
+        $this->assertInstanceOf(ModuleSettings::class, $viewConfig->getUsercentricsModuleSettings());
     }
 
     /**
@@ -49,12 +41,12 @@ class ViewConfigTest extends UnitTestCase
         $settingsService->saveString(ModuleSettings::USERCENTRICS_ID, 'ABC123', Module::MODULE_ID);
 
         /** @var ViewConfig $viewConfig */
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
+        $viewConfig = Registry::get(EshopViewConfig::class);
         $html = $viewConfig->getUsercentricsScript();
         $this->assertHtmlEquals($expected, $html);
     }
 
-    public function dataProviderTestOutputPerMode(): array
+    public static function dataProviderTestOutputPerMode(): array
     {
         return [
             [
@@ -102,16 +94,8 @@ class ViewConfigTest extends UnitTestCase
         $settingsService->saveString(ModuleSettings::USERCENTRICS_MODE, Pattern\Custom::VERSION_NAME, Module::MODULE_ID);
 
         /** @var ViewConfig $viewConfig */
-        $viewConfig = Registry::get(\OxidEsales\Eshop\Core\ViewConfig::class);
+        $viewConfig = Registry::get(EshopViewConfig::class);
         $html = $viewConfig->getUsercentricsScript();
         $this->assertEmpty($html);
-    }
-
-    public function booleanProvider(): array
-    {
-        return [
-            [true],
-            [false]
-        ];
     }
 }

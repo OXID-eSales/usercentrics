@@ -13,18 +13,8 @@ use OxidProfessionalServices\Usercentrics\Exception\WidgetsNotSupported;
 
 final class Renderer implements RendererInterface
 {
-    /**
-     * @var ScriptServiceMapperInterface
-     */
-    private $scriptServiceMapper;
-
-    /**
-     * Renderer constructor.
-     * @param ScriptServiceMapperInterface $scriptServiceMapper
-     */
-    public function __construct(ScriptServiceMapperInterface $scriptServiceMapper)
+    public function __construct(private readonly ScriptServiceMapperInterface $scriptServiceMapper)
     {
-        $this->scriptServiceMapper = $scriptServiceMapper;
     }
 
     /**

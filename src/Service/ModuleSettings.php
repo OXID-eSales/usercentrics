@@ -22,13 +22,8 @@ final class ModuleSettings implements ModuleSettingsInterface
 
     public const USERCENTRICS_DEVELOPMENT_AUTO_CONSENT = 'developmentAutomaticConsent';
 
-    /** @var ModuleSettingServiceInterface */
-    private $moduleSettingService;
-
-    public function __construct(
-        ModuleSettingServiceInterface $moduleSettingService
-    ) {
-        $this->moduleSettingService = $moduleSettingService;
+    public function __construct(private readonly ModuleSettingServiceInterface $moduleSettingService)
+    {
     }
 
     public function getUsercentricsId(): string
@@ -43,30 +38,31 @@ final class ModuleSettings implements ModuleSettingsInterface
 
     public function isSmartProtectorEnabled(): bool
     {
-        return $this->moduleSettingService->getBoolean(
-            self::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED,
-            Module::MODULE_ID
-        );
+        return $this->moduleSettingService
+            ->getBoolean(self::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED, Module::MODULE_ID);
     }
 
-    public function getSmartProtectorBlockingDisabledList(): string
+    public function getSmartProtectorBlockingDisabledServices(): array
     {
-        return $this->getStringSettingValue(self::USERCENTRICS_SMART_DATA_PROTECTOR_BLOCKING_DISABLED);
+        $string = $this->getStringSettingValue(self::USERCENTRICS_SMART_DATA_PROTECTOR_BLOCKING_DISABLED);
+
+        return array_map(function ($element) {
+            return trim($element);
+        }, explode(",", $string));
+
     }
 
     public function isDevelopmentAutoConsentEnabled(): bool
     {
-        return $this->moduleSettingService->getBoolean(
-            self::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT,
-            Module::MODULE_ID
-        );
+        return $this->moduleSettingService
+            ->getBoolean(self::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT, Module::MODULE_ID);
     }
 
-    protected function getStringSettingValue($key): string
+    private function getStringSettingValue($key): string
     {
-        return $this->moduleSettingService->getString(
-            $key,
-            Module::MODULE_ID
-        )->trim()->toString();
+        return $this->moduleSettingService
+            ->getString($key, Module::MODULE_ID)
+            ->trim()
+            ->toString();
     }
 }

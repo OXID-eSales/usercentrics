@@ -6,18 +6,10 @@ use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptB
 
 class IntegrationScript
 {
-    /** @var IntegrationScriptBuilderInterface */
-    private $scriptBuilder;
-
-    /** @var ModuleSettingsInterface */
-    private $moduleSettings;
-
     public function __construct(
-        IntegrationScriptBuilderInterface $scriptBuilder,
-        ModuleSettingsInterface $moduleSettings
+        private readonly IntegrationScriptBuilderInterface $scriptBuilder,
+        private readonly ModuleSettingsInterface $moduleSettings
     ) {
-        $this->scriptBuilder = $scriptBuilder;
-        $this->moduleSettings = $moduleSettings;
     }
 
     public function getIntegrationScript(): string

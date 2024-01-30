@@ -32,11 +32,10 @@ final class UsercentricsDeactivateBlockingCest extends BaseCest
     }
 
     /**
-     * @param AcceptanceTester $I
      * @throws \Exception
      * @group usercentrics
      */
-    public function protectorBlockingDeactivationConfigurationPresent(AcceptanceTester $I)
+    public function protectorBlockingDeactivationConfigurationPresent(AcceptanceTester $I): void
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);

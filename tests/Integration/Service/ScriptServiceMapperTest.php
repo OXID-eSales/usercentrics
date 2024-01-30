@@ -49,7 +49,7 @@ class ScriptServiceMapperTest extends UnitTestCase
         $this->assertEquals("name1", $service->getName());
     }
 
-    public function matchingScriptUrls(): array
+    public static function matchingScriptUrls(): array
     {
         return [
             ["http://someurl/path/test1.js"],
@@ -61,7 +61,7 @@ class ScriptServiceMapperTest extends UnitTestCase
         ];
     }
 
-    public function notMatchingScriptUrls(): array
+    public static function notMatchingScriptUrls(): array
     {
         return [
             ["http://someurl/path/test.js"],
@@ -121,9 +121,6 @@ class ScriptServiceMapperTest extends UnitTestCase
         $this->assertNull($service);
     }
 
-    /**
-     * @return ScriptServiceMapper
-     */
     private function createScriptMapper(string $file): ScriptServiceMapper
     {
         $config = new ConfigurationDao($this->getStorage($file, __DIR__ . '/ConfigTestData'));

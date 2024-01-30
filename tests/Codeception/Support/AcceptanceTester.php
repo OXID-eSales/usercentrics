@@ -33,13 +33,13 @@ class AcceptanceTester extends \Codeception\Actor
      * Define custom actions here
      */
 
-    public function saveConfStringVar($sVarName, $sVarVal)
+    public function saveConfStringVar($sVarName, $sVarVal): void
     {
         $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
         $moduleSettingsService->saveString($sVarName, $sVarVal, Module::MODULE_ID);
     }
 
-    public function saveConfBoolVar($sVarName, $sVarVal)
+    public function saveConfBoolVar($sVarName, $sVarVal): void
     {
         $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
         $moduleSettingsService->saveBoolean($sVarName, $sVarVal, Module::MODULE_ID);
@@ -48,7 +48,7 @@ class AcceptanceTester extends \Codeception\Actor
     /**
      * Open shop first page.
      */
-    public function openShop()
+    public function openShop(): Home
     {
         $I = $this;
         $homePage = new Home($I);

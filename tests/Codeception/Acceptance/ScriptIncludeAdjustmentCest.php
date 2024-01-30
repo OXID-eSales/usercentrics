@@ -16,34 +16,32 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
-final class ScriptIncludeAdjustementCest extends BaseCest
+final class ScriptIncludeAdjustmentCest extends BaseCest
 {
     /**
-     * @param AcceptanceTester $I
      * @group usercentrics
      */
-    public function scriptIncludeDecoratedNotAccepted(AcceptanceTester $I)
+    public function scriptIncludeDecoratedNotAccepted(AcceptanceTester $I): void
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
 
         $I->seeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
-        $this->waitForUserCentrics($I, false);
+        $this->waitForUsercentrics($I, false);
 
         $I->seeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
     }
 
     /**
-     * @param AcceptanceTester $I
      * @group usercentrics
      */
-    public function scriptIncludeDecoratedAccepted(AcceptanceTester $I)
+    public function scriptIncludeDecoratedAccepted(AcceptanceTester $I): void
     {
         $homePage = new Home($I);
         $I->amOnPage($homePage->URL);
 
         $I->seeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
-        $this->waitForUserCentrics($I, true);
+        $this->waitForUsercentrics($I, true);
 
         $I->dontSeeElementInDOM("//script[@type='text/plain'][@data-usercentrics='testcustomservice']");
     }
@@ -51,7 +49,7 @@ final class ScriptIncludeAdjustementCest extends BaseCest
     /**
      * Prepare some test configuration before tests
      */
-    protected function prepareConfiguration(Config $configModule)
+    protected function prepareConfiguration(Config $configModule): void
     {
         $config = new Configuration(
             [ //services

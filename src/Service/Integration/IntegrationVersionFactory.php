@@ -3,12 +3,11 @@
 namespace OxidProfessionalServices\Usercentrics\Service\Integration;
 
 use OxidProfessionalServices\Usercentrics\Exception\PatternNotFound;
-use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\IntegrationPatternInterface;
 
 class IntegrationVersionFactory implements IntegrationVersionFactoryInterface
 {
-    private $versionMap = [
+    private const VERSION_MAP = [
         Pattern\CmpV1::VERSION_NAME => Pattern\CmpV1::class,
         Pattern\CmpV2::VERSION_NAME => Pattern\CmpV2::class,
         Pattern\CmpV2Legacy::VERSION_NAME => Pattern\CmpV2Legacy::class,
@@ -17,14 +16,17 @@ class IntegrationVersionFactory implements IntegrationVersionFactoryInterface
         Pattern\Custom::VERSION_NAME => Pattern\Custom::class
     ];
 
+    /**
+     * @throws PatternNotFound
+     */
     public function getPatternByVersion(string $integrationVersion): IntegrationPatternInterface
     {
-        if (!isset($this->versionMap[$integrationVersion])) {
+        if (!isset(self::VERSION_MAP[$integrationVersion])) {
             throw new PatternNotFound();
         }
 
         /** @var IntegrationPatternInterface $integrationVersionPattern */
-        $integrationVersionPattern = new $this->versionMap[$integrationVersion]();
+        $integrationVersionPattern = new (self::VERSION_MAP[$integrationVersion]);
         return $integrationVersionPattern;
     }
 }

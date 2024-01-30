@@ -33,22 +33,37 @@ class ModuleSettingsTest extends TestCase
         $this->assertSame($expectedValue, $sut->$method());
     }
 
-    public function gettersDataProvider(): array
+    public static function gettersDataProvider(): array
     {
         return [
-            $this->prepareStringTestItem('getUsercentricsId', ModuleSettings::USERCENTRICS_ID),
-            $this->prepareStringTestItem('getUsercentricsMode', ModuleSettings::USERCENTRICS_MODE),
-            $this->prepareStringTestItem('getSmartProtectorBlockingDisabledList', ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_BLOCKING_DISABLED),
+            static::prepareStringTestItem('getUsercentricsId', ModuleSettings::USERCENTRICS_ID),
+            static::prepareStringTestItem('getUsercentricsMode', ModuleSettings::USERCENTRICS_MODE),
 
-            $this->prepareBoolTestItem('isSmartProtectorEnabled', ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED, true),
-            $this->prepareBoolTestItem('isSmartProtectorEnabled', ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED, false),
+            static::prepareArrayTestItem(
+                'getSmartProtectorBlockingDisabledServices',
+                ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_BLOCKING_DISABLED
+            ),
 
-            $this->prepareBoolTestItem('isDevelopmentAutoConsentEnabled', ModuleSettings::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT, true),
-            $this->prepareBoolTestItem('isDevelopmentAutoConsentEnabled', ModuleSettings::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT, false),
+            ...static::prepareBoolTestItems(
+                'isSmartProtectorEnabled',
+                ModuleSettings::USERCENTRICS_SMART_DATA_PROTECTOR_ENABLED,
+            ),
+            ...static::prepareBoolTestItems(
+                'isDevelopmentAutoConsentEnabled',
+                ModuleSettings::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT,
+            ),
         ];
     }
 
-    private function prepareBoolTestItem(string $method, string $key, bool $value): array
+    private static function prepareBoolTestItems(string $method, string $key): array
+    {
+        return [
+            self::prepareBoolTestItem($method, $key, true),
+            self::prepareBoolTestItem($method, $key, false),
+        ];
+    }
+
+    private static function prepareBoolTestItem(string $method, string $key, bool $value): array
     {
         return [
             'method' => $method,
@@ -59,7 +74,7 @@ class ModuleSettingsTest extends TestCase
         ];
     }
 
-    private function prepareStringTestItem(string $method, string $key): array
+    private static function prepareStringTestItem(string $method, string $key): array
     {
         $exampleValue = 'exampleValue';
         return [
@@ -68,6 +83,19 @@ class ModuleSettingsTest extends TestCase
             'key' => $key,
             'systemValue' => new UnicodeString($exampleValue),
             'expectedValue' => $exampleValue
+        ];
+    }
+
+    private static function prepareArrayTestItem(string $method, string $key): array
+    {
+        $exampleValue = 'exampleValue, nextExampleValue';
+        $expected = ['exampleValue', 'nextExampleValue'];
+        return [
+            'method' => $method,
+            'systemMethod' => 'getString',
+            'key' => $key,
+            'systemValue' => new UnicodeString($exampleValue),
+            'expectedValue' => $expected
         ];
     }
 }

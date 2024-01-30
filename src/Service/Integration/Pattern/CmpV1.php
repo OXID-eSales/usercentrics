@@ -6,7 +6,7 @@ class CmpV1 implements IntegrationPatternInterface
 {
     public const VERSION_NAME = 'CmpV1';
 
-    protected $scriptSource = 'https://app.usercentrics.eu/latest/main.js';
+    protected string $scriptSource = 'https://app.usercentrics.eu/latest/main.js';
 
     public function getIntegrationScriptPattern(): string
     {

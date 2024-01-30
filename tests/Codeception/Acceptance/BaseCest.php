@@ -9,12 +9,13 @@ declare(strict_types=1);
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Acceptance;
 
+use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
 abstract class BaseCest
 {
-    private $configBackup;
+    private Configuration $configBackup;
 
     public function _before(AcceptanceTester $I, Config $configModule): void
     {
@@ -38,11 +39,11 @@ abstract class BaseCest
     /**
      * Prepare some test configuration before tests
      */
-    protected function prepareConfiguration(Config $configModule)
+    protected function prepareConfiguration(Config $configModule): void
     {
     }
 
-    protected function waitForUserCentrics($I, $accept = false)
+    protected function waitForUsercentrics(AcceptanceTester $I, bool $accept = false): void
     {
         $I->waitForElement("#usercentrics-root", 10);
         $I->waitForJS("return typeof UC_UI !== 'undefined' && UC_UI !== null && UC_UI.isInitialized()");

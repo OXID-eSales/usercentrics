@@ -16,13 +16,12 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\AcceptanceTester;
 use OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config;
 
-final class ScriptSnippetAdjustementCest extends BaseCest
+final class ScriptSnippetAdjustmentCest extends BaseCest
 {
     /**
-     * @param AcceptanceTester $I
      * @group usercentrics
      */
-    public function scriptIncludeDecorated(AcceptanceTester $I, Config $configModule)
+    public function scriptIncludeDecorated(AcceptanceTester $I, Config $configModule): void
     {
         $I->updateConfigInDatabase('iNewBasketItemMessage', 2, 'str');
         $basket = new Basket($I);
@@ -37,7 +36,7 @@ final class ScriptSnippetAdjustementCest extends BaseCest
         $basket->addProductToBasket('1000', 1);
 
         $I->waitForElement("//script[@data-oxid='$value'][@data-usercentrics='testcustomservice'][@type='text/plain']");
-        $this->waitForUserCentrics($I, true); // Accept cookie policy
+        $this->waitForUsercentrics($I, true); // Accept cookie policy
         $I->waitForElement("//script[@data-oxid='$value'][@type='text/javascript']");
     }
 

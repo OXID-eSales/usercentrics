@@ -13,32 +13,15 @@ namespace OxidProfessionalServices\Usercentrics\DataObject;
 final class Configuration
 {
     /**
-     * @var Script[]
-     */
-    private $scripts;
-
-    /**
-     * @var Service[]
-     */
-    private $services;
-
-    /**
-     * @var ScriptSnippet[]
-     */
-    private $scriptSnippets;
-
-    /**
-     * Configuration constructor.
-     *
      * @param Service[] $services
      * @param Script[] $scripts
      * @param ScriptSnippet[] $scriptSnippets
      */
-    public function __construct(array $services, array $scripts, array $scriptSnippets)
-    {
-        $this->scripts = $scripts;
-        $this->services = $services;
-        $this->scriptSnippets = $scriptSnippets;
+    public function __construct(
+        private readonly array $services,
+        private readonly array $scripts,
+        private readonly array $scriptSnippets
+    ) {
     }
 
     /**
