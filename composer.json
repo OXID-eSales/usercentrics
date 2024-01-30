@@ -3,7 +3,7 @@
   "description": " OXID Cookie Management powered by usercentrics",
   "type": "oxideshop-module",
   "license": ["proprietary"],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "require": {
     "php": ">=8.0",
     "symfony/yaml" : "> 3",
@@ -11,12 +11,33 @@
   },
   "require-dev": {
     "ext-dom": "*",
-    "ext-libxml": "*"
+    "ext-libxml": "*",
+    "oxid-esales/oxideshop-ce": "dev-b-7.1.x",
+    "phpunit/phpunit": "^10.5"
   },
   "autoload": {
     "psr-4": {
       "OxidProfessionalServices\\Usercentrics\\": "src",
       "OxidProfessionalServices\\Usercentrics\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "tests-unit": "phpunit --config=tests/ --testsuite=Unit",
+    "tests-integration": "phpunit --bootstrap=/var/www/source/bootstrap.php --config=tests/ --testsuite=Integration",
+    "tests-coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --bootstrap=/var/www/source/bootstrap.php --config=tests/ --coverage-html=tests/result/coverage",
+
+    "tests-codeception": "THEME_ID=apex MODULE_IDS=oxps_usercentrics /var/www/vendor/bin/codecept run Acceptance -c /var/www/vendor/oxid-professional-services/usercentrics/tests/codeception.yml",
+
+    "tests-all": [
+      "@tests-unit",
+      "@tests-integration",
+      "@tests-codeception"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "oxid-esales/oxideshop-unified-namespace-generator": true,
+      "oxid-esales/oxideshop-composer-plugin": true
     }
   }
 }

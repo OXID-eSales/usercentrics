@@ -42,19 +42,6 @@ $aModule = [
 
     'templates' => [],
 
-    'blocks' => [
-        [
-            'template' => 'layout/base.tpl',
-            'block' => 'base_js',
-            'file' => 'views/smarty/blocks/base_js.tpl'
-        ],
-        [
-            'template' => 'layout/base.tpl',
-            'block' => 'head_meta_description',
-            'file' => 'views/smarty/blocks/head_meta_description.tpl'
-        ],
-    ],
-
     'settings' => [
         [
             'group' => 'usercentrics_main',
