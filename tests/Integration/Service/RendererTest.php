@@ -27,7 +27,10 @@ class RendererTest extends UnitTestCase
         $sut = $this->createRenderer($file);
         $rendered = $sut->formFilesOutput([0 => ["http://shop.de/out/theme/js/test.js"]], "");
 
-        $this->assertStringContainsString('<script type="text/javascript" src="http://shop.de/out/theme/js/test.js"></script>', $rendered);
+        $this->assertStringContainsString(
+            '<script type="text/javascript" src="http://shop.de/out/theme/js/test.js"></script>',
+            $rendered
+        );
     }
 
     public function testServiceNamedScript(): void

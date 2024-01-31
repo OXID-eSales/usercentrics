@@ -12,6 +12,9 @@ namespace OxidProfessionalServices\Usercentrics\DataObject;
 /** @psalm-immutable */
 final class Service
 {
+    /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
+     */
     public function __construct(private readonly string $name, private readonly string $id)
     {
     }

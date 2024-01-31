@@ -91,7 +91,11 @@ class ViewConfigTest extends UnitTestCase
     public function testNoUsercentricsScriptInCustomMode(): void
     {
         $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
-        $settingsService->saveString(ModuleSettings::USERCENTRICS_MODE, Pattern\Custom::VERSION_NAME, Module::MODULE_ID);
+        $settingsService->saveString(
+            ModuleSettings::USERCENTRICS_MODE,
+            Pattern\Custom::VERSION_NAME,
+            Module::MODULE_ID
+        );
 
         /** @var ViewConfig $viewConfig */
         $viewConfig = Registry::get(EshopViewConfig::class);

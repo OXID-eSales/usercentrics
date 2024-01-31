@@ -14,11 +14,11 @@ class IntegrationScript
 
     public function getIntegrationScript(): string
     {
-        $id = $this->moduleSettings->getUsercentricsId();
+        $clientId = $this->moduleSettings->getUsercentricsId();
         $mode = $this->moduleSettings->getUsercentricsMode();
 
         $params = [
-            '{USERCENTRICS_CLIENT_ID}' => $id
+            '{USERCENTRICS_CLIENT_ID}' => $clientId
         ];
 
         return $this->scriptBuilder->getIntegrationScript($mode, $params);

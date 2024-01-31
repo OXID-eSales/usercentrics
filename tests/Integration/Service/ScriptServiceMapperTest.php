@@ -20,7 +20,6 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
  */
 class ScriptServiceMapperTest extends UnitTestCase
 {
-
     /**
      * @dataProvider notMatchingScriptUrls
      */

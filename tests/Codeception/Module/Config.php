@@ -31,7 +31,7 @@ class Config extends Module implements DependsOnModule
 
     private function getConfigManager(): ConfigurationDao
     {
-        $storage =  new YamlStorage(
+        $storage = new YamlStorage(
             $this->config['shop_path'],
             $this->config['config_file']
         );

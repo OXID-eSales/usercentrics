@@ -49,7 +49,6 @@ final class ModuleSettings implements ModuleSettingsInterface
         return array_map(function ($element) {
             return trim($element);
         }, explode(",", $string));
-
     }
 
     public function isDevelopmentAutoConsentEnabled(): bool
@@ -58,7 +57,7 @@ final class ModuleSettings implements ModuleSettingsInterface
             ->getBoolean(self::USERCENTRICS_DEVELOPMENT_AUTO_CONSENT, Module::MODULE_ID);
     }
 
-    private function getStringSettingValue($key): string
+    private function getStringSettingValue(string $key): string
     {
         return $this->moduleSettingService
             ->getString($key, Module::MODULE_ID)

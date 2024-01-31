@@ -8,13 +8,11 @@
 namespace OxidProfessionalServices\Usercentrics\Core;
 
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
-use OxidProfessionalServices\Usercentrics\Service\ModuleSettings;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 
 class ViewConfig extends ViewConfig_parent
 {
-
-    public function getUsercentricsModuleSettings(): ModuleSettings
+    public function getUsercentricsModuleSettings(): ModuleSettingsInterface
     {
         return $this->getService(ModuleSettingsInterface::class);
     }

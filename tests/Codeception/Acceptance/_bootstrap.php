@@ -8,6 +8,7 @@
 declare(strict_types=1);
 
 use Symfony\Component\Filesystem\Path;
+
 require_once Path::join((new \OxidEsales\Facts\Facts())->getShopRootPath(), 'source', 'bootstrap.php');
 
 // This is acceptance bootstrap

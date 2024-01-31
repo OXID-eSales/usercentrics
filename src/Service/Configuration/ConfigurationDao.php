@@ -111,6 +111,7 @@ final class ConfigurationDao implements ConfigurationDaoInterface
     }
 
     /**
+     * @SuppressWarnings(PHPMD.ShortVariable)
      * @param mixed[] $data
      */
     private function scriptSnippetFromArray(array $data): ScriptSnippet

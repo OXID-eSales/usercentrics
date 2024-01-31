@@ -7,5 +7,4 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Codeception\Support\Helper
 
 class Acceptance extends \Codeception\Module
 {
-
 }
