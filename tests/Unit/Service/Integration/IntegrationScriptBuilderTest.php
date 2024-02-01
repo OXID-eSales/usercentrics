@@ -7,7 +7,9 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Unit\Service\Integration;
 
-use OxidProfessionalServices\Usercentrics\Service\Integration;
+use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder;
+use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory;
+use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
 
 /**
@@ -15,24 +17,72 @@ use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
  */
 class IntegrationScriptBuilderTest extends UnitTestCase
 {
-    public function testGetIntegrationScript(): void
+    private const PARAMS = ['{USERCENTRICS_CLIENT_ID}' => 'ABC123'];
+
+    /**
+     * @dataProvider dataProviderTestOutputPerMode
+     */
+    public function testGetIntegrationScript(string $versionName, string $expected): void
     {
-        $builder = new Integration\IntegrationScriptBuilder(
-            new Integration\IntegrationVersionFactory()
+        $builder = new IntegrationScriptBuilder(
+            new IntegrationVersionFactory()
         );
 
-        $versionName = Integration\Pattern\CmpV1::VERSION_NAME;
-        $params = [
-            '{USERCENTRICS_CLIENT_ID}' => 'ABC123'
+        $result = $builder->getIntegrationScript($versionName, self::PARAMS);
+        $this->assertHtmlEquals($expected, $result);
+    }
+
+    public static function dataProviderTestOutputPerMode(): array
+    {
+        return [
+            [
+                Pattern\CmpV2Tcf::VERSION_NAME,
+                '<script id="usercentrics-cmp"
+                    data-settings-id="ABC123"
+                    src="https://app.usercentrics.eu/browser-ui/latest/bundle.js"
+                    data-tcf-enabled
+                    defer></script>'
+            ],
+            [
+                Pattern\CmpV2TcfLegacy::VERSION_NAME,
+                '<script id="usercentrics-cmp"
+                    data-settings-id="ABC123"
+                    src="https://app.usercentrics.eu/browser-ui/latest/bundle_legacy.js"
+                    data-tcf-enabled
+                    defer></script>'
+            ],
+            [
+                Pattern\CmpV2Legacy::VERSION_NAME,
+                '<script id="usercentrics-cmp"
+                    data-settings-id="ABC123"
+                    src="https://app.usercentrics.eu/browser-ui/latest/bundle_legacy.js"
+                    defer></script>'
+            ],
+            [
+                Pattern\CmpV2::VERSION_NAME,
+                '<script id="usercentrics-cmp"
+                    data-settings-id="ABC123"
+                    src="https://app.usercentrics.eu/browser-ui/latest/bundle.js"
+                    defer></script>'
+            ],
+            [
+                Pattern\CmpV1::VERSION_NAME,
+                '<script type="application/javascript" 
+                    src="https://app.usercentrics.eu/latest/main.js" 
+                    id="ABC123" ></script>'
+            ]
         ];
+    }
 
-        $result = $builder->getIntegrationScript($versionName, $params);
-
-        $this->assertHtmlEquals(
-            '<script type="application/javascript" 
-                src="https://app.usercentrics.eu/latest/main.js" 
-                id="ABC123" ></script>',
-            $result
+    public function testNoUsercentricsScriptInCustomMode(): void
+    {
+        $builder = new IntegrationScriptBuilder(
+            new IntegrationVersionFactory()
         );
+
+        $versionName = Pattern\Custom::VERSION_NAME;
+        $result = $builder->getIntegrationScript($versionName, self::PARAMS);
+
+        $this->assertEmpty($result);
     }
 }

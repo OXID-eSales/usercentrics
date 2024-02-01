@@ -25,8 +25,6 @@ class IntegrationVersionFactory implements IntegrationVersionFactoryInterface
             throw new PatternNotFound();
         }
 
-        /** @var IntegrationPatternInterface $pattern */
-        $pattern = new (self::VERSION_MAP[$integrationVersion]);
-        return $pattern;
+        return new (self::VERSION_MAP[$integrationVersion]);
     }
 }

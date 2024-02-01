@@ -19,16 +19,16 @@ final class UsercentricsDeactivateBlockingCest extends BaseCest
     {
         parent::_before($I, $configModule);
 
-        $I->saveConfBoolVar('smartDataProtectorActive', true);
-        $I->saveConfStringVar('smartDataProtectorDeactivateBlocking', 'xxx , yyy');
+        $I->setSmartDataProtectorActive(true);
+        $I->setSmartDataProtectorDeactivateBlocking('xxx , yyy');
     }
 
     public function _after(AcceptanceTester $I, Config $configModule): void
     {
         parent::_after($I, $configModule);
 
-        $I->saveConfBoolVar('smartDataProtectorActive', false);
-        $I->saveConfStringVar('smartDataProtectorDeactivateBlocking', '');
+        $I->setSmartDataProtectorActive(false);
+        $I->setSmartDataProtectorDeactivateBlocking('');
     }
 
     /**

@@ -32,6 +32,6 @@ class IntegrationVersionFactoryTest extends UnitTestCase
 
         $versionName = 'NotExisting';
         $factory = new IntegrationVersionFactory();
-        $patternObject = $factory->getPatternByVersion($versionName);
+        $factory->getPatternByVersion($versionName);
     }
 }

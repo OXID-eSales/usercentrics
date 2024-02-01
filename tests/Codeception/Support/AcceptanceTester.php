@@ -33,13 +33,38 @@ class AcceptanceTester extends \Codeception\Actor
      * Define custom actions here
      */
 
-    public function saveConfStringVar($sVarName, $sVarVal): void
+    public function setUsercentricsId(string $usercentricsId): void
+    {
+        $this->saveConfStringVar('usercentricsId', $usercentricsId);
+    }
+
+    public function setUsercentricsMode(string $mode): void
+    {
+        $this->saveConfStringVar('usercentricsMode', $mode);
+    }
+
+    public function setSmartDataProtectorDeactivateBlocking(string $value): void
+    {
+        $this->saveConfStringVar('smartDataProtectorDeactivateBlocking', $value);
+    }
+
+    private function saveConfStringVar(string $sVarName, string $sVarVal): void
     {
         $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
         $moduleSettingsService->saveString($sVarName, $sVarVal, Module::MODULE_ID);
     }
 
-    public function saveConfBoolVar($sVarName, $sVarVal): void
+    public function setDevelopmentAutomaticConsent(bool $value): void
+    {
+        $this->saveConfBoolVar('developmentAutomaticConsent', $value);
+    }
+
+    public function setSmartDataProtectorActive(bool $value): void
+    {
+        $this->saveConfBoolVar('smartDataProtectorActive', $value);
+    }
+
+    private function saveConfBoolVar(string $sVarName, bool $sVarVal): void
     {
         $moduleSettingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
         $moduleSettingsService->saveBoolean($sVarName, $sVarVal, Module::MODULE_ID);

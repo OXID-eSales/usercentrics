@@ -4,7 +4,7 @@ namespace OxidProfessionalServices\Usercentrics\Service;
 
 use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilderInterface;
 
-class IntegrationScript
+class IntegrationScript implements IntegrationScriptInterface
 {
     public function __construct(
         private readonly IntegrationScriptBuilderInterface $scriptBuilder,

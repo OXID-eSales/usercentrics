@@ -7,13 +7,10 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
-use OxidProfessionalServices\Usercentrics\Core\Module;
-use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\CmpV1;
-use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
-use OxidProfessionalServices\Usercentrics\Service\ModuleSettings;
+use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilderInterface;
+use OxidProfessionalServices\Usercentrics\Service\IntegrationScript;
+use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
-use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
 
 /**
  * Class RendererTest
@@ -21,22 +18,20 @@ use OxidProfessionalServices\Usercentrics\Traits\ServiceContainer;
  */
 class IntegrationScriptTest extends UnitTestCase
 {
-    use ServiceContainer;
-
-    public function testWhiteListedScript(): void
+    public function testGetIntegrationScript(): void
     {
-        $settingsService = $this->getServiceFromContainer(ModuleSettingServiceInterface::class);
-        $settingsService->saveString(ModuleSettings::USERCENTRICS_MODE, CmpV1::VERSION_NAME, Module::MODULE_ID);
-        $settingsService->saveString(ModuleSettings::USERCENTRICS_ID, 'SomeId', Module::MODULE_ID);
+        $scriptBuilder = $this->createMock(IntegrationScriptBuilderInterface::class);
+        $scriptBuilder
+            ->expects($this->once())
+            ->method('getIntegrationScript')
+            ->with('usercentrics_mode', ['{USERCENTRICS_CLIENT_ID}' => 'usercentrics_id'])
+            ->willReturn('integration script');
 
-        $integrationScript = $this->getServiceFromContainer(IntegrationScriptInterface::class);
-        $script = $integrationScript->getIntegrationScript();
+        $settings = $this->createMock(ModuleSettingsInterface::class);
+        $settings->method('getUsercentricsId')->willReturn('usercentrics_id');
+        $settings->method('getUsercentricsMode')->willReturn('usercentrics_mode');
 
-        $this->assertHtmlEquals(
-            '<script type="application/javascript" 
-            src="https://app.usercentrics.eu/latest/main.js" 
-            id="SomeId"></script>',
-            $script
-        );
+        $integrationScript = new IntegrationScript($scriptBuilder, $settings);
+        $this->assertEquals('integration script', $integrationScript->getIntegrationScript());
     }
 }
