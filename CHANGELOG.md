@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - unreleased
+
+### Added
+- ``Core\ViewConfig::getUsercentricsModuleSettings``
+- ``Service\Integration\Pattern\*->scriptSource`` type definition
+- ``Service/ModuleSettingsInterface::getSmartProtectorBlockingDisabledServices``
+- Code style tools
+
+### Removed
+- Smarty support
+- ``Core\ViewConfig`` methods:
+  - ``getUsercentricsID``
+  - ``isSmartDataProtectorActive``
+  - ``isDevelopmentAutomaticConsentActive``
+  - ``getSmartDataProtectorDeactivateBlockingServices``
+
+### Changed
+- Rename ``getSmartProtectorBlockingDisabledList`` to ``getSmartProtectorBlockingDisabledServices`` and change return
+type to ``string[]`` for:
+  - ``Service/ModuleSettingsInterface``
+  - ``Service/ModuleSettings``
+- Change ``Service/ModuleSettings::getStringSettingValue`` from protected to private
+
 ## [2.0.2] - 2023-05-09
 
 ### Fixed
@@ -100,6 +123,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module provides a possibility to turn on "Smart data protection" function provided by UserCentrics.
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
+[3.0.0]: https://github.com/OXID-eSales/usercentrics/compare/v2.0.2...b-7.1.x
 [2.0.2]: https://github.com/OXID-eSales/usercentrics/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/OXID-eSales/usercentrics/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/OXID-eSales/usercentrics/compare/v1.2.1...v2.0.0
