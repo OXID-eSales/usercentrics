@@ -36,6 +36,7 @@ $aModule = [
                  </form>
                  '
     ],
+    'thumbnail'   => 'logo.png',
     'version' => '2.0.2',
     'author' => 'OXID Professional Services',
     'events' => [],
