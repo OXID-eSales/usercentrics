@@ -37,7 +37,7 @@ $aModule = [
                  '
     ],
     'thumbnail'   => 'logo.png',
-    'version' => '2.0.2',
+    'version' => '3.0.0',
     'author' => 'OXID Professional Services',
     'events' => [],
 

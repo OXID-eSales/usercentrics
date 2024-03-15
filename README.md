@@ -32,6 +32,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 
 ## Branch Compatibility
 
+* b-7.1.x branch for b-7.1.x shop compilation branches
 * b-7.0.x branch for b-7.0.x shop compilation branches
 * b-6.5.x branch for b-6.5.x shop compilation branches
 * b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
@@ -40,7 +41,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 ## Developer installation
 
 ```bash
-$ git clone --branch=b-7.0.x https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/usercentrics
+$ git clone --branch=b-7.1.x https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/usercentrics
 $ composer config repositories.oxid-professional-services/usercentrics path ./source/modules/oxps/usercentrics
 $ composer require oxid-professional-services/usercentrics:*
 
