@@ -7,7 +7,7 @@ on:
         type: string
         required: true
         description: 'URL/PATH of the testplan to run'
-        default: 'tests/github_actions/defaults/7.1.x.yml,tests/github_actions/module-usercentrics.yml'
+        default: 'tests/github_actions/defaults/7.1.x.yml,tests/github_actions/module-usercentrics.yaml'
       runs_on:
         type: string
         description: 'JSON string/array describing the runner'
@@ -16,7 +16,7 @@ on:
 
 jobs:
   call_matrix:
-    uses: OXID-eSales/github-actions/.github/workflows/call-universal_test_workflow.yml@v0
+    uses: OXID-eSales/github-actions/.github/workflows/call-universal_test_workflow.yaml@v0
     with:
       testplan: ${{ inputs.testplan }}
       runs_on: ${{ inputs.runs_on }}

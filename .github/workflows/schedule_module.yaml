@@ -1,14 +1,16 @@
-name: Automatically triggered on pull request
+name: Scheduled weekly run
 
-on: pull_request
+on:
+  schedule:
+    - cron: '0 4 */7 * *'
 
 jobs:
   call_matrix:
-    uses: OXID-eSales/github-actions/.github/workflows/call-universal_test_workflow.yml@v3
+    uses: OXID-eSales/github-actions/.github/workflows/call-universal_test_workflow.yaml@v4
     with:
-      testplan: 'tests/github_actions/defaults/7.1.x.yml,tests/github_actions/module-usercentrics.yml'
+      testplan: 'tests/github_actions/defaults/7.1.x.yaml,tests/github_actions/module-usercentrics.yaml'
       runs_on: '"ubuntu-latest"'
-      defaults: 'v3'
+      defaults: 'v4'
     secrets:
       DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
       DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
