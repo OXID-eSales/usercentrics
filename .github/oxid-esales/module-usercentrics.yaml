@@ -57,7 +57,7 @@ runtest:
 sonarcloud:
   matrix:
     testplan: '["-"]'
-  project_key: '{{ print $name }}-{{ print $order }}'
+  project_key: '{{ print $sonarKey }}'
   project_name: *package_name
   parameters: |
     -Dsonar.language=php
