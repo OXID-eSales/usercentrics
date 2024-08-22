@@ -2,13 +2,8 @@
 # {{ $org := "oxid-professional-services" }}
 # {{ $name := "usercentrics" }}
 # {{ $order := "01" }}
+# {{ $sonarKey := "OXID-eSales_usercentrics" }}
 prepare_shop:
-  # matrix: &matrix
-  #   php: &matrix_php '["8.1", "8.2"]'
-  #   mysql: &matrix_mysql '["8.0"]'
-  # specific: &specific_matrix
-  #   php: '["8.1"]'
-  #   mysql: '["8.0"]'
   git:
     shop_ref: '{{ .Data.global.git.default_ref }}'
 
