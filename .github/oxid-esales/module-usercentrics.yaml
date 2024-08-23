@@ -71,4 +71,4 @@ styles:
   module_ids: *ids
 
 finish:
-  slack_title: 'Module {{ print $name }} {{ .Github.RefName}} on {{ .Github.Repository }} by {{ .Github.Actor }}'
+  slack_title: 'Module {{ print $name }} {{ .Github.RefName }} on {{ .Github.Repository }} by {{ .Github.Actor }}'
