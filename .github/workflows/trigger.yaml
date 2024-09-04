@@ -1,4 +1,5 @@
-name: Automatically triggered on pull request
+name: Auto trigger on push or pull requests
+# Matrix workflow using re-usable github actions
 
 on:
   pull_request: {}
@@ -7,10 +8,10 @@ on:
       - 'b-7.1.x*'
 
 jobs:
-  pull_module:
+  usercentrics_php82_mysql_80:
     uses: oxid-eSales/github-actions/.github/workflows/call-universal_test_workflow.yaml@v4
     with:
-      testplan: '~/defaults/7.1.x.yml,~/module-usercentrics.yaml'
+      testplan: '~/defaults/7.1.x.yaml,~/module-usercentrics.yaml'
       runs_on: '"ubuntu-latest"'
       defaults: 'v4'
       plan_folder: '.github/oxid-esales'

@@ -5,12 +5,13 @@ on:
     - cron: '0 4 */7 * *'
 
 jobs:
-  call_matrix:
-    uses: OXID-eSales/github-actions/.github/workflows/call-universal_test_workflow.yaml@v4
+  usercentrics_71x_nightly:
+    uses: oxid-eSales/github-actions/.github/workflows/call-universal_test_workflow.yaml@v4
     with:
-      testplan: 'tests/github_actions/defaults/7.1.x.yaml,tests/github_actions/module-usercentrics.yaml'
+      testplan: '~/defaults/7.1.x.yaml,~/defaults/scheduled.yaml,~/module-usercentrics.yaml'
       runs_on: '"ubuntu-latest"'
       defaults: 'v4'
+      plan_folder: '.github/oxid-esales'
     secrets:
       DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
       DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
