@@ -2,57 +2,116 @@
 # {{ $org := "oxid-professional-services" }}
 # {{ $name := "usercentrics" }}
 # {{ $order := "01" }}
-prepare_shop:
-  git:
-    shop_ref: '{{ .Data.global.git.default_ref }}'
+#prepare_shop:
+#  git:
+#    shop_ref: '{{ .Data.global.git.default_ref }}'
+#
+#install_module:
+#  matrix:
+#    testplan: '["-"]'
+#  title: '{{ print $name }}-{{ print $order }}'
+#  cache:
+#    prefix: &install_module_prefix 'moduleInstallation-ce-{{ .Github.SHA }}-{{ .Github.RunNumber }}-{{ .Github.RunAttempt }}'
+#  ids: &ids '{{ print $ids }}'
+#  activate: *ids
+#  git:
+#    module:
+#      url: &git_module_url '{{ .Github.Repository }}'
+#      ref: '{{ .Github.RefName }}'
+#  package_name: &package_name '{{ print $org }}/{{ print $name }}'
+#  path: *ids
+#
+#phpunit:
+#  matrix:
+#    testplan: '["~/defaults/module_phpunit_unit.yaml","~/defaults/module_phpunit_integration.yaml"]'
+#  load_shop: *install_module_prefix
+#
+#codeception:
+#  matrix:
+#    testplan: '["-"]'
+#  load_shop: *install_module_prefix
+#  title: '{{ print $name }}-{{ print $order }}'
+#  container:
+#    options: '-e SELENIUM_SERVER_HOST=selenium -e BROWSER_NAME=chrome -e XDEBUG_MODE=coverage -e THEME_ID=apex'
+#  configuration: '/var/www/vendor/oxid-professional-services/usercentrics/tests/codeception.yml'
+#  suite: 'Acceptance'
+#  additional_options: '--coverage-xml=/var/www/codeception_coverage.xml'
+#  logfile:
+#    prefix: 'codeception'
+#  output:
+#    prefix: 'codeception-artifacts'
+#  coverage:
+#    path: 'source/codeception_coverage.xml'
+#
+#runtest:
+#  matrix:
+#    testplan: 'skip'
+#  title: '{{ print $name }}-{{ print $order }}'
+#  load_shop: *install_module_prefix
+#
+#phpcs_tests:
+#  skip: true
+#
+#styles:
+#  matrix:
+#    testplan: '["-"]'
+#  title: '{{ print $name }}-{{ print $order }}'
+#  load_shop: *install_module_prefix
+#  path: *ids
+#  module_ids: *ids
 
-install_module:
-  matrix:
-    testplan: '["-"]'
-  title: '{{ print $name }}-{{ print $order }}'
+install_shop_with_modules:
   cache:
-    prefix: &install_module_prefix 'moduleInstallation-ce-{{ .Github.SHA }}-{{ .Github.RunNumber }}-{{ .Github.RunAttempt }}'
-  ids: &ids '{{ print $ids }}'
-  activate: *ids
-  git:
-    module:
-      url: &git_module_url '{{ .Github.Repository }}'
-      ref: '{{ .Github.RefName }}'
-  package_name: &package_name '{{ print $org }}/{{ print $name }}'
-  path: *ids
+    prepared_shop: false
+  composer:
+    transform: |
+      {
+          "require": {
+              "oxid-esales/oxideshop-ce": "{{ .Data.global.composer.dev_ref }}",
+              "oxid-esales/twig-component": "{{ .Data.global.composer.dev_ref }}",
+              "oxid-esales/twig-admin-theme": "{{ .Data.global.composer.dev_ref }}",
+              "oxid-esales/apex-theme": "{{ .Data.global.composer.dev_ref }}",
+              "oxid-professional-services/usercentrics": "{{ .Data.global.composer.ref_name }}"
+          },
+          "repositories": {
+            "oxid-professional-services/usercentrics": {
+              "type": "git",
+              "url": "https://github.com/OXID-eSales/usercentrics.git"
+            }
+          }
+      }
+  custom_script_container: |
+    vendor/bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
+    vendor/bin/oe-console oe:module:activate oxps_usercentrics
+    vendor/bin/oe-console oe:theme:activate apex
 
-phpunit:
+runscript: &runscript
   matrix:
-    testplan: '["~/defaults/module_phpunit_unit.yaml","~/defaults/module_phpunit_integration.yaml"]'
-  load_shop: *install_module_prefix
+    script: |
+      [
+        "usercentrics_module:tests-unit",
+        "usercentrics_module:tests-integration",
+        "usercentrics_module:tests-codeception"
+      ]
+  composer:
+    early: true
+  usercentrics_module:
+    path: 'vendor/oxid-professional-services/usercentrics/'
 
-codeception:
+runslim:
+  <<: *runscript
   matrix:
-    testplan: '["-"]'
-  load_shop: *install_module_prefix
-  title: '{{ print $name }}-{{ print $order }}'
-  container:
-    options: '-e SELENIUM_SERVER_HOST=selenium -e BROWSER_NAME=chrome -e XDEBUG_MODE=coverage -e THEME_ID=apex'
-  configuration: '/var/www/vendor/oxid-professional-services/usercentrics/tests/codeception.yml'
-  suite: 'Acceptance'
-  additional_options: '--coverage-xml=/var/www/codeception_coverage.xml'
-  logfile:
-    prefix: 'codeception'
-  output:
-    prefix: 'codeception-artifacts'
-  coverage:
-    path: 'source/codeception_coverage.xml'
-
-runtest:
-  matrix:
-    testplan: 'skip'
-  title: '{{ print $name }}-{{ print $order }}'
-  load_shop: *install_module_prefix
+    script: |
+      [
+        "usercentrics_module:phpcs",
+        "usercentrics_module:phpstan",
+        "usercentrics_module:phpmd"
+      ]
 
 sonarcloud:
   matrix:
     testplan: '["-"]'
-  title: '{{ print $name }}-{{ print $order }}'
+  strip_path: '/var/www/vendor/oxid-professional-services/usercentrics/'
   project_key: 'OXID-eSales_usercentrics'
   project_name: 'oxid-esales/usercentrics'
   parameters: |
@@ -60,17 +119,7 @@ sonarcloud:
     -Dsonar.scm.provider=git
     -Dsonar.sources=src
     -Dsonar.tests=tests
-
-phpcs_tests:
-  skip: true
-
-styles:
-  matrix:
-    testplan: '["-"]'
-  title: '{{ print $name }}-{{ print $order }}'
-  load_shop: *install_module_prefix
-  path: *ids
-  module_ids: *ids
+    -Dsonar.php.phpstan.reportPaths=coverage-reports/phpstan.report.json
 
 finish:
   slack_title: 'Module {{ print $name }} ({{ .Github.RefName }}) on {{ .Github.Repository }} by {{ .Github.Actor }}'
