@@ -16,15 +16,7 @@
     "phpunit/phpunit": "^10.5",
     "phpstan/phpstan": "^1.10",
     "squizlabs/php_codesniffer": "^3.8",
-    "phpmd/phpmd": "^2.15",
-    "codeception/codeception": "*",
-    "codeception/module-asserts": "*",
-    "codeception/module-db": "*",
-    "codeception/module-filesystem": "*",
-    "codeception/module-webdriver": "*",
-    "oxid-esales/codeception-modules": "dev-b-7.1.x",
-    "oxid-esales/codeception-page-objects": "dev-b-7.1.x",
-    "mikey179/vfsstream": "^1.6"
+    "phpmd/phpmd": "^2.15"
   },
   "autoload": {
     "psr-4": {
@@ -53,10 +45,7 @@
     "tests-integration": "phpunit --bootstrap=/var/www/source/bootstrap.php --config=tests/ --testsuite=Integration",
     "tests-coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --bootstrap=/var/www/source/bootstrap.php --config=tests/ --coverage-html=tests/result/coverage",
 
-    "tests-codeception": [
-      "Composer\\Config::disableProcessTimeout",
-      "THEME_ID=apex MODULE_IDS=oxps_usercentrics SHOP_ROOT_PATH=/var/www vendor/bin/codecept run Acceptance -c tests/codeception.yml --no-redirect"
-    ],
+    "tests-codeception": "THEME_ID=apex MODULE_IDS=oxps_usercentrics /var/www/vendor/bin/codecept run Acceptance -c /var/www/vendor/oxid-professional-services/usercentrics/tests/codeception.yml",
 
     "tests-all": [
       "@tests-unit",
