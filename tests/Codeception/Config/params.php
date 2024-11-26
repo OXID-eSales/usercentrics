@@ -55,24 +55,16 @@ function getTestFixtureSqlFilePath(): string
     return getShopTestPath() . '/Codeception/Support/Data/dump.sql';
 }
 
-function getShopSuitePath($facts): string
-{
-    $testSuitePath = getenv('TEST_SUITE');
-    if (!$testSuitePath) {
-        $testSuitePath = $facts->getShopRootPath() . '/tests';
-    }
-
-    return $testSuitePath;
-}
-
 function getShopTestPath(): string
 {
     $facts = new Facts();
 
     if ($facts->isEnterprise()) {
         $shopTestPath = $facts->getEnterpriseEditionRootPath() . '/Tests';
+    } elseif ($facts->isProfessional()) {
+        $shopTestPath = $facts->getProfessionalEditionRootPath() . '/Tests';
     } else {
-        $shopTestPath = getShopSuitePath($facts);
+        $shopTestPath = $facts->getCommunityEditionRootPath() . '/tests';
     }
 
     return $shopTestPath;
