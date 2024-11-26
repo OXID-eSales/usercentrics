@@ -32,6 +32,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 
 ## Branch Compatibility
 
+* b-7.2.x and b-7.3.x branch for b-7.2.x shop compilation branches
 * b-7.1.x branch for b-7.1.x shop compilation branches
 * b-7.0.x branch for b-7.0.x shop compilation branches
 * b-6.5.x branch for b-6.5.x shop compilation branches
@@ -40,18 +41,51 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 
 ## Developer installation
 
-```bash
-$ git clone --branch=b-7.1.x https://github.com/OXID-eSales/usercentrics.git source/modules/oxps/usercentrics
-$ composer config repositories.oxid-professional-services/usercentrics path ./source/modules/oxps/usercentrics
-$ composer require oxid-professional-services/usercentrics:*
+1. Clone the SDK to ``MyProject`` directory in this case:
+```
+echo MyProject && git clone https://github.com/OXID-eSales/docker-eshop-sdk.git $_ && cd $_
+```
 
-$ vendor/bin/oe-console oe:module:activate oxps_usercentrics
+2. Clone recipes
+```
+git clone --recurse-submodules https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-esales
+```
+
+3. And last - run the module recipe:
+```
+./recipes/oxid-esales/module-usercentrics/b-7.3.x-root.sh
 ```
 
 ## Testing
+### Linting, syntax check, static analysis
 
-For instructions on running tests, please refer to current version github development workflow.
+```bash
+$ composer update
+$ composer static
+```
 
+### Unit/Integration/Acceptance tests
+
+- Install this module in a running OXID eShop
+- Reset the shop's database
+
+```bash
+$ bin/oe-console oe:database:reset --db-host=db-host --db-port=db-port --db-name=db-name --db-user=db-user --db-password=db-password --force
+```
+
+- Run all the tests
+
+```bash
+$ composer tests-all
+```
+
+- Or the desired suite
+
+```bash
+$ composer tests-unit
+$ composer tests-integration
+$ composer tests-codeception
+```
 ## Contributing
 
 You like to contribute? 🙌 AWESOME 🙌\
