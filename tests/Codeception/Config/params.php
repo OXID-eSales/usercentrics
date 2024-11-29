@@ -22,6 +22,7 @@ $screenShotPathEnv = ($screenShotPathEnv) ? : '';
 return [
     'SHOP_URL' => $facts->getShopUrl(),
     'SHOP_SOURCE_PATH' => $facts->getSourcePath(),
+    'SOURCE_RELATIVE_PACKAGE_PATH' => getSourceRelativePackagePath($facts),
     'VENDOR_PATH' => $facts->getVendorPath(),
     'DB_NAME' => $facts->getDatabaseName(),
     'DB_USERNAME' => $facts->getDatabaseUserName(),
@@ -39,6 +40,11 @@ return [
     'SCREEN_SHOT_URL' => $screenShotPathEnv
 ];
 
+function getSourceRelativePackagePath(Facts $facts): string
+{
+	return str_replace($facts->getShopRootPath(), '..', __DIR__) . '/../../../';
+}
+
 function getTestDataDumpFilePath(): string
 {
     return getShopTestPath() . '/Codeception/Support/Data/generated/shop-dump.sql';
@@ -49,24 +55,16 @@ function getTestFixtureSqlFilePath(): string
     return getShopTestPath() . '/Codeception/Support/Data/dump.sql';
 }
 
-function getShopSuitePath($facts): string
-{
-    $testSuitePath = getenv('TEST_SUITE');
-    if (!$testSuitePath) {
-        $testSuitePath = $facts->getShopRootPath() . '/tests';
-    }
-
-    return $testSuitePath;
-}
-
 function getShopTestPath(): string
 {
     $facts = new Facts();
 
     if ($facts->isEnterprise()) {
         $shopTestPath = $facts->getEnterpriseEditionRootPath() . '/Tests';
+    } elseif ($facts->isProfessional()) {
+        $shopTestPath = $facts->getProfessionalEditionRootPath() . '/Tests';
     } else {
-        $shopTestPath = getShopSuitePath($facts);
+        $shopTestPath = $facts->getCommunityEditionRootPath() . '/tests';
     }
 
     return $shopTestPath;

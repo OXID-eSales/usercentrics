@@ -1,9 +1,13 @@
 {% extends "layout/base.html.twig" %}
 
+{% set settings = oViewConf.getUsercentricsModuleSettings %}
+
 {% block base_js %}
 
-{{ oViewConf.getUsercentricsScript()|raw }}
-{{ parent() }}
+    {% if settings.getUsercentricsId %}
+        {{ oViewConf.getUsercentricsScript()|raw }}
+    {% endif %}
+    {{ parent() }}
 
 {% endblock %}
 
@@ -11,9 +15,9 @@
 {% block head_meta_description %}
 
 {{ parent() }}
-{% set settings = oViewConf.getUsercentricsModuleSettings %}
 
-{% if settings.isSmartProtectorEnabled %}
+
+{% if settings.getUsercentricsId and settings.isSmartProtectorEnabled %}
     <meta data-privacy-proxy-server="https://privacy-proxy-server.usercentrics.eu">
     <script type="application/javascript" src="https://privacy-proxy.usercentrics.eu/latest/uc-block.bundle.js"></script>
 
@@ -23,7 +27,7 @@
     {% endif %}
 {% endif %}
 
-{% if settings.isDevelopmentAutomaticConsentActive %}
+{% if settings.getUsercentricsId and settings.isDevelopmentAutomaticConsentActive %}
     <script type="application/javascript">
         console.log('Warning! Development section. Not intended to be used in Live environment!');
         function consentsCheck() {

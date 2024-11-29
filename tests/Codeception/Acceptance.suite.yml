@@ -15,6 +15,7 @@ modules:
     - \OxidEsales\Codeception\Module\ShopSetup:
         dump: '%DUMP_PATH%'
         fixtures: '%FIXTURES_PATH%'
+        license: '%license_key%'
     - Db:
         dsn: 'mysql:host=%DB_HOST%;dbname=%DB_NAME%;charset=utf8'
         user: '%DB_USERNAME%'
@@ -45,7 +46,10 @@ modules:
           - \OxidEsales\Codeception\Module\Database
     - \OxidEsales\Codeception\Module\Translation\TranslationsModule:
         shop_path: '%SHOP_SOURCE_PATH%'
-        paths: 'Application/views/apex'
+        paths:
+        - 'Application/views/apex'
+        - '%SOURCE_RELATIVE_PACKAGE_PATH%/translations'
+        - '%SOURCE_RELATIVE_PACKAGE_PATH%/views/admin_twig'
     - \OxidProfessionalServices\Usercentrics\Tests\Codeception\Module\Config:
         shop_path: '%SHOP_SOURCE_PATH%'
         config_file: '../var/configuration/usercentrics.yaml'
