@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Prevent page blocking when Usercentrics ID is missing
-- Updated to work with OXID eShop 7.2.x.
+- Updated to work with OXID eShop 7.3.x.
 
 ### Removed
 - Dropped support for PHP 8.1.
