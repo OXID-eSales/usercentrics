@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.1] - Unreleased
 
 ### Added
-- Support for PHP 8.3.
+- Support for PHP 8.4.
 
 ### Changed
 - Prevent page blocking when Usercentrics ID is missing
