@@ -7,7 +7,7 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Core;
 
-use OxidProfessionalServices\Usercentrics\Core\ViewConfig;
+use OxidEsales\Eshop\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
@@ -22,7 +22,10 @@ class ViewConfigTest extends UnitTestCase
     {
         $settingsStub = $this->createStub(ModuleSettingsInterface::class);
 
-        $viewConfig = $this->createPartialMock(ViewConfig::class, ['getService']);
+        $viewConfig = $this->createPartialMock(
+            get_class(oxNew(ViewConfig::class)),
+            ['getService']
+        );
         $viewConfig
             ->method('getService')
             ->with(ModuleSettingsInterface::class)
@@ -38,7 +41,10 @@ class ViewConfigTest extends UnitTestCase
             ->method('getIntegrationScript')
             ->willReturn('script content');
 
-        $viewConfig = $this->createPartialMock(ViewConfig::class, ['getService']);
+        $viewConfig = $this->createPartialMock(
+            get_class(oxNew(ViewConfig::class)),
+            ['getService']
+        );
         $viewConfig
             ->method('getService')
             ->with(IntegrationScriptInterface::class)
