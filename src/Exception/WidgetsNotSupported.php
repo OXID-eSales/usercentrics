@@ -16,7 +16,7 @@ final class WidgetsNotSupported extends Exception
     public function __construct(
         string $message = "Widgets are not yet supported",
         int $code = 0,
-        \Throwable $previous = null
+        ?\Throwable $previous = null
     ) {
         parent::__construct($message, $code, $previous);
     }
