@@ -3,7 +3,7 @@
   "description": " OXID Cookie Management powered by usercentrics",
   "type": "oxideshop-module",
   "license": ["proprietary"],
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "require": {
     "php": "^8.2",
@@ -14,8 +14,8 @@
   "require-dev": {
     "ext-dom": "*",
     "ext-libxml": "*",
-    "oxid-esales/oxideshop-ce": "v7.3.0",
-    "oxid-esales/twig-component": "v2.6.0",
+    "oxid-esales/oxideshop-ce": "dev-b-7.3.x",
+    "oxid-esales/twig-component": "dev-b-7.3.x",
     "phpunit/phpunit": "^10.5",
     "mikey179/vfsstream": "~1.6.8",
     "phpstan/phpstan": "^1.10",
@@ -26,9 +26,9 @@
     "codeception/module-db": "^3.1",
     "codeception/module-filesystem": "^3.0",
     "codeception/module-webdriver": "^4.0",
-    "oxid-esales/codeception-modules": "v4.2.0",
-    "oxid-esales/codeception-page-objects": "v4.6.0",
-    "oxid-esales/developer-tools": "v2.5.0"
+    "oxid-esales/codeception-modules": "dev-b-7.3.x",
+    "oxid-esales/codeception-page-objects": "dev-b-7.3.x",
+    "oxid-esales/developer-tools": "dev-b-7.3.x"
   },
   "conflict": {
     "oxid-esales/oxideshop-ce": "<7.3"
