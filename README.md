@@ -32,7 +32,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 
 ## Branch Compatibility
 
-* b-7.3.x branch for b-7.3.x shop compilation branches
+* b-7.3.x branch and v3.1.0 for b-7.3.x shop compilation branches
 * b-7.2.x branch and v3.0.0 for b-7.2.x shop compilation branches
 * b-7.1.x branch and v3.0.0 for b-7.1.x shop compilation branches
 * b-7.0.x branch and v3.0.0 for b-7.0.x shop compilation branches
