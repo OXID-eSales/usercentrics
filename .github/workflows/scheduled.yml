@@ -7,11 +7,11 @@ on:
     - cron: '16 1 */7 * *'
 
 jobs:
-  module_template_71x_nightly:
+  usercentrics_74x_scheduled:
     if: always()
     uses: oxid-eSales/github-actions/.github/workflows/universal_workflow_light.yaml@v4
     with:
-      testplan: '~/defaults/7.3.x.yaml,~/defaults/scheduled.yaml,~/module-usercentrics.yaml'
+      testplan: '~/defaults/7.4.x.yaml,~/defaults/scheduled.yaml,~/module-usercentrics.yaml'
       runs_on: '"ubuntu-latest"'
       defaults: 'v4'
       plan_folder: '.github/oxid-esales'

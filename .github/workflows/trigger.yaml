@@ -6,10 +6,10 @@ on:
   push: {}
 
 jobs:
-  module_template_php82_mysql_80:
+  usercentrics_php84_mysql_80:
     uses: oxid-eSales/github-actions/.github/workflows/universal_workflow_light.yaml@v4
     with:
-      testplan: '~/defaults/7.3.x.yaml,~/defaults/php8.2_mysql8.0_only.yaml,~/module-usercentrics.yaml'
+      testplan: '~/defaults/7.4.x.yaml,~/defaults/php8.3_mysql8.0_only.yaml,~/module-usercentrics.yaml'
       runs_on: '"ubuntu-latest"'
       defaults: 'v4'
       plan_folder: '.github/oxid-esales'
