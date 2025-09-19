@@ -9,7 +9,7 @@
     "php": "^8.2",
     "symfony/yaml" : "> 3",
     "ext-json": "*",
-    "symfony/filesystem": "^6.0"
+    "symfony/filesystem": "^7.3"
   },
   "require-dev": {
     "ext-dom": "*",
