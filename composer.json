@@ -14,8 +14,8 @@
   "require-dev": {
     "ext-dom": "*",
     "ext-libxml": "*",
-    "oxid-esales/oxideshop-ce": "dev-b-7.4.x",
-    "oxid-esales/twig-component": "dev-b-7.4.x",
+    "oxid-esales/oxideshop-ce": "dev-b-8.0.x",
+    "oxid-esales/twig-component": "dev-b-8.0.x",
     "phpunit/phpunit": "^10.5",
     "mikey179/vfsstream": "~1.6.8",
     "phpstan/phpstan": "^1.10",
@@ -26,12 +26,12 @@
     "codeception/module-db": "^3.1",
     "codeception/module-filesystem": "^3.0",
     "codeception/module-webdriver": "^4.0",
-    "oxid-esales/codeception-modules": "dev-b-7.4.x",
-    "oxid-esales/codeception-page-objects": "dev-b-7.4.x",
-    "oxid-esales/developer-tools": "dev-b-7.4.x"
+    "oxid-esales/codeception-modules": "dev-b-8.0.x",
+    "oxid-esales/codeception-page-objects": "dev-b-8.0.x",
+    "oxid-esales/developer-tools": "dev-b-8.0.x"
   },
   "conflict": {
-    "oxid-esales/oxideshop-ce": "<7.4"
+    "oxid-esales/oxideshop-ce": "<8.0"
   },
   "autoload": {
     "psr-4": {
