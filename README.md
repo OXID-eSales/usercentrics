@@ -41,22 +41,39 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 * b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
 * b-6.2.x branch for b-6.2.x shop compilation branches
 
-## Developer installation
+### Development installation
 
-1. Clone the SDK to ``MyProject`` directory in this case:
-```
+We recommend developing the module as independent as possible. This means that the module for development should
+be installed as a [root package](https://getcomposer.org/doc/04-schema.md#root-package), with its own strict dependencies if such are needed.
+
+The next section shows how to install the module as a root package by using the OXID eShop SDK.
+
+In case of different environment usage, please adjust by your own needs.
+
+### Development installation on OXID eShop SDK
+
+The installation instructions below are shown for the current [SDK](https://github.com/OXID-eSales/docker-eshop-sdk)
+for shop 7.4. Make sure your system meets the requirements of the SDK.
+
+0. Ensure all docker containers are down to avoid port conflicts
+
+1. Clone the SDK for the new project
+```shell
 echo MyProject && git clone https://github.com/OXID-eSales/docker-eshop-sdk.git $_ && cd $_
 ```
 
-2. Clone recipes
-```
-git clone --recurse-submodules https://github.com/OXID-eSales/docker-eshop-sdk-recipes recipes/oxid-esales
+2. Clone the repository to the source directory
+```shell
+git clone --recurse-submodules https://github.com/OXID-eSales/usercentrics.git --branch=b-7.4.x ./source
 ```
 
-3. And last - run the module recipe:
+3. Run the recipe to setup the development environment, you can decide which shop edition to install. Omitting the flag installs EE.
+```shell
+./source/recipes/setup-development.sh
 ```
-./recipes/oxid-esales/module-usercentrics/b-7.3.x-root.sh
-```
+
+You should be able to access the shop with http://localhost.local and the admin panel with http://localhost.local/admin
+(credentials: noreply@oxid-esales.com / admin)
 
 ## Testing
 ### Linting, syntax check, static analysis
