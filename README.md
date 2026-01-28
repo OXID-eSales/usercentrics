@@ -32,6 +32,7 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 
 ## Branch Compatibility
 
+* b-7.5.x branch for b-7.5.x shop compilation branches
 * b-7.4.x branch and v3.2.1 for b-7.4.x shop compilation branches
 * b-7.3.x branch and v3.1.0 for b-7.3.x shop compilation branches
 * b-7.2.x branch and v3.0.0 for b-7.2.x shop compilation branches
@@ -53,7 +54,7 @@ In case of different environment usage, please adjust by your own needs.
 ### Development installation on OXID eShop SDK
 
 The installation instructions below are shown for the current [SDK](https://github.com/OXID-eSales/docker-eshop-sdk)
-for shop 7.4. Make sure your system meets the requirements of the SDK.
+for shop 7.5. Make sure your system meets the requirements of the SDK.
 
 0. Ensure all docker containers are down to avoid port conflicts
 
@@ -64,7 +65,7 @@ echo MyProject && git clone https://github.com/OXID-eSales/docker-eshop-sdk.git 
 
 2. Clone the repository to the source directory
 ```shell
-git clone --recurse-submodules https://github.com/OXID-eSales/usercentrics.git --branch=b-7.4.x ./source
+git clone --recurse-submodules https://github.com/OXID-eSales/usercentrics.git --branch=b-7.5.x ./source
 ```
 
 3. Run the recipe to setup the development environment, you can decide which shop edition to install. Omitting the flag installs EE.
