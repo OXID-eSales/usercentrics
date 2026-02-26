@@ -4,35 +4,9 @@
 
 This module provides the [Usercentrics](https://usercentrics.com/de/preise/?partnerid=16967#business-paket) functionality for the [OXID eShop](https://www.oxid-esales.com/) allowing you to use their Consent Management Platform.
 
-## Usage
-
-This assumes you have OXID eShop (at least the `v6.2.0` compilation) up and running.
-
-### Install
-
-The Usercentrics module is already included in the OXID eShop compilation.
-
-Module can be installed manually, by using composer:
-```bash
-$ composer require oxid-professional-services/usercentrics
-```
-
-After requiring the module, you need to activate it, either via OXID eShop admin or CLI.
-
-Navigate to oxideshop folder and execute the following: 
-```bash
-$ vendor/bin/oe-console oe:module:activate oxps_usercentrics
-```
-
-### How to use
-
-Activate the module and enter your usercentrics ID in the module settings.
-
-User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/latest/)
-
 ## Branch Compatibility
 
-* b-7.5.x branch for b-7.5.x shop compilation branches
+* b-7.5.x branch and v3.3.0 for b-7.5.x shop compilation branches
 * b-7.4.x branch and v3.2.1 for b-7.4.x shop compilation branches
 * b-7.3.x branch and v3.1.0 for b-7.3.x shop compilation branches
 * b-7.2.x branch and v3.0.0 for b-7.2.x shop compilation branches
@@ -41,6 +15,20 @@ User documentation: [DE](https://docs.oxid-esales.com/modules/usercentrics/de/la
 * b-6.5.x branch for b-6.5.x shop compilation branches
 * b-6.3.x branch for b-6.3.x and b-6.4.x shop compilation branches
 * b-6.2.x branch for b-6.2.x shop compilation branches
+
+## Installation
+
+### Module installation via composer
+
+In order to install the module via composer, run one of the following commands
+on commandline in your shop base directory (where the shop's composer.json file resides).
+
+* **composer require oxid-professional-services/usercentrics:^3.3.0** to install the released version compatible with OXID eShop 7.5.x compilations
+* **composer require oxid-professional-services/usercentrics:^3.2.0** to install the released version compatible with OXID eShop 7.4.x compilations
+* **composer require oxid-professional-services/usercentrics:^3.1.0** to install the released version compatible with OXID eShop 7.3.x compilations
+* **composer require oxid-professional-services/usercentrics:^3.0.0** to install the released version compatible with OXID eShop 7.0.x - 7.2.x compilations
+
+and [activate the module](https://docs.oxid-esales.com/developer/en/latest/development/modules_components_themes/module/installation_setup/setup.html).
 
 ### Development installation
 
@@ -106,14 +94,19 @@ $ composer tests-unit
 $ composer tests-integration
 $ composer tests-codeception
 ```
+
 ## Contributing
 
 You like to contribute? 🙌 AWESOME 🙌\
 Go and check the [contribution guidelines](CONTRIBUTING.md)
 
-## Issues
+## Bugs and Issues
 
-To report issues with the module, please use the [OXID eShop bugtracking system](https://bugs.oxid-esales.com/) - module Usercentrics project.
+If you experience any bugs or issues, please report them in the section **Module Usercentrics** of https://bugs.oxid-esales.com.
+
+## Documentation
+
+The module documentation can be found on our documentation platform: https://docs.oxid-esales.com/modules/usercentrics/de/latest/.
 
 ## License
 
