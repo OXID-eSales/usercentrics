@@ -6,6 +6,7 @@ This module provides the [Usercentrics](https://usercentrics.com/de/preise/?part
 
 ## Branch Compatibility
 
+* b-7.6.x branch for b-7.6.x shop compilation branches
 * b-7.5.x branch and v3.3.0 for b-7.5.x shop compilation branches
 * b-7.4.x branch and v3.2.1 for b-7.4.x shop compilation branches
 * b-7.3.x branch and v3.1.0 for b-7.3.x shop compilation branches
