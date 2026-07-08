@@ -11,10 +11,9 @@ use OxidProfessionalServices\Usercentrics\Exception\PatternNotFound;
 use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\CmpV1;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory
- */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory::class)]
 class IntegrationVersionFactoryTest extends UnitTestCase
 {
     public function testGetIntegrationScriptPattern(): void

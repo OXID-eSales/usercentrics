@@ -11,18 +11,18 @@ use OxidProfessionalServices\Usercentrics\DataObject\Service;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 /**
  * Class RepositoryTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @psalm-suppress PropertyNotSetInConstructor
- * @covers \OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper::class)]
 class ScriptServiceMapperTest extends UnitTestCase
 {
-    /**
-     * @dataProvider notMatchingScriptUrls
-     */
+    #[DataProvider('notMatchingScriptUrls')]
     public function testScriptNoNameConfigured(string $scriptUrl): void
     {
         $scriptServiceMapper = $this->createScriptMapper('Service1.yaml');
@@ -34,9 +34,7 @@ class ScriptServiceMapperTest extends UnitTestCase
         );
     }
 
-    /**
-     * @dataProvider matchingScriptUrls
-     */
+    #[DataProvider('matchingScriptUrls')]
     public function testScriptNameConfigured(string $scriptUrl): void
     {
         $scriptServiceMapper = $this->createScriptMapper('Service1.yaml');

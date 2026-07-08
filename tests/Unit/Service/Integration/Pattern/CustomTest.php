@@ -9,10 +9,9 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Unit\Service\Integration\P
 
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\Custom;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\Custom
- */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\Custom::class)]
 class CustomTest extends UnitTestCase
 {
     public function testGetIntegrationScriptPattern(): void

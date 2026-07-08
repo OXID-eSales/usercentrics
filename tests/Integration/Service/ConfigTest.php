@@ -7,19 +7,20 @@
 
 namespace OxidProfessionalServices\Usercentrics\Tests\Integration\Service;
 
-use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
-use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
+use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
+use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ConfigTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @psalm-suppress PropertyNotSetInConstructor
- * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao::class)]
 class ConfigTest extends UnitTestCase
 {
     public function testConfigPut(): void

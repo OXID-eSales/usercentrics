@@ -9,10 +9,9 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Unit\Service\Integration\P
 
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\CmpV2;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\CmpV2
- */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Integration\Pattern\CmpV2::class)]
 class CmpV2Test extends UnitTestCase
 {
     public function testGetIntegrationScriptPattern(): void

@@ -11,13 +11,14 @@ use OxidProfessionalServices\Usercentrics\DataObject\Configuration;
 use OxidProfessionalServices\Usercentrics\DataObject\Script;
 use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ServiceTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Unit
- * @covers \OxidProfessionalServices\Usercentrics\DataObject\Configuration
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\DataObject\Configuration::class)]
 class ConfigurationTest extends TestCase
 {
     public function testHasService(): void

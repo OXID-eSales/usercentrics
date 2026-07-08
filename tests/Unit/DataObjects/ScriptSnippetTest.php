@@ -8,13 +8,14 @@
 namespace OxidProfessionalServices\Usercentrics\Tests\Unit\DataObjects;
 
 use OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ServiceTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Unit
- * @covers \OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\DataObject\ScriptSnippet::class)]
 class ScriptSnippetTest extends TestCase
 {
     public function testHasId(): void

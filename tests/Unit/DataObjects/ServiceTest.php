@@ -8,13 +8,14 @@
 namespace OxidProfessionalServices\Usercentrics\Tests\Unit\DataObjects;
 
 use OxidProfessionalServices\Usercentrics\DataObject\Service;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ServiceTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Unit
- * @covers \OxidProfessionalServices\Usercentrics\DataObject\Service
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\DataObject\Service::class)]
 class ServiceTest extends TestCase
 {
     public function testHasName(): void

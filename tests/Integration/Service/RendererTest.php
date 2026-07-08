@@ -12,13 +12,14 @@ use OxidProfessionalServices\Usercentrics\Service\Configuration\ConfigurationDao
 use OxidProfessionalServices\Usercentrics\Service\Renderer;
 use OxidProfessionalServices\Usercentrics\Service\ScriptServiceMapper;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class RendererTest
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
  * @psalm-suppress PropertyNotSetInConstructor
- * @covers \OxidProfessionalServices\Usercentrics\Service\Renderer
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Renderer::class)]
 class RendererTest extends UnitTestCase
 {
     public function testWhiteListedScript(): void

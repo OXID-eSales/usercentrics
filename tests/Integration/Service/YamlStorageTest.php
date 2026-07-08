@@ -11,12 +11,13 @@ use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\StorageInterface;
 use OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * YamlStorageTest Yaml
  * @package OxidProfessionalServices\Usercentrics\Tests\Integration\Service
- * @covers \OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Configuration\YamlStorage::class)]
 class YamlStorageTest extends UnitTestCase
 {
     public function testIntegration(): void

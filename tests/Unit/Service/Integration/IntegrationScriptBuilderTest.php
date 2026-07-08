@@ -11,17 +11,15 @@ use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptB
 use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationVersionFactory;
 use OxidProfessionalServices\Usercentrics\Service\Integration\Pattern;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-/**
- * @covers \OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder
- */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptBuilder::class)]
 class IntegrationScriptBuilderTest extends UnitTestCase
 {
     private const PARAMS = ['{USERCENTRICS_CLIENT_ID}' => 'ABC123'];
 
-    /**
-     * @dataProvider dataProviderTestOutputPerMode
-     */
+    #[DataProvider('dataProviderTestOutputPerMode')]
     public function testGetIntegrationScript(string $versionName, string $expected): void
     {
         $builder = new IntegrationScriptBuilder(

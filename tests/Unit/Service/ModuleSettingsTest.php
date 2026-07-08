@@ -10,17 +10,15 @@ namespace OxidProfessionalServices\Usercentrics\Tests\Unit\Service;
 use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingService;
 use OxidProfessionalServices\Usercentrics\Core\Module;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettings;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\String\UnicodeString;
 
-/**
- * @covers \OxidProfessionalServices\Usercentrics\Service\ModuleSettings
- */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\ModuleSettings::class)]
 class ModuleSettingsTest extends TestCase
 {
-    /**
-     * @dataProvider gettersDataProvider
-     */
+    #[DataProvider('gettersDataProvider')]
     public function testGetters($method, $systemMethod, $key, $systemValue, $expectedValue)
     {
         $mssMock = $this->createPartialMock(ModuleSettingService::class, [$systemMethod]);

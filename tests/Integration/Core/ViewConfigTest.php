@@ -11,11 +11,12 @@ use OxidEsales\Eshop\Core\ViewConfig;
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScriptInterface;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class ViewConfigTest
- * @covers \OxidProfessionalServices\Usercentrics\Core\ViewConfig
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Core\ViewConfig::class)]
 class ViewConfigTest extends UnitTestCase
 {
     public function testGetUsercentricsModuleSettings(): void
@@ -36,7 +37,7 @@ class ViewConfigTest extends UnitTestCase
 
     public function testGetUsercentricsScript(): void
     {
-        $script = $this->createMock(IntegrationScriptInterface::class);
+        $script = $this->createStub(IntegrationScriptInterface::class);
         $script
             ->method('getIntegrationScript')
             ->willReturn('script content');

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Update module to work with OXID eShop 7.6
+- Upgraded the test suite to PHPUnit 12.5
 
 ## [3.3.0] - 2026-04-08
 

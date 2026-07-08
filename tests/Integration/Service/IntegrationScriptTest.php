@@ -11,11 +11,12 @@ use OxidProfessionalServices\Usercentrics\Service\Integration\IntegrationScriptB
 use OxidProfessionalServices\Usercentrics\Service\IntegrationScript;
 use OxidProfessionalServices\Usercentrics\Service\ModuleSettingsInterface;
 use OxidProfessionalServices\Usercentrics\Tests\Unit\UnitTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
 /**
  * Class RendererTest
- * @covers \OxidProfessionalServices\Usercentrics\Service\IntegrationScript
  */
+#[CoversClass(\OxidProfessionalServices\Usercentrics\Service\IntegrationScript::class)]
 class IntegrationScriptTest extends UnitTestCase
 {
     public function testGetIntegrationScript(): void
@@ -27,7 +28,7 @@ class IntegrationScriptTest extends UnitTestCase
             ->with('usercentrics_mode', ['{USERCENTRICS_CLIENT_ID}' => 'usercentrics_id'])
             ->willReturn('integration script');
 
-        $settings = $this->createMock(ModuleSettingsInterface::class);
+        $settings = $this->createStub(ModuleSettingsInterface::class);
         $settings->method('getUsercentricsId')->willReturn('usercentrics_id');
         $settings->method('getUsercentricsMode')->willReturn('usercentrics_mode');
 
