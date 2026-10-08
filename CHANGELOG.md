@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.4.0] - unreleased
+## [3.4.0] - 2026-10-08
 
 ### Changed
 - Update module to work with OXID eShop 7.6
@@ -157,6 +157,7 @@ type to ``string[]`` for:
 - Module provides a possibility to turn on "Smart data protection" function provided by UserCentrics.
 - Possibility to configure any javascript included with oxscript tag to usercentrics service, and allow client to manipulate (turn it on/off) by Usercentrics data protection panel.
 
+[3.4.0]: https://github.com/OXID-eSales/usercentrics/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/OXID-eSales/usercentrics/compare/v3.2.1...v3.3.0
 [3.2.1]: https://github.com/OXID-eSales/usercentrics/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/OXID-eSales/usercentrics/compare/v3.1.0...v3.2.0

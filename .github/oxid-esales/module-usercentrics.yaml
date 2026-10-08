@@ -6,18 +6,18 @@ install:
     transform: |
       {
         "require": {
-          "oxid-esales/oxideshop-ce": "{{ .Data.install.composer.dev_ref }}",
-          "oxid-esales/twig-admin-theme": "{{ .Data.install.composer.dev_ref }}",
-          "oxid-esales/twig-component": "{{ .Data.install.composer.dev_ref }}",
-          "oxid-esales/apex-theme": "{{ .Data.install.composer.dev_ref }}"
+          "oxid-esales/oxideshop-ce": "v7.6.0",
+          "oxid-esales/twig-admin-theme": "v3.2.0",
+          "oxid-esales/twig-component": "v2.8.1",
+          "oxid-esales/apex-theme": "v3.2.0"
         }
       }
   custom_script_container: |
     vendor/bin/oe-console oe:database:reset --db-host=mysql --db-port=3306 --db-name=example --db-user=root --db-password=root --force
     vendor/bin/oe-console oe:module:install ./
-    
+
     vendor/bin/oe-eshop-doctrine_migration migrations:migrate
-    
+
     vendor/bin/oe-console oe:module:activate oxps_usercentrics
     vendor/bin/oe-console oe:theme:activate apex
 
